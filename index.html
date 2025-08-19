@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wetter – <?= boot.locationName ?></title>
+  <style>
+    /* ====== Design tokens ====== */
+    :root{
+      --bg:#f6f8fb; --tile:#ffffff; --text:#0b1220; --muted:#546179; --accent:#156ff0;
+      --ok:#15803d; --bad:#b91c1c; --chip:#eef2f7;
+      --shadow:0 12px 28px rgba(16,24,40,.12);
+      --r:18px;
+      --gap:16px;
+    }
+    body.dark{
+      --bg:#0b0f16; --tile:#111827; --text:#f3f4f6; --muted:#9aa4b2; --accent:#60a5fa;
+      --chip:#1f2937;
+      --shadow:0 20px 40px rgba(0,0,0,.35);
+    }
+    html,body{height:100%;}
+    body{
+      margin:0; background:var(--bg); color:var(--text); font: 500 16px/1.35 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      letter-spacing:.2px;
+    }
+    .wrap{max-width:1400px; margin-inline:auto; padding:20px;}
+
+    /* Responsive grid */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: 1fr;
+      gap:var(--gap);
+    }
+    @media (max-width: 1200px){
+      .grid{ grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 800px){
+      .grid{ grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .tile{
+      background:var(--tile); border-radius:var(--r); box-shadow:var(--shadow);
+      padding:18px; display:flex; flex-direction:column; gap:10px; min-height:160px;
+    }
+    .tile h2{ margin:0; font-size:22px; font-weight:700; }
+    .muted{ color:var(--muted); }
+    .big{ font-size: clamp(42px, 7vw, 76px); font-weight:800; line-height:0.95; letter-spacing:-.8px; }
+    .row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+    .chip{ background:var(--chip); padding:6px 10px; border-radius:999px; font-weight:600; }
+    .kv{ display:grid; grid-template-columns:auto 1fr; gap:8px 12px; align-items:baseline; }
+    .kv dt{ color:var(--muted); }
+    .kv dd{ margin:0; }
+
+    .now{ grid-column: span 3; grid-row: span 2; }
+    @media (max-width:1200px){ .now{ grid-column: span 4; } }
+    @media (max-width:800px){ .now{ grid-column: span 2; } }
+
+    .slot{ min-height:140px; }
+    .slots{ display:grid; grid-template-columns: repeat(2, 1fr); gap:var(--gap); }
+    .slot h3{ margin:0 0 6px 0; font-size:16px; color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:.8px; }
+    .slot .big{ font-size: clamp(28px, 5.2vw, 44px); }
+    .slot .sub{ display:flex; gap:10px; color:var(--muted); }
+
+    header.wrap{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding-bottom:0; }
+    header h1{ margin:0; font-size: clamp(22px, 2.4vw, 28px); }
+    header .meta{ display:flex; gap:10px; color:var(--muted); flex-wrap:wrap; }
+    header .clock{ font-variant-numeric: tabular-nums; }
+
+    footer.wrap{ display:flex; justify-content:space-between; gap:16px; align-items:center; padding-top:10px; }
+    .bar{ height:10px; background:var(--chip); border-radius:999px; overflow:hidden; flex:1; }
+    .bar > i{ display:block; height:100%; background:var(--accent); width:0%; }
+
+    .status{ color:var(--muted); }
+
+    /* Hide until loaded */
+    .hidden{ visibility:hidden; }
+  </style>
+</head>
+<body class="hidden">
+  <header class="wrap">
+    <div>
+      <h1>Wetter – <?= boot.locationName ?></h1>
+      <div class="meta">
+        <span>ICON / Open‑Meteo</span>
+        <span>•</span>
+        <span>Zeitzone: <?= boot.timezone ?></span>
+        <span>•</span>
+        <span class="version">v<?= boot.version ?></span>
+      </div>
+    </div>
+    <div class="clock" aria-live="polite">--:--:--</div>
+  </header>
+
+  <main class="wrap grid">
+    <!-- Now tile -->
+    <section class="tile now" aria-label="Aktuelles Wetter" id="now">
+      <h2>Aktuell</h2>
+      <div class="row">
+        <div class="big" id="now-temp">--°C</div>
+        <div class="chip" id="now-icon">⛅</div>
+      </div>
+      <dl class="kv">
+        <dt>Gefühlte Temp.</dt><dd id="now-feels">--°C</dd>
+        <dt>Niederschlag</dt><dd id="now-precip">-- mm</dd>
+        <dt>Luftfeuchte</dt><dd id="now-hum">-- %</dd>
+        <dt>Luftdruck</dt><dd id="now-pressure">-- hPa</dd>
+        <dt>Wind</dt><dd id="now-wind">-- km/h</dd>
+        <dt>Sonne</dt><dd id="now-sun">--:-- / --:--</dd>
+      </dl>
+      <div class="muted" id="now-status">Lade Daten…</div>
+    </section>
+
+    <!-- 4 slots (flip hourly/daily) -->
+    <section class="tile slot" id="slot1"><h3>—</h3><div class="big">—</div><div class="sub"></div></section>
+    <section class="tile slot" id="slot2"><h3>—</h3><div class="big">—</div><div class="sub"></div></section>
+    <section class="tile slot" id="slot3"><h3>—</h3><div class="big">—</div><div class="sub"></div></section>
+    <section class="tile slot" id="slot4"><h3>—</h3><div class="big">—</div><div class="sub"></div></section>
+  </main>
+
+  <footer class="wrap">
+    <div class="bar" aria-label="Jahresfortschritt"><i id="yearbar"></i></div>
+    <div class="status" id="footer-status">—</div>
+  </footer>
+
+  <script>
+    // Boot config (from server)
+    const BOOT = <?= JSON.stringify(boot) ?>;
+
+    // ===== Utilities (ENGLISH comments) =====
+
+    // Localized formatters for Germany
+    const dtOptsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: BOOT.timezone };
+    const dtOptsHour = { hour: '2-digit', hour12: false, timeZone: BOOT.timezone };
+    const dtOptsDay  = { weekday: 'long', day: '2-digit', month: '2-digit', timeZone: BOOT.timezone };
+
+    const nf0 = new Intl.NumberFormat(BOOT.locale, { maximumFractionDigits: 0 });
+    const nf1 = new Intl.NumberFormat(BOOT.locale, { maximumFractionDigits: 1 });
+
+    function pctYearProgress() {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), 0, 1);
+      const end = new Date(now.getFullYear()+1, 0, 1);
+      return ((now - start) / (end - start)) * 100;
+    }
+    function setDarkBySunriseSunset(cur) {
+      try {
+        const sr = cur.sunrise ? new Date(cur.sunrise) : null;
+        const ss = cur.sunset ? new Date(cur.sunset)  : null;
+        const now = new Date();
+        const isDark = (sr && ss) ? (now < sr || now > ss) : (now.getHours()<6 || now.getHours()>=21);
+        document.body.classList.toggle('dark', isDark);
+      } catch (e) {}
+    }
+    function wmoIcon(code){
+      // Minimal emoji set for clarity on iOS
+      code = Number(code);
+      if ([0].includes(code)) return "☀️";
+      if ([1,2,3].includes(code)) return "⛅";
+      if ([45,48].includes(code)) return "🌫️";
+      if ([51,53,55,61,63,65,80,81,82].includes(code)) return "🌧️";
+      if ([71,73,75,77,85,86].includes(code)) return "❄️";
+      if ([95,96,99].includes(code)) return "⛈️";
+      return "❔";
+    }
+    function windStr(v, dir){
+      if (v == null) return "-- km/h";
+      const arrow = dir==null ? "" : ` (${degToArrow(dir)})`;
+      return nf0.format(v) + " km/h" + arrow;
+    }
+    function degToArrow(deg){
+      const dirs = ["↑","↗","→","↘","↓","↙","←","↖"];
+      const idx = Math.round(((deg%360)+360)%360 / 45) % 8;
+      return dirs[idx];
+    }
+    function fmtTime(iso, opts){ return new Intl.DateTimeFormat(BOOT.locale, opts).format(new Date(iso)); }
+
+    // Clock
+    function startClock(){
+      const el = document.querySelector(".clock");
+      function tick(){ el.textContent = new Intl.DateTimeFormat(BOOT.locale, dtOptsTime).format(new Date()); }
+      tick(); setInterval(tick, 1000);
+    }
+
+    // Year progress bar
+    function renderYearBar(){
+      document.getElementById("yearbar").style.width = pctYearProgress().toFixed(2) + "%";
+    }
+
+    function setFooterStatus(text){ document.getElementById("footer-status").textContent = text; }
+    function setNowStatus(text){ document.getElementById("now-status").textContent = text; }
+
+    // Render NOW
+    function renderNow(d){
+      const cur = d.current || {};
+      document.getElementById("now-temp").textContent = (cur.temp==null ? "--" : nf0.format(cur.temp)) + "°C";
+      document.getElementById("now-feels").textContent = (cur.feels==null ? "--" : nf0.format(cur.feels)) + "°C";
+      document.getElementById("now-precip").textContent = (cur.precip==null ? "--" : nf1.format(cur.precip)) + " mm";
+      document.getElementById("now-hum").textContent = (cur.humidity==null ? "--" : nf0.format(cur.humidity)) + " %";
+      document.getElementById("now-pressure").textContent = (cur.pressure==null ? "--" : nf0.format(cur.pressure)) + " hPa";
+      document.getElementById("now-wind").textContent = windStr(cur.wind, cur.winddir);
+      document.getElementById("now-icon").textContent = wmoIcon(cur.weathercode);
+      const sun = (cur.sunrise && cur.sunset) ? (fmtTime(cur.sunrise, dtOptsHour)+ " / " + fmtTime(cur.sunset, dtOptsHour)) : "--:-- / --:--";
+      document.getElementById("now-sun").textContent = sun;
+      setDarkBySunriseSunset(cur);
+    }
+
+    // Render slots (flip hourly/daily)
+    let flipTimer = null;
+    let isHourly = true;
+
+    function renderSlotsHourly(d){
+      // Choose the next 4 FULL hours from now
+      const h = (d.hourly||[]).filter(x => x && x.time);
+      const now = new Date();
+      const next = h.filter(o => new Date(o.time) > now);
+      const pick = next.slice(0,4);
+      const ids = ["slot1","slot2","slot3","slot4"];
+      ids.forEach((id, i) => {
+        const el = document.getElementById(id);
+        const it = pick[i];
+        if (!it){ el.querySelector("h3").textContent="—"; el.querySelector(".big").textContent="—"; el.querySelector(".sub").textContent=""; return; }
+        el.querySelector("h3").textContent = fmtTime(it.time, dtOptsHour) + " Uhr";
+        el.querySelector(".big").textContent = (it.temp==null ? "—" : nf0.format(it.temp)+"°C");
+        el.querySelector(".sub").textContent = `${wmoIcon(it.weathercode)} · ${nf1.format(it.precip||0)} mm · ${windStr(it.wind, it.winddir)}`;
+      });
+    }
+    function renderSlotsDaily(d){
+      // Show next 4 days (skip today if there are 5+ entries)
+      const days = (d.daily||[]).slice();
+      if (days.length >= 5) days.shift();
+      const pick = days.slice(0,4);
+      const ids = ["slot1","slot2","slot3","slot4"];
+      ids.forEach((id, i) => {
+        const el = document.getElementById(id);
+        const it = pick[i];
+        if (!it){ el.querySelector("h3").textContent="—"; el.querySelector(".big").textContent="—"; el.querySelector(".sub").textContent=""; return; }
+        el.querySelector("h3").textContent = new Intl.DateTimeFormat(BOOT.locale, dtOptsDay).format(new Date(it.date));
+        el.querySelector(".big").textContent = (it.tmin==null || it.tmax==null) ? "—" : `${nf0.format(it.tmin)}–${nf0.format(it.tmax)}°C`;
+        el.querySelector(".sub").textContent = `${wmoIcon(it.weathercode)} · ${nf1.format(it.precipSum||0)} mm`;
+      });
+    }
+    function startFlip(d){
+      function show(){
+        if (d.daily && d.daily.length) {
+          if (isHourly){ renderSlotsHourly(d); }
+          else { renderSlotsDaily(d); }
+          isHourly = !isHourly;
+        } else {
+          renderSlotsHourly(d);
+        }
+      }
+      show();
+      if (flipTimer) clearInterval(flipTimer);
+      flipTimer = setInterval(show, (BOOT.flipIntervalSec||30)*1000);
+    }
+
+    // Load data from server
+    function loadData(){
+      setFooterStatus("Lade Wetterdaten…");
+      setNowStatus("Lade Daten…");
+
+      google.script.run
+        .withSuccessHandler(function(d){
+          try{
+            if (!d || d.ok !== true){
+              const err = d && d.error ? d.error : "Unbekannter Fehler";
+              setFooterStatus("Fehler: " + err);
+              setNowStatus("Fehler beim Abruf. Neuer Versuch folgt…");
+              scheduleRetry();
+              return;
+            }
+            renderNow(d);
+            isHourly = true; // reset sequence
+            startFlip(d);
+            renderYearBar();
+            const tag = d.fromCache ? " (Cache)" : "";
+            const ts = new Intl.DateTimeFormat(BOOT.locale, { dateStyle: 'short', timeStyle:'medium', timeZone: BOOT.timezone}).format(new Date(d.meta.fetchedAt));
+            setFooterStatus(`Letzter Abruf: ${ts}${tag} · Auto-Reload in ${BOOT.refreshIntervalMin} min`);
+            document.body.classList.remove("hidden");
+          }catch(e){
+            setFooterStatus("Fehler beim Rendern: " + e.message);
+            setNowStatus("Fehler beim Rendern. Neuer Versuch folgt…");
+            scheduleRetry();
+          }
+        })
+        .withFailureHandler(function(err){
+          setFooterStatus("Netzwerk-/Serverfehler");
+          setNowStatus("Abruf fehlgeschlagen. Neuer Versuch folgt…");
+          scheduleRetry();
+        })
+        .getWeatherData();
+    }
+
+    function scheduleRetry(){
+      const sec = BOOT.retryOnFailureSec || 60;
+      setTimeout(loadData, sec*1000);
+    }
+
+    function scheduleReload(){
+      const min = BOOT.refreshIntervalMin || 5;
+      setTimeout(()=> location.reload(), min*60*1000);
+    }
+
+    // Init
+    startClock();
+    scheduleReload();
+    loadData();
+  </script>
+</body>
+</html>
