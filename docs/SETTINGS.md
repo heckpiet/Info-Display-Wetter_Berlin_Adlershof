@@ -41,7 +41,7 @@ Set **Forecast rotation** to **Manual only** when changing content would make th
 
 ## Year progress
 
-The footer can show **Percentage and days**, **Percentage only**, **Days only**, or be **Hidden**. The combined default looks like `58.90% of year · Day 216 of 365`. Leap years are detected automatically and use 366 as the total.
+The footer can show **Percentage and days**, **Percentage only**, **Days only**, or be **Hidden**. The combined default looks like `58.90% of year · Day 216 of 365`. Changes are previewed immediately behind the settings dialog; **Cancel** restores the saved presentation and **Save settings** persists it. Leap years are detected automatically and use 366 as the total. The bar always visualizes elapsed year progress proportionally, even when its text label uses days.
 
 ## Display detection and manual overrides
 

@@ -46,4 +46,16 @@ export function formatYearProgress(progress, mode = "both", language = "en") {
   if (mode === "hidden") return "";
   return `${percent} · ${days}`;
 }
+
+export function getYearProgressPresentation(
+  progress,
+  mode = "both",
+  language = "en",
+) {
+  return {
+    width: `${progress.percentage}%`,
+    label: formatYearProgress(progress, mode, language),
+    hidden: mode === "hidden",
+  };
+}
 import { translate } from "./i18n.js";

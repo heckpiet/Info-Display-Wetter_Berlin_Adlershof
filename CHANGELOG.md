@@ -4,6 +4,13 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [3.6.1] - 2026-08-04
+
+### Fixed
+
+- Preview year-progress labels immediately when their display mode changes
+- Restore the saved year-progress presentation when the settings dialog is cancelled
+
 ## [3.6.0] - 2026-08-04
 
 ### Added
