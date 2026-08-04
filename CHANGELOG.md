@@ -4,6 +4,14 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [2.3.0] - 2026-08-04
+
+### Added
+
+- Automatic morning, noon, evening, and night themes with manual overrides
+- Font scaling, compact density, and kiosk layout configuration
+- Manual forecast switch with a reduced-duration flip animation
+
 ## [2.2.0] - 2026-08-04
 
 ### Added

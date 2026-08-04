@@ -33,14 +33,21 @@ function setTheme(current) {
   const now = Date.now();
   const sunrise = Date.parse(current.sunrise);
   const sunset = Date.parse(current.sunset);
-  const dark =
-    Number.isFinite(sunrise) && Number.isFinite(sunset)
-      ? now < sunrise || now > sunset
-      : new Date().getHours() < 6 || new Date().getHours() >= 21;
-  document.body.classList.toggle("dark", dark);
-  document.querySelector('meta[name="theme-color"]').content = dark
-    ? "#0b0f16"
-    : "#f6f8fb";
+  let theme = config.themeMode;
+  if (theme === "auto") {
+    if (!Number.isFinite(sunrise) || !Number.isFinite(sunset))
+      theme =
+        new Date().getHours() < 6 || new Date().getHours() >= 21
+          ? "night"
+          : "noon";
+    else if (now < sunrise || now >= sunset) theme = "night";
+    else if (now < sunrise + 3 * 3600000) theme = "morning";
+    else if (now >= sunset - 2 * 3600000) theme = "evening";
+    else theme = "noon";
+  }
+  document.body.dataset.theme = theme;
+  document.querySelector('meta[name="theme-color"]').content =
+    theme === "night" ? "#0b0f16" : "#f6f8fb";
 }
 
 function renderCurrent(data) {
@@ -103,6 +110,14 @@ function renderForecast() {
   hourlyView = !hourlyView;
 }
 
+function flipForecast() {
+  document.querySelector(".forecast").classList.add("flipping");
+  setTimeout(() => {
+    renderForecast();
+    document.querySelector(".forecast").classList.remove("flipping");
+  }, 175);
+}
+
 function render(data, cached = false) {
   latestData = data;
   renderCurrent(data);
@@ -147,6 +162,12 @@ async function loadWeather() {
 }
 
 function initialise() {
+  document.documentElement.style.setProperty(
+    "--font-scale",
+    String(config.fontScale),
+  );
+  document.body.dataset.density = config.density;
+  document.body.dataset.layout = config.layoutMode;
   document.title = `Weather – ${config.locationName}`;
   $("title").textContent = `Weather – ${config.locationName}`;
   $("timezone").textContent = config.timezone;
@@ -178,7 +199,8 @@ function initialise() {
   };
   tick();
   setInterval(tick, 1000);
-  setInterval(renderForecast, config.flipIntervalSeconds * 1000);
+  $("flip-button").addEventListener("click", flipForecast);
+  setInterval(flipForecast, config.flipIntervalSeconds * 1000);
   loadWeather();
 }
 

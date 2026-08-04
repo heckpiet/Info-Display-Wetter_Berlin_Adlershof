@@ -3,7 +3,7 @@
  * ?lat=52.4357&lon=13.5406&name=Berlin-Adlershof&timezone=Europe/Berlin
  */
 export const DEFAULT_CONFIG = Object.freeze({
-  version: "2.2.0",
+  version: "2.3.0",
   latitude: 52.4357,
   longitude: 13.5406,
   locationName: "Berlin-Adlershof",
@@ -12,6 +12,10 @@ export const DEFAULT_CONFIG = Object.freeze({
   // Keep credentials and required identification headers in a server-side proxy.
   weatherProvider: "openMeteoDwd",
   providerProxyUrl: "",
+  themeMode: "auto",
+  fontScale: 1,
+  density: "comfortable",
+  layoutMode: "auto",
   refreshIntervalMinutes: 10,
   flipIntervalSeconds: 30,
   retryIntervalSeconds: 60,

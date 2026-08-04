@@ -61,7 +61,16 @@
       <section class="tile forecast" aria-labelledby="forecast-heading">
         <div class="forecast-header">
           <h2 id="forecast-heading">Forecast</h2>
-          <span class="view-label" id="view-label"></span>
+          <div>
+            <span class="view-label" id="view-label"></span>
+            <button
+              id="flip-button"
+              type="button"
+              aria-label="Switch forecast view"
+            >
+              ↻
+            </button>
+          </div>
         </div>
         <div class="slots" id="forecast-slots" aria-live="polite"></div>
       </section>
