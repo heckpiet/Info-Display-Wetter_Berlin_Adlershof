@@ -1,0 +1,7 @@
+name = "weather-display-provider-proxy"
+main = "worker.js"
+compatibility_date = "2026-08-04"
+
+[vars]
+ALLOWED_ORIGIN = "https://heckpiet.github.io"
+METNO_USER_AGENT = "WeatherInfoDisplay/3.0 https://github.com/heckpiet/Info-Display-Wetter_Berlin_Adlershof"
