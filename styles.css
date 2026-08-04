@@ -48,6 +48,8 @@ body {
 }
 body {
   margin: 0;
+  padding: var(--frame-inset-top, 0) var(--frame-inset-right, 0)
+    var(--frame-inset-bottom, 0) var(--frame-inset-left, 0);
   background: var(--bg);
   color: var(--text);
   font:
@@ -87,8 +89,8 @@ body[data-layout="kiosk"] .wrap {
 .settings-trigger {
   position: fixed;
   z-index: 10;
-  right: 1rem;
-  bottom: 1rem;
+  right: calc(1rem + var(--frame-inset-right, 0px));
+  bottom: calc(1rem + var(--frame-inset-bottom, 0px));
   border: 0;
   border-radius: 50%;
   padding: 0.75rem;
@@ -103,6 +105,8 @@ body.controls-hidden .control {
 }
 dialog {
   width: min(620px, 92vw);
+  max-height: 92vh;
+  overflow: auto;
   border: 0;
   border-radius: 18px;
   background: var(--tile);
@@ -152,6 +156,19 @@ dialog::backdrop {
   color: var(--muted);
   font-size: 0.85rem;
 }
+.inset-settings {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--muted);
+  border-radius: 10px;
+}
+.inset-settings legend {
+  padding-inline: 0.35rem;
+  font-weight: 700;
+}
 .settings-backup {
   grid-template-columns: 1fr;
 }
@@ -181,6 +198,10 @@ dialog::backdrop {
 #settings-form select {
   padding: 0.65rem;
 }
+#settings-form input[readonly] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
 .settings-actions {
   display: flex;
   flex-wrap: wrap;
@@ -196,6 +217,9 @@ dialog::backdrop {
   .settings-panel {
     grid-template-columns: 1fr;
     min-height: auto;
+  }
+  .inset-settings {
+    grid-template-columns: 1fr;
   }
 }
 .import-button input {

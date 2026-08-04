@@ -51,6 +51,7 @@ The settings dialog shows the detected viewport and capabilities. Override the a
 
 - **Display scale** applies a global 75–150% visual scale on top of the existing font scale.
 - **Content width** limits the dashboard to 70–100% of the viewport.
+- **Edge spacing** reserves 0–500 CSS pixels between the browser edges and the dashboard. Choose **All sides together** for one shared value or **Each side individually** for separate top, right, bottom, and left values. The settings button follows the right and bottom spacing so it stays inside the visible frame.
 - **Layout**, **Density**, **Information mode**, and **Font scale** remain independent controls.
 
 Automatic detection uses standards-based [CSS media features](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries) and progressive [feature detection](https://web.dev/learn/pwa/foundations), avoiding unreliable browser-name assumptions.

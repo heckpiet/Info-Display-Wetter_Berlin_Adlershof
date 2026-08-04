@@ -136,6 +136,15 @@ export function applyStaticTranslations(language) {
     "contentWidthPercent",
     de ? "Inhaltsbreite (%)" : "Content width (%)",
   );
+  form.querySelector(".inset-settings legend").textContent = de
+    ? "Randabstand"
+    : "Edge spacing";
+  label(form, "frameInsetMode", de ? "Abstandsmodus" : "Spacing mode");
+  label(form, "frameInset", de ? "Alle Seiten (px)" : "All sides (px)");
+  label(form, "frameInsetTop", de ? "Oben (px)" : "Top (px)");
+  label(form, "frameInsetRight", de ? "Rechts (px)" : "Right (px)");
+  label(form, "frameInsetBottom", de ? "Unten (px)" : "Bottom (px)");
+  label(form, "frameInsetLeft", de ? "Links (px)" : "Left (px)");
   label(form, "language", de ? "Sprache" : "Language");
   label(form, "iconPack", de ? "Icon-Paket" : "Icon pack");
   label(form, "themeMode", "Theme");
@@ -151,6 +160,13 @@ export function applyStaticTranslations(language) {
     de
       ? ["Automatisch", "Smartphone", "Tablet", "Desktop", "TV / Kiosk"]
       : ["Auto-detect", "Phone", "Tablet", "Desktop", "TV / kiosk"],
+  );
+  options(
+    form,
+    "frameInsetMode",
+    de
+      ? ["Alle Seiten gemeinsam", "Jede Seite einzeln"]
+      : ["All sides together", "Each side individually"],
   );
   options(
     form,

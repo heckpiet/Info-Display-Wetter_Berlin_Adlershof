@@ -3,7 +3,7 @@
  * ?lat=52.4357&lon=13.5406&name=Berlin-Adlershof&timezone=Europe/Berlin
  */
 export const DEFAULT_CONFIG = Object.freeze({
-  version: "3.5.0",
+  version: "3.6.0",
   latitude: 52.4357,
   longitude: 13.5406,
   locationName: "Berlin-Adlershof",
@@ -24,6 +24,12 @@ export const DEFAULT_CONFIG = Object.freeze({
   deviceProfile: "auto",
   displayScale: 1,
   contentWidthPercent: 100,
+  frameInsetMode: "uniform",
+  frameInset: 0,
+  frameInsetTop: 0,
+  frameInsetRight: 0,
+  frameInsetBottom: 0,
+  frameInsetLeft: 0,
   controlsAutoHideSeconds: 8,
   refreshIntervalMinutes: 10,
   flipIntervalSeconds: 30,
