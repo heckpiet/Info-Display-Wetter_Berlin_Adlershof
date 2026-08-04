@@ -154,7 +154,6 @@ async function loadWeather() {
 }
 
 function initialise() {
-  document.documentElement.lang = config.locale.split("-")[0];
   document.title = `Weather – ${config.locationName}`;
   $("title").textContent = `Weather – ${config.locationName}`;
   $("timezone").textContent = config.timezone;

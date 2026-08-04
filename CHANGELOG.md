@@ -4,6 +4,15 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [2.0.1] - 2026-08-04
+
+### Changed
+
+- Use `de-DE` formatting for the Berlin-Adlershof default while keeping the interface language English
+- Keep the document language independent from regional number and date formatting
+- Ignore unsupported locale and timezone URL overrides instead of allowing rendering failures
+- Add static-site validation and automated dependency update configuration
+
 ## [2.0.0] - 2026-08-04
 
 ### Added
