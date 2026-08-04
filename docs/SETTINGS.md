@@ -16,6 +16,10 @@ The modes change information hierarchy without changing the underlying weather r
 
 Set **Forecast rotation** to **Manual only** when changing content would make the display harder to follow. The forecast switch remains available as a large touch target.
 
+## Year progress
+
+The footer can show **Percentage and days**, **Percentage only**, **Days only**, or be **Hidden**. The combined default looks like `58.90% of year · Day 216 of 365`. Leap years are detected automatically and use 366 as the total.
+
 The profiles follow practical accessibility principles: strong text contrast, scalable text, touch controls at least 44 CSS pixels in size, a reduced-motion fallback, and fewer competing elements in distance-viewing modes.
 
 Reference guidance:

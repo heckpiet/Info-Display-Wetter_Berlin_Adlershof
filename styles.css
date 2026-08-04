@@ -322,6 +322,10 @@ body[data-information-mode="glance"]:not(.offline) .footer {
   width: 0;
   background: var(--accent);
 }
+.year-progress-hidden,
+.year-label:empty {
+  display: none;
+}
 .offline .status {
   color: var(--warning);
 }

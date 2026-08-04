@@ -21,11 +21,17 @@ test("information mode is included in portable settings", () => {
     sanitizeSettings({
       informationMode: "glance",
       forecastRotation: "manual",
+      yearProgressMode: "days",
     }),
-    { informationMode: "glance", forecastRotation: "manual" },
+    {
+      informationMode: "glance",
+      forecastRotation: "manual",
+      yearProgressMode: "days",
+    },
   );
   assert.deepEqual(
     sanitizeSettings({ informationMode: "unknown", forecastRotation: "yes" }),
     {},
   );
+  assert.deepEqual(sanitizeSettings({ yearProgressMode: "invalid" }), {});
 });

@@ -3,6 +3,7 @@ import { cacheKey, configFromUrl, weatherInfo } from "./weather.js";
 import { fetchWeather, getProvider } from "./providers.js";
 import { initialiseSettings, loadSettings } from "./settings.js";
 import { compareVersions, getLatestRelease, RELEASES_URL } from "./version.js";
+import { formatYearProgress, getYearProgress } from "./progress.js";
 
 const config = configFromUrl({ ...DEFAULT_CONFIG, ...loadSettings() });
 const $ = (id) => document.getElementById(id);
@@ -215,14 +216,18 @@ function initialise() {
   $("provider-name").textContent = getProvider(
     config.weatherProvider,
   ).attribution;
-  const yearPercentage = (
-    ((Date.now() - new Date(new Date().getFullYear(), 0, 1)) /
-      (new Date(new Date().getFullYear() + 1, 0, 1) -
-        new Date(new Date().getFullYear(), 0, 1))) *
-    100
-  ).toFixed(2);
-  $("year-progress").style.width = `${yearPercentage}%`;
-  $("year-label").textContent = `${yearPercentage}% of year`;
+  const yearProgress = getYearProgress(new Date(), config.timezone);
+  $("year-progress").style.width = `${yearProgress.percentage}%`;
+  $("year-label").textContent = formatYearProgress(
+    yearProgress,
+    config.yearProgressMode,
+  );
+  document
+    .querySelector(".progress")
+    .classList.toggle(
+      "year-progress-hidden",
+      config.yearProgressMode === "hidden",
+    );
   const tick = () => {
     $("clock").textContent = formatDate(new Date(), {
       hour: "2-digit",

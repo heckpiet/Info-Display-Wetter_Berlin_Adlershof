@@ -4,6 +4,13 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [3.2.0] - 2026-08-04
+
+### Added
+
+- Add percentage, elapsed-day, combined, and hidden year-progress display options
+- Calculate day-of-year totals with automatic Gregorian leap-year handling
+
 ## [3.1.0] - 2026-08-04
 
 ### Added
