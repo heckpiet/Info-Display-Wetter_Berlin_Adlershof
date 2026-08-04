@@ -4,7 +4,14 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
-## [3.9.0] - 2026-08-04
+## [3.10.0] - 2026-08-04
+
+### Added
+
+- Add 5 selectable Color Themes in Display Settings: Sky Glass (Default), Cyberpunk Neon, Nordic Slate, Forest Aurora, and Sunset Coral
+- Add full 5 Day Phase coverage (Morning, Noon, Afternoon, Evening, Night) for EVERY color theme
+- Add Afternoon day phase detection and dropdown override selection
+- Add German and English localization for all color themes and day phases
 
 ### Added
 

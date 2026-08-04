@@ -26,7 +26,92 @@
     0 16px 36px -8px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.03);
   --glass-blur: blur(16px);
 }
-body[data-theme="night"] {
+/* ==========================================================================
+   DEFAULT THEME (Sky Glass) - 5 Day Phases
+   ========================================================================== */
+body[data-color-theme="default"][data-theme="morning"],
+body:not([data-color-theme])[data-theme="morning"] {
+  --bg: #e0f2fe;
+  --bg-gradient:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(56, 189, 248, 0.25),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(251, 146, 60, 0.15),
+      transparent 40%
+    ),
+    #e0f2fe;
+  --accent: #0284c7;
+  --accent-glow: rgba(2, 132, 199, 0.25);
+  --chip: rgba(224, 242, 254, 0.8);
+}
+body[data-color-theme="default"][data-theme="noon"],
+body:not([data-color-theme])[data-theme="noon"] {
+  --bg: #fef3c7;
+  --bg-gradient:
+    radial-gradient(
+      circle at 30% 10%,
+      rgba(245, 158, 11, 0.22),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 90%,
+      rgba(14, 165, 233, 0.15),
+      transparent 45%
+    ),
+    #fef9c3;
+  --accent: #d97706;
+  --accent-glow: rgba(217, 119, 6, 0.25);
+  --chip: rgba(254, 243, 199, 0.85);
+}
+body[data-color-theme="default"][data-theme="afternoon"],
+body:not([data-color-theme])[data-theme="afternoon"] {
+  --bg: #fff7ed;
+  --bg-gradient:
+    radial-gradient(
+      circle at 20% 15%,
+      rgba(249, 115, 22, 0.2),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 85%,
+      rgba(2, 132, 199, 0.15),
+      transparent 45%
+    ),
+    #fff7ed;
+  --accent: #ea580c;
+  --accent-glow: rgba(234, 88, 12, 0.25);
+  --chip: rgba(255, 237, 213, 0.85);
+}
+body[data-color-theme="default"][data-theme="evening"],
+body:not([data-color-theme])[data-theme="evening"] {
+  --bg: #1e1b4b;
+  --bg-gradient:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(249, 115, 22, 0.25),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(99, 102, 241, 0.3),
+      transparent 50%
+    ),
+    #1e1b4b;
+  --tile: rgba(30, 27, 75, 0.72);
+  --tile-border: rgba(255, 255, 255, 0.14);
+  --text: #fff7ed;
+  --muted: #cbd5e1;
+  --accent: #fb923c;
+  --accent-glow: rgba(251, 146, 60, 0.3);
+  --chip: rgba(49, 46, 129, 0.75);
+  color-scheme: dark;
+}
+body[data-color-theme="default"][data-theme="night"],
+body:not([data-color-theme])[data-theme="night"] {
   color-scheme: dark;
   --bg: #090d16;
   --bg-gradient:
@@ -52,61 +137,431 @@ body[data-theme="night"] {
   --warning: #fbbf24;
   --shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.5);
 }
-body[data-theme="morning"] {
-  --bg: #e0f2fe;
+
+/* ==========================================================================
+   CYBERPUNK THEME (Neon Tech) - 5 Day Phases
+   ========================================================================== */
+body[data-color-theme="cyberpunk"][data-theme="morning"] {
+  --bg: #042f2e;
   --bg-gradient:
     radial-gradient(
-      circle at 10% 20%,
-      rgba(56, 189, 248, 0.25),
+      circle at 15% 20%,
+      rgba(20, 184, 166, 0.3),
       transparent 50%
     ),
     radial-gradient(
-      circle at 90% 80%,
-      rgba(251, 146, 60, 0.15),
-      transparent 40%
+      circle at 85% 80%,
+      rgba(6, 182, 212, 0.25),
+      transparent 45%
     ),
-    #e0f2fe;
-  --accent: #0284c7;
-  --chip: rgba(224, 242, 254, 0.8);
+    #042f2e;
+  --tile: rgba(15, 23, 42, 0.8);
+  --tile-border: rgba(20, 184, 166, 0.3);
+  --text: #f0fdf4;
+  --muted: #99f6e4;
+  --accent: #14b8a6;
+  --accent-glow: rgba(20, 184, 166, 0.4);
+  --chip: rgba(19, 78, 74, 0.75);
+  color-scheme: dark;
 }
-body[data-theme="noon"] {
-  --bg: #fef3c7;
+body[data-color-theme="cyberpunk"][data-theme="noon"] {
+  --bg: #083344;
   --bg-gradient:
     radial-gradient(
       circle at 30% 10%,
-      rgba(245, 158, 11, 0.22),
+      rgba(6, 182, 212, 0.35),
       transparent 50%
     ),
     radial-gradient(
       circle at 70% 90%,
-      rgba(14, 165, 233, 0.15),
+      rgba(250, 204, 21, 0.2),
       transparent 45%
     ),
-    #fef9c3;
-  --accent: #d97706;
-  --chip: rgba(254, 243, 199, 0.85);
+    #083344;
+  --tile: rgba(15, 23, 42, 0.82);
+  --tile-border: rgba(6, 182, 212, 0.35);
+  --text: #ecfeff;
+  --muted: #a5f3fc;
+  --accent: #06b6d4;
+  --accent-glow: rgba(6, 182, 212, 0.4);
+  --chip: rgba(22, 78, 99, 0.75);
+  color-scheme: dark;
 }
-body[data-theme="evening"] {
-  --bg: #1e1b4b;
+body[data-color-theme="cyberpunk"][data-theme="afternoon"] {
+  --bg: #4c0519;
+  --bg-gradient:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(244, 63, 94, 0.35),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(6, 182, 212, 0.25),
+      transparent 45%
+    ),
+    #4c0519;
+  --tile: rgba(30, 10, 25, 0.82);
+  --tile-border: rgba(244, 63, 94, 0.35);
+  --text: #fff1f2;
+  --muted: #fecdd3;
+  --accent: #fb7185;
+  --accent-glow: rgba(251, 113, 133, 0.4);
+  --chip: rgba(136, 19, 55, 0.75);
+  color-scheme: dark;
+}
+body[data-color-theme="cyberpunk"][data-theme="evening"] {
+  --bg: #3b0764;
   --bg-gradient:
     radial-gradient(
       circle at 20% 30%,
-      rgba(249, 115, 22, 0.25),
+      rgba(217, 70, 239, 0.35),
       transparent 50%
     ),
     radial-gradient(
       circle at 80% 70%,
-      rgba(99, 102, 241, 0.3),
+      rgba(249, 115, 22, 0.3),
+      transparent 45%
+    ),
+    #3b0764;
+  --tile: rgba(24, 9, 45, 0.82);
+  --tile-border: rgba(217, 70, 239, 0.35);
+  --text: #fdf4ff;
+  --muted: #f5d0fe;
+  --accent: #e879f9;
+  --accent-glow: rgba(232, 121, 249, 0.4);
+  --chip: rgba(88, 28, 135, 0.75);
+  color-scheme: dark;
+}
+body[data-color-theme="cyberpunk"][data-theme="night"] {
+  --bg: #0f0728;
+  --bg-gradient:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(34, 211, 238, 0.3),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(168, 85, 247, 0.35),
       transparent 50%
     ),
-    #1e1b4b;
-  --tile: rgba(30, 27, 75, 0.72);
+    #0f0728;
+  --tile: rgba(20, 14, 44, 0.85);
+  --tile-border: rgba(34, 211, 238, 0.35);
+  --text: #f8fafc;
+  --muted: #c084fc;
+  --accent: #22d3ee;
+  --accent-glow: rgba(34, 211, 238, 0.45);
+  --chip: rgba(36, 24, 75, 0.8);
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   NORDIC THEME (Polar Slate) - 5 Day Phases
+   ========================================================================== */
+body[data-color-theme="nordic"][data-theme="morning"] {
+  --bg: #f0fdfa;
+  --bg-gradient:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(13, 148, 136, 0.18),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 85% 85%,
+      rgba(56, 189, 248, 0.15),
+      transparent 40%
+    ),
+    #f0fdfa;
+  --tile: rgba(255, 255, 255, 0.82);
+  --tile-border: rgba(204, 251, 241, 0.9);
+  --text: #0f172a;
+  --muted: #334155;
+  --accent: #0d9488;
+  --accent-glow: rgba(13, 148, 136, 0.25);
+  --chip: rgba(204, 251, 241, 0.6);
+}
+body[data-color-theme="nordic"][data-theme="noon"] {
+  --bg: #ecfeff;
+  --bg-gradient:
+    radial-gradient(circle at 30% 10%, rgba(8, 145, 178, 0.2), transparent 50%),
+    radial-gradient(
+      circle at 70% 90%,
+      rgba(20, 184, 166, 0.15),
+      transparent 45%
+    ),
+    #ecfeff;
+  --accent: #0891b2;
+  --accent-glow: rgba(8, 145, 178, 0.25);
+  --chip: rgba(207, 250, 254, 0.65);
+}
+body[data-color-theme="nordic"][data-theme="afternoon"] {
+  --bg: #f1f5f9;
+  --bg-gradient:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(15, 118, 110, 0.18),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(245, 158, 11, 0.12),
+      transparent 40%
+    ),
+    #f1f5f9;
+  --accent: #0f766e;
+  --accent-glow: rgba(15, 118, 110, 0.25);
+  --chip: rgba(226, 232, 240, 0.75);
+}
+body[data-color-theme="nordic"][data-theme="evening"] {
+  --bg: #0f2942;
+  --bg-gradient:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(245, 158, 11, 0.22),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(20, 184, 166, 0.25),
+      transparent 45%
+    ),
+    #0f2942;
+  --tile: rgba(15, 41, 66, 0.78);
+  --tile-border: rgba(255, 255, 255, 0.14);
+  --text: #f0fdfa;
+  --muted: #94a3b8;
+  --accent: #2dd4bf;
+  --accent-glow: rgba(45, 212, 191, 0.3);
+  --chip: rgba(30, 58, 88, 0.75);
+  color-scheme: dark;
+}
+body[data-color-theme="nordic"][data-theme="night"] {
+  --bg: #061e29;
+  --bg-gradient:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(45, 212, 191, 0.22),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(56, 189, 248, 0.18),
+      transparent 45%
+    ),
+    #061e29;
+  --tile: rgba(11, 37, 50, 0.82);
+  --tile-border: rgba(45, 212, 191, 0.2);
+  --text: #f0fdfa;
+  --muted: #99f6e4;
+  --accent: #2dd4bf;
+  --accent-glow: rgba(45, 212, 191, 0.35);
+  --chip: rgba(19, 53, 71, 0.75);
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   FOREST THEME (Emerald Aurora) - 5 Day Phases
+   ========================================================================== */
+body[data-color-theme="forest"][data-theme="morning"] {
+  --bg: #f0fdf4;
+  --bg-gradient:
+    radial-gradient(circle at 15% 15%, rgba(22, 163, 74, 0.2), transparent 45%),
+    radial-gradient(
+      circle at 85% 85%,
+      rgba(234, 179, 8, 0.15),
+      transparent 40%
+    ),
+    #f0fdf4;
+  --tile: rgba(255, 255, 255, 0.82);
+  --tile-border: rgba(220, 252, 231, 0.9);
+  --text: #052e16;
+  --muted: #166534;
+  --accent: #16a34a;
+  --accent-glow: rgba(22, 163, 74, 0.25);
+  --chip: rgba(220, 252, 231, 0.65);
+}
+body[data-color-theme="forest"][data-theme="noon"] {
+  --bg: #ecfdf5;
+  --bg-gradient:
+    radial-gradient(
+      circle at 30% 10%,
+      rgba(16, 185, 129, 0.22),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 90%,
+      rgba(202, 138, 4, 0.15),
+      transparent 45%
+    ),
+    #ecfdf5;
+  --accent: #10b981;
+  --accent-glow: rgba(16, 185, 129, 0.25);
+  --chip: rgba(209, 250, 229, 0.7);
+}
+body[data-color-theme="forest"][data-theme="afternoon"] {
+  --bg: #f7fee7;
+  --bg-gradient:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(101, 163, 13, 0.22),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(217, 119, 6, 0.15),
+      transparent 40%
+    ),
+    #f7fee7;
+  --accent: #65a30d;
+  --accent-glow: rgba(101, 163, 13, 0.25);
+  --chip: rgba(236, 252, 203, 0.75);
+}
+body[data-color-theme="forest"][data-theme="evening"] {
+  --bg: #142e1b;
+  --bg-gradient:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(234, 88, 12, 0.25),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(34, 197, 94, 0.22),
+      transparent 45%
+    ),
+    #142e1b;
+  --tile: rgba(20, 46, 27, 0.8);
+  --tile-border: rgba(255, 255, 255, 0.14);
+  --text: #f0fdf4;
+  --muted: #86efac;
+  --accent: #4ade80;
+  --accent-glow: rgba(74, 222, 128, 0.3);
+  --chip: rgba(32, 68, 41, 0.75);
+  color-scheme: dark;
+}
+body[data-color-theme="forest"][data-theme="night"] {
+  --bg: #051e11;
+  --bg-gradient:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(74, 222, 128, 0.22),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(20, 184, 166, 0.2),
+      transparent 45%
+    ),
+    #051e11;
+  --tile: rgba(10, 40, 24, 0.82);
+  --tile-border: rgba(74, 222, 128, 0.2);
+  --text: #f0fdf4;
+  --muted: #86efac;
+  --accent: #4ade80;
+  --accent-glow: rgba(74, 222, 128, 0.35);
+  --chip: rgba(20, 58, 36, 0.75);
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   SUNSET THEME (Warm Coral) - 5 Day Phases
+   ========================================================================== */
+body[data-color-theme="sunset"][data-theme="morning"] {
+  --bg: #fff1f2;
+  --bg-gradient:
+    radial-gradient(circle at 15% 15%, rgba(225, 29, 72, 0.2), transparent 45%),
+    radial-gradient(
+      circle at 85% 85%,
+      rgba(251, 146, 60, 0.2),
+      transparent 40%
+    ),
+    #fff1f2;
+  --tile: rgba(255, 255, 255, 0.82);
+  --tile-border: rgba(254, 205, 211, 0.9);
+  --text: #4c0519;
+  --muted: #9f1239;
+  --accent: #e11d48;
+  --accent-glow: rgba(225, 29, 72, 0.25);
+  --chip: rgba(254, 226, 226, 0.65);
+}
+body[data-color-theme="sunset"][data-theme="noon"] {
+  --bg: #fff7ed;
+  --bg-gradient:
+    radial-gradient(
+      circle at 30% 10%,
+      rgba(217, 119, 6, 0.25),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 90%,
+      rgba(244, 63, 94, 0.18),
+      transparent 45%
+    ),
+    #fff7ed;
+  --accent: #d97706;
+  --accent-glow: rgba(217, 119, 6, 0.25);
+  --chip: rgba(255, 237, 213, 0.75);
+}
+body[data-color-theme="sunset"][data-theme="afternoon"] {
+  --bg: #fff3ed;
+  --bg-gradient:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(249, 115, 22, 0.28),
+      transparent 45%
+    ),
+    radial-gradient(circle at 80% 80%, rgba(225, 29, 72, 0.2), transparent 40%),
+    #fff3ed;
+  --accent: #f97316;
+  --accent-glow: rgba(249, 115, 22, 0.25);
+  --chip: rgba(255, 228, 213, 0.8);
+}
+body[data-color-theme="sunset"][data-theme="evening"] {
+  --bg: #31102e;
+  --bg-gradient:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(244, 63, 94, 0.35),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(192, 38, 211, 0.3),
+      transparent 45%
+    ),
+    #31102e;
+  --tile: rgba(49, 16, 46, 0.8);
   --tile-border: rgba(255, 255, 255, 0.14);
   --text: #fff7ed;
-  --muted: #cbd5e1;
-  --accent: #fb923c;
-  --chip: rgba(49, 46, 129, 0.75);
+  --muted: #f472b6;
+  --accent: #f43f5e;
+  --accent-glow: rgba(244, 63, 94, 0.35);
+  --chip: rgba(76, 24, 71, 0.75);
   color-scheme: dark;
+}
+body[data-color-theme="sunset"][data-theme="night"] {
+  --bg: #1c0a24;
+  --bg-gradient:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(251, 146, 60, 0.25),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(192, 38, 211, 0.3),
+      transparent 50%
+    ),
+    #1c0a24;
+  --tile: rgba(36, 14, 46, 0.82);
+  --tile-border: rgba(251, 146, 60, 0.2);
+  --text: #fff7ed;
+  --muted: #f472b6;
+  --accent: #fb923c;
+  --accent-glow: rgba(251, 146, 60, 0.35);
+  --chip: rgba(56, 21, 71, 0.75);
 }
 * {
   box-sizing: border-box;

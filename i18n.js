@@ -147,7 +147,34 @@ export function applyStaticTranslations(language) {
   label(form, "frameInsetLeft", de ? "Links (px)" : "Left (px)");
   label(form, "language", de ? "Sprache" : "Language");
   label(form, "iconPack", de ? "Icon-Paket" : "Icon pack");
-  label(form, "themeMode", "Theme");
+  label(form, "colorTheme", de ? "Farb-Theme" : "Color theme");
+  label(form, "themeMode", de ? "Tagesphase" : "Theme phase");
+  options(
+    form,
+    "colorTheme",
+    de
+      ? [
+          "Sky Glass (Standard)",
+          "Cyberpunk Neon",
+          "Nordic Slate",
+          "Forest Aurora",
+          "Sunset Coral",
+        ]
+      : [
+          "Sky Glass (Default)",
+          "Cyberpunk Neon",
+          "Nordic Slate",
+          "Forest Aurora",
+          "Sunset Coral",
+        ],
+  );
+  options(
+    form,
+    "themeMode",
+    de
+      ? ["Automatisch", "Morgen", "Mittag", "Nachmittag", "Abend", "Nacht"]
+      : ["Automatic", "Morning", "Noon", "Afternoon", "Evening", "Night"],
+  );
   label(
     form,
     "forecastRotation",

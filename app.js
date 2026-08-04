@@ -1,28 +1,28 @@
-import { DEFAULT_CONFIG } from "./config.js?v=3.9.0";
+import { DEFAULT_CONFIG } from "./config.js?v=3.10.0";
 import {
   cacheKey,
   configFromUrl,
   isNightTime,
   weatherInfo,
-} from "./weather.js?v=3.9.0";
-import { fetchWeather, getProvider } from "./providers.js?v=3.9.0";
-import { initialiseSettings, loadSettings } from "./settings.js?v=3.9.0";
+} from "./weather.js?v=3.10.0";
+import { fetchWeather, getProvider } from "./providers.js?v=3.10.0";
+import { initialiseSettings, loadSettings } from "./settings.js?v=3.10.0";
 import {
   compareVersions,
   getLatestRelease,
   RELEASES_URL,
   VERSION_CACHE_KEY,
-} from "./version.js?v=3.9.0";
+} from "./version.js?v=3.10.0";
 import {
   getYearProgress,
   getYearProgressPresentation,
-} from "./progress.js?v=3.9.0";
+} from "./progress.js?v=3.10.0";
 import {
   detectDisplay,
   formatDisplaySummary,
   resolveDisplay,
-} from "./display.js?v=3.9.0";
-import { applyStaticTranslations, translate } from "./i18n.js?v=3.9.0";
+} from "./display.js?v=3.10.0";
+import { applyStaticTranslations, translate } from "./i18n.js?v=3.10.0";
 
 const config = configFromUrl({ ...DEFAULT_CONFIG, ...loadSettings() });
 config.locale = config.language === "de" ? "de-DE" : "en-GB";
@@ -86,19 +86,30 @@ function setTheme(current) {
   const sunset = Date.parse(current.sunset);
   let theme = config.themeMode;
   if (theme === "auto") {
-    if (!Number.isFinite(sunrise) || !Number.isFinite(sunset))
-      theme =
-        new Date().getHours() < 6 || new Date().getHours() >= 21
-          ? "night"
-          : "noon";
-    else if (now < sunrise || now >= sunset) theme = "night";
-    else if (now < sunrise + 3 * 3600000) theme = "morning";
-    else if (now >= sunset - 2 * 3600000) theme = "evening";
-    else theme = "noon";
+    if (!Number.isFinite(sunrise) || !Number.isFinite(sunset)) {
+      const hours = new Date().getHours();
+      if (hours < 6 || hours >= 22) theme = "night";
+      else if (hours < 10) theme = "morning";
+      else if (hours < 14) theme = "noon";
+      else if (hours < 18) theme = "afternoon";
+      else theme = "evening";
+    } else if (now < sunrise || now >= sunset) {
+      theme = "night";
+    } else if (now < sunrise + 3 * 3600000) {
+      theme = "morning";
+    } else if (now >= sunset - 3 * 3600000) {
+      theme = "evening";
+    } else {
+      const midDayStart = sunrise + 3 * 3600000;
+      const eveningStart = sunset - 3 * 3600000;
+      const halfWay = midDayStart + (eveningStart - midDayStart) / 2;
+      theme = now < halfWay ? "noon" : "afternoon";
+    }
   }
   document.body.dataset.theme = theme;
+  document.body.dataset.colorTheme = config.colorTheme || "default";
   document.querySelector('meta[name="theme-color"]').content =
-    theme === "night" ? "#0b0f16" : "#f6f8fb";
+    theme === "night" ? "#090d16" : "#f0f4f9";
 }
 
 function renderCurrent(data) {

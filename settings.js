@@ -6,6 +6,7 @@ const ALLOWED = [
   "refreshIntervalMinutes",
   "cacheMaxAgeHours",
   "themeMode",
+  "colorTheme",
   "language",
   "iconPack",
   "fontScale",
@@ -32,6 +33,20 @@ export function sanitizeSettings(value = {}) {
   const result = {};
   for (const key of ALLOWED)
     if (value[key] !== undefined) result[key] = value[key];
+  if (
+    result.colorTheme !== undefined &&
+    !["default", "cyberpunk", "nordic", "forest", "sunset"].includes(
+      result.colorTheme,
+    )
+  )
+    delete result.colorTheme;
+  if (
+    result.themeMode !== undefined &&
+    !["auto", "morning", "noon", "afternoon", "evening", "night"].includes(
+      result.themeMode,
+    )
+  )
+    delete result.themeMode;
   if (
     result.informationMode !== undefined &&
     !["detailed", "essential", "glance"].includes(result.informationMode)
