@@ -50,10 +50,14 @@ function renderCurrent(data) {
   $("now-icon").textContent = info.icon;
   $("now-description").textContent = info.description;
   $("now-feels").textContent = `${formatNumber(current.feelsLike)}°C`;
+  $("now-range").textContent =
+    `${formatNumber(current.tempMin)} / ${formatNumber(current.tempMax)}°C`;
   $("now-precip").textContent = `${formatNumber(current.precipitation, 1)} mm`;
   $("now-humidity").textContent = `${formatNumber(current.humidity)} %`;
   $("now-pressure").textContent = `${formatNumber(current.pressure)} hPa`;
   $("now-wind").textContent = wind(current.wind, current.windDirection);
+  $("now-gust").textContent = `${formatNumber(current.windGust)} km/h`;
+  $("now-uv").textContent = formatNumber(current.uvIndex, 1);
   $("now-sun").textContent =
     current.sunrise && current.sunset
       ? `${formatDate(current.sunrise, { hour: "2-digit", minute: "2-digit" })} / ${formatDate(current.sunset, { hour: "2-digit", minute: "2-digit" })}`
@@ -110,7 +114,7 @@ function render(data, cached = false) {
   );
   $("status").textContent = cached
     ? `Offline · cached data from ${ageMinutes} min ago · retrying automatically`
-    : `Updated ${formatDate(data.fetchedAt, { dateStyle: "short", timeStyle: "medium" })}`;
+    : `Updated ${formatDate(data.fetchedAt, { dateStyle: "short", timeStyle: "medium" })} · ${ageMinutes} min old`;
   document.body.classList.toggle("offline", cached);
 }
 
@@ -150,14 +154,26 @@ function initialise() {
   $("provider-name").textContent = getProvider(
     config.weatherProvider,
   ).attribution;
-  $("year-progress").style.width =
-    `${(((Date.now() - new Date(new Date().getFullYear(), 0, 1)) / (new Date(new Date().getFullYear() + 1, 0, 1) - new Date(new Date().getFullYear(), 0, 1))) * 100).toFixed(2)}%`;
+  const yearPercentage = (
+    ((Date.now() - new Date(new Date().getFullYear(), 0, 1)) /
+      (new Date(new Date().getFullYear() + 1, 0, 1) -
+        new Date(new Date().getFullYear(), 0, 1))) *
+    100
+  ).toFixed(2);
+  $("year-progress").style.width = `${yearPercentage}%`;
+  $("year-label").textContent = `${yearPercentage}% of year`;
   const tick = () => {
     $("clock").textContent = formatDate(new Date(), {
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit",
       hour12: false,
+    });
+    $("date").textContent = formatDate(new Date(), {
+      weekday: "long",
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
     });
   };
   tick();

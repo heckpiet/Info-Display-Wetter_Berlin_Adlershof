@@ -65,6 +65,7 @@ export function buildWeatherUrl(config) {
       "pressure_msl",
       "wind_speed_10m",
       "wind_direction_10m",
+      "wind_gusts_10m",
     ].join(","),
     hourly: [
       "temperature_2m",
@@ -73,6 +74,7 @@ export function buildWeatherUrl(config) {
       "weather_code",
       "wind_speed_10m",
       "wind_direction_10m",
+      "uv_index",
     ].join(","),
     daily: [
       "weather_code",
@@ -83,6 +85,7 @@ export function buildWeatherUrl(config) {
       "precipitation_sum",
       "precipitation_probability_max",
       "wind_gusts_10m_max",
+      "uv_index_max",
     ].join(","),
     timezone: config.timezone,
     forecast_days: String(config.forecastDays),
@@ -115,6 +118,7 @@ export function normalizeWeather(
     weatherCode: "weather_code",
     wind: "wind_speed_10m",
     windDirection: "wind_direction_10m",
+    uvIndex: "uv_index",
   });
   const daily = mapRows(data.daily, {
     tempMax: "temperature_2m_max",
@@ -123,6 +127,7 @@ export function normalizeWeather(
     precipitationProbability: "precipitation_probability_max",
     weatherCode: "weather_code",
     windGust: "wind_gusts_10m_max",
+    uvIndexMax: "uv_index_max",
   }).map((row, index) => ({
     ...row,
     sunrise: data.daily.sunrise?.[index] ?? null,
@@ -132,6 +137,10 @@ export function normalizeWeather(
   const today =
     daily.find((day) => day.time === String(data.current.time).slice(0, 10)) ??
     daily[0];
+  const currentHour = hourly.find(
+    (hour) =>
+      String(hour.time).slice(0, 13) === String(data.current.time).slice(0, 13),
+  );
   return {
     fetchedAt,
     locationName: config.locationName,
@@ -145,7 +154,11 @@ export function normalizeWeather(
       precipitation: numberOrNull(data.current.precipitation),
       wind: numberOrNull(data.current.wind_speed_10m),
       windDirection: numberOrNull(data.current.wind_direction_10m),
+      windGust: numberOrNull(data.current.wind_gusts_10m),
       weatherCode: numberOrNull(data.current.weather_code),
+      uvIndex: currentHour?.uvIndex ?? null,
+      tempMin: today?.tempMin ?? null,
+      tempMax: today?.tempMax ?? null,
       sunrise: today?.sunrise ?? null,
       sunset: today?.sunset ?? null,
     },

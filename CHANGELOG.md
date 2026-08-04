@@ -4,6 +4,13 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [2.2.0] - 2026-08-04
+
+### Added
+
+- Today's low/high, current gusts and UV index
+- Full local date, numeric year progress, and visible online data age
+
 ## [2.1.0] - 2026-08-04
 
 ### Added
