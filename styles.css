@@ -1174,6 +1174,26 @@ h2 {
   line-height: 0.95;
   letter-spacing: -1px;
 }
+.sun-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+}
+.sun-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+.sunrise-icon {
+  color: #f59e0b;
+}
+.sunset-icon {
+  color: #f97316;
+}
+.sun-sep {
+  opacity: 0.45;
+  margin-inline: 4px;
+}
 .weather-icon {
   width: clamp(78px, 8vw, 112px);
   height: clamp(58px, 6vw, 84px);

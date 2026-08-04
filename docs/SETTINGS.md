@@ -43,7 +43,7 @@ Customize your display arrangement under **Appearance & behavior** (Design & Ver
 Personalize your kiosk with custom background imagery:
 
 - **Source Selection:** Choose between **None (Theme Color)**, **Atmospheric Presets**, custom **Web Image URLs**, or **Local Image File Uploads**.
-- **Sunrise & sunset times:** Toggle visibility of local sunrise and sunset times (`Visible` or `Hidden`).
+- **Sunrise & sunset times:** Toggle visibility of local sunrise and sunset times (`Visible` or `Hidden`) rendered with dedicated vector icons (🌅 / 🌇).
 - **Opacity Slider:** Fine-tune glass card transparency (`--tile-opacity`) from 10% to 100% for optimal contrast over background pictures.
 
 | Display and edge controls                       | Appearance and behavior controls                       |

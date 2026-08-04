@@ -4,7 +4,11 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
-## [3.17.0] - 2026-08-04
+## [3.18.0] - 2026-08-04
+
+### Added
+
+- Add custom SVG vector icons for sunrise (amber glow #f59e0b) and sunset (warm orange #f97316) in the current weather metrics card
 
 ### Added
 
