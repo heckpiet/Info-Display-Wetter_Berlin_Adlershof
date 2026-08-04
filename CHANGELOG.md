@@ -4,6 +4,14 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [2.5.0] - 2026-08-04
+
+### Added
+
+- Service-worker application shell and installable web-app manifest
+- Exponential retry backoff capped at 15 minutes
+- Offline and recovery operations documentation
+
 ## [2.4.0] - 2026-08-04
 
 ### Added

@@ -1,0 +1,9 @@
+{
+  "name": "Weather Info Display",
+  "short_name": "Weather Display",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f8fb",
+  "theme_color": "#156ff0",
+  "lang": "en"
+}

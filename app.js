@@ -19,6 +19,7 @@ const formatDate = (value, options) =>
 let latestData;
 let hourlyView = true;
 let retryTimer;
+let retryAttempt = 0;
 
 function wind(value, direction) {
   if (value == null) return "-- km/h";
@@ -150,6 +151,7 @@ async function loadWeather() {
     const data = await fetchWeather(config);
     localStorage.setItem(cacheKey(config), JSON.stringify(data));
     render(data);
+    retryAttempt = 0;
     retryTimer = setTimeout(loadWeather, config.refreshIntervalMinutes * 60000);
   } catch (error) {
     const cached = readCache();
@@ -158,7 +160,13 @@ async function loadWeather() {
       $("status").textContent =
         `Weather unavailable · ${error.message} · retrying automatically`;
     document.body.classList.add("offline");
-    retryTimer = setTimeout(loadWeather, config.retryIntervalSeconds * 1000);
+    const retrySeconds = Math.min(
+      config.retryIntervalSeconds * 2 ** retryAttempt,
+      900,
+    );
+    retryAttempt += 1;
+    $("status").textContent += ` · next retry in ${retrySeconds}s`;
+    retryTimer = setTimeout(loadWeather, retrySeconds * 1000);
   }
 }
 
@@ -204,6 +212,8 @@ function initialise() {
   $("flip-button").addEventListener("click", flipForecast);
   setInterval(flipForecast, config.flipIntervalSeconds * 1000);
   loadWeather();
+  if ("serviceWorker" in navigator)
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
 }
 
 initialise();
