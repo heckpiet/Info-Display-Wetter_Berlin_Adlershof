@@ -9,8 +9,8 @@
       content="A resilient, backend-free DWD weather display for kiosk browsers."
     />
     <title>Weather display</title>
-    <link rel="stylesheet" href="styles.css?v=3.12.0" />
-    <link rel="manifest" href="manifest.webmanifest?v=3.12.0" />
+    <link rel="stylesheet" href="styles.css?v=3.13.0" />
+    <link rel="manifest" href="manifest.webmanifest?v=3.13.0" />
   </head>
   <body>
     <button
@@ -257,6 +257,19 @@
               max="100"
               step="1"
           /></label>
+          <label
+            >Layout structure
+            <select name="layoutMode">
+              <option value="default">Standard Kiosk Grid (Default)</option>
+              <option value="heroBottom">
+                Hero Header & Bottom Cards (Bild 1)
+              </option>
+              <option value="dashboardGrid">Smart Display Grid (Bild 2)</option>
+              <option value="splitVertical">Split Columns (Vertikal)</option>
+              <option value="compactBanner">Compact Banner Bar</option>
+              <option value="focusCards">Focused Hero Deck</option>
+            </select></label
+          >
           <fieldset class="inset-settings">
             <legend>Edge spacing</legend>
             <label
@@ -460,10 +473,10 @@
           }
         });
         navigator.serviceWorker
-          .register("./sw.js?v=3.12.0", { updateViaCache: "none" })
+          .register("./sw.js?v=3.13.0", { updateViaCache: "none" })
           .catch(() => {});
       }
     </script>
-    <script type="module" src="app.js?v=3.12.0"></script>
+    <script type="module" src="app.js?v=3.13.0"></script>
   </body>
 </html>

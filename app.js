@@ -1,31 +1,32 @@
-import { DEFAULT_CONFIG } from "./config.js?v=3.12.0";
+import { DEFAULT_CONFIG } from "./config.js?v=3.13.0";
 import {
   cacheKey,
   configFromUrl,
   isNightTime,
   weatherInfo,
-} from "./weather.js?v=3.12.0";
-import { fetchWeather, getProvider } from "./providers.js?v=3.12.0";
-import { initialiseSettings, loadSettings } from "./settings.js?v=3.12.0";
+} from "./weather.js?v=3.13.0";
+import { fetchWeather, getProvider } from "./providers.js?v=3.13.0";
+import { initialiseSettings, loadSettings } from "./settings.js?v=3.13.0";
 import {
   compareVersions,
   getLatestRelease,
   RELEASES_URL,
   VERSION_CACHE_KEY,
-} from "./version.js?v=3.12.0";
+} from "./version.js?v=3.13.0";
 import {
   getYearProgress,
   getYearProgressPresentation,
-} from "./progress.js?v=3.12.0";
+} from "./progress.js?v=3.13.0";
 import {
   detectDisplay,
   formatDisplaySummary,
   resolveDisplay,
-} from "./display.js?v=3.12.0";
-import { applyStaticTranslations, translate } from "./i18n.js?v=3.12.0";
+} from "./display.js?v=3.13.0";
+import { applyStaticTranslations, translate } from "./i18n.js?v=3.13.0";
 
 const config = configFromUrl({ ...DEFAULT_CONFIG, ...loadSettings() });
 config.locale = config.language === "de" ? "de-DE" : "en-GB";
+document.body.dataset.layoutMode = config.layoutMode || "default";
 const t = (key, values) => translate(config.language, key, values);
 const $ = (id) => document.getElementById(id);
 const formatNumber = (value, digits = 0) =>

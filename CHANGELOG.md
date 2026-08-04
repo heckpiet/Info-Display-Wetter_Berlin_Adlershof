@@ -4,7 +4,13 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
-## [3.12.0] - 2026-08-04
+## [3.13.0] - 2026-08-04
+
+### Added
+
+- Add 5 new layout structure modes inspired by user reference designs: Hero Header & Bottom Cards (Image 0), Smart Display Grid (Image 1), Split Columns, Compact Banner Bar, and Focused Hero Deck
+- Add layout structure selector dropdown in display settings dialog
+- Add full German and English localization for all 6 layout structure options
 
 ### Added
 

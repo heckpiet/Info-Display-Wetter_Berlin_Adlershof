@@ -66,6 +66,18 @@ export function sanitizeSettings(value = {}) {
       delete result[key];
   }
   if (
+    result.layoutMode !== undefined &&
+    ![
+      "default",
+      "heroBottom",
+      "dashboardGrid",
+      "splitVertical",
+      "compactBanner",
+      "focusCards",
+    ].includes(result.layoutMode)
+  )
+    delete result.layoutMode;
+  if (
     result.themeMode !== undefined &&
     !["auto", "morning", "noon", "afternoon", "evening", "night"].includes(
       result.themeMode,

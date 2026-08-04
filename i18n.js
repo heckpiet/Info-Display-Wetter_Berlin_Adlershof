@@ -136,6 +136,28 @@ export function applyStaticTranslations(language) {
     "contentWidthPercent",
     de ? "Inhaltsbreite (%)" : "Content width (%)",
   );
+  label(form, "layoutMode", de ? "Layout-Struktur" : "Layout structure");
+  options(
+    form,
+    "layoutMode",
+    de
+      ? [
+          "Standard Kiosk Grid (Default)",
+          "Hero Header & Bottom Cards (Bild 1)",
+          "Smart Display Grid (Bild 2)",
+          "Split Columns (Vertikal)",
+          "Kompakte Banner-Leiste",
+          "Zentriertes Fokus-Deck",
+        ]
+      : [
+          "Standard Kiosk Grid (Default)",
+          "Hero Header & Bottom Cards (Image 1)",
+          "Smart Display Grid (Image 2)",
+          "Split Columns (Vertical)",
+          "Compact Banner Bar",
+          "Focused Hero Deck",
+        ],
+  );
   form.querySelector(".inset-settings legend").textContent = de
     ? "Randabstand"
     : "Edge spacing";

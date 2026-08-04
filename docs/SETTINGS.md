@@ -25,6 +25,17 @@ Choose from 8 built-in color themes or build a custom palette:
 
 Every theme seamlessly integrates with all **5 day phases** (**Morning**, **Noon**, **Afternoon**, **Evening**, **Night**). Choose **auto** under **Theme phase** to automatically cycle phases based on local sunrise and sunset times, or select a specific phase to pin it permanently.
 
+## Layout structure modes (6 Variants)
+
+Customize your display arrangement under **Display**:
+
+- **Standard Kiosk Grid (Default):** Balanced two-column grid layout with current conditions on the left and forecast on the right.
+- **Hero Header & Bottom Cards (Bild 1):** Prominent hero weather header with giant temperature readout and a full-width bottom row of 7-day forecast cards.
+- **Smart Display Grid (Bild 2):** Echo Show / Nest Hub style modular dashboard layout with main weather and key metric cards.
+- **Split Columns (Vertikal):** Symmetrical 50/50 vertical column split for portrait displays or split kiosks.
+- **Compact Banner Bar:** Ultra-widescreen horizontal strip layout for wide monitors or header displays.
+- **Focused Hero Deck:** Centered single-column focus card with subtle elevation shadows.
+
 | Display and edge controls                       | Appearance and behavior controls                       |
 | ----------------------------------------------- | ------------------------------------------------------ |
 | ![Display settings](images/settings-dialog.png) | ![Appearance settings](images/settings-appearance.png) |
