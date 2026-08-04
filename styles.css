@@ -79,6 +79,16 @@ h2 {
   font-variant-numeric: tabular-nums;
   font-weight: 700;
 }
+.datetime {
+  text-align: right;
+}
+.datetime time {
+  display: block;
+}
+#date,
+.year-label {
+  color: var(--muted);
+}
 .grid {
   display: grid;
   grid-template-columns: minmax(300px, 2fr) minmax(420px, 3fr);
