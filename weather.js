@@ -167,27 +167,120 @@ export function normalizeWeather(
   };
 }
 
-export function weatherInfo(code) {
+const WEATHER_TEXT = {
+  en: {
+    clear: "Clear sky",
+    mainlyClear: "Mainly clear",
+    partlyCloudy: "Partly cloudy",
+    overcast: "Overcast",
+    fog: "Fog",
+    drizzle: "Drizzle",
+    freezingDrizzle: "Freezing drizzle",
+    rain: "Rain",
+    freezingRain: "Freezing rain",
+    snow: "Snow",
+    rainShowers: "Rain showers",
+    snowShowers: "Snow showers",
+    thunderstorm: "Thunderstorm",
+    hail: "Thunderstorm with hail",
+    unknown: "Unknown",
+  },
+  de: {
+    clear: "Klar",
+    mainlyClear: "Überwiegend klar",
+    partlyCloudy: "Teilweise bewölkt",
+    overcast: "Bedeckt",
+    fog: "Nebel",
+    drizzle: "Nieselregen",
+    freezingDrizzle: "Gefrierender Nieselregen",
+    rain: "Regen",
+    freezingRain: "Gefrierender Regen",
+    snow: "Schnee",
+    rainShowers: "Regenschauer",
+    snowShowers: "Schneeschauer",
+    thunderstorm: "Gewitter",
+    hail: "Gewitter mit Hagel",
+    unknown: "Unbekannt",
+  },
+};
+
+const ICON_PACKS = {
+  color: {
+    clear: "☀️",
+    mainlyClear: "🌤️",
+    partlyCloudy: "⛅",
+    overcast: "☁️",
+    fog: "🌫️",
+    drizzle: "🌦️",
+    freezingDrizzle: "🌧️",
+    rain: "🌧️",
+    freezingRain: "🌧️",
+    snow: "❄️",
+    rainShowers: "🌦️",
+    snowShowers: "🌨️",
+    thunderstorm: "⛈️",
+    hail: "⛈️",
+    unknown: "❔",
+  },
+  mono: {
+    clear: "☀︎",
+    mainlyClear: "☼",
+    partlyCloudy: "◒",
+    overcast: "☁",
+    fog: "≋",
+    drizzle: "☂",
+    freezingDrizzle: "☂",
+    rain: "☂",
+    freezingRain: "☂",
+    snow: "❄",
+    rainShowers: "☔",
+    snowShowers: "❄",
+    thunderstorm: "ϟ",
+    hail: "ϟ",
+    unknown: "?",
+  },
+  minimal: {
+    clear: "○",
+    mainlyClear: "◔",
+    partlyCloudy: "◑",
+    overcast: "●",
+    fog: "≡",
+    drizzle: "⋮",
+    freezingDrizzle: "⋮",
+    rain: "▥",
+    freezingRain: "▥",
+    snow: "✳",
+    rainShowers: "▦",
+    snowShowers: "✳",
+    thunderstorm: "↯",
+    hail: "↯",
+    unknown: "·",
+  },
+};
+
+export function weatherInfo(code, language = "en", iconPack = "color") {
   const groups = [
-    [[0], "☀️", "Clear sky"],
-    [[1], "🌤️", "Mainly clear"],
-    [[2], "⛅", "Partly cloudy"],
-    [[3], "☁️", "Overcast"],
-    [[45, 48], "🌫️", "Fog"],
-    [[51, 53, 55], "🌦️", "Drizzle"],
-    [[56, 57], "🌧️", "Freezing drizzle"],
-    [[61, 63, 65], "🌧️", "Rain"],
-    [[66, 67], "🌧️", "Freezing rain"],
-    [[71, 73, 75, 77], "❄️", "Snow"],
-    [[80, 81, 82], "🌦️", "Rain showers"],
-    [[85, 86], "🌨️", "Snow showers"],
-    [[95], "⛈️", "Thunderstorm"],
-    [[96, 99], "⛈️", "Thunderstorm with hail"],
+    [[0], "clear"],
+    [[1], "mainlyClear"],
+    [[2], "partlyCloudy"],
+    [[3], "overcast"],
+    [[45, 48], "fog"],
+    [[51, 53, 55], "drizzle"],
+    [[56, 57], "freezingDrizzle"],
+    [[61, 63, 65], "rain"],
+    [[66, 67], "freezingRain"],
+    [[71, 73, 75, 77], "snow"],
+    [[80, 81, 82], "rainShowers"],
+    [[85, 86], "snowShowers"],
+    [[95], "thunderstorm"],
+    [[96, 99], "hail"],
   ];
   const match = groups.find(([codes]) => codes.includes(Number(code)));
-  return match
-    ? { icon: match[1], description: match[2] }
-    : { icon: "❔", description: "Unknown" };
+  const key = match?.[1] ?? "unknown";
+  return {
+    icon: (ICON_PACKS[iconPack] ?? ICON_PACKS.color)[key],
+    description: (WEATHER_TEXT[language] ?? WEATHER_TEXT.en)[key],
+  };
 }
 
 export function cacheKey(config) {

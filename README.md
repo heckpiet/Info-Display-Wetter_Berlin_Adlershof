@@ -51,6 +51,7 @@ Choose **Essential** for a quieter wall display or **Glance** for maximum readab
 - Configurable year progress as percentage, elapsed days, both, or hidden
 - Viewport- and capability-aware device profiles with manual scale and width overrides
 - Thematically grouped, keyboard-accessible settings tabs
+- Complete German/English runtime localization and three offline icon packs
 - No cookies, analytics, account, backend, or secrets
 
 ## Quick start

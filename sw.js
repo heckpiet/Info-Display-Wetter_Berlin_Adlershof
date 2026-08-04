@@ -1,4 +1,4 @@
-const CACHE = "weather-display-shell-v3.4.0";
+const CACHE = "weather-display-shell-v3.5.0";
 const ASSETS = [
   "./",
   "./index.html",
@@ -10,6 +10,7 @@ const ASSETS = [
   "./settings.js",
   "./progress.js",
   "./display.js",
+  "./i18n.js",
   "./version.js",
   "./manifest.webmanifest",
 ];

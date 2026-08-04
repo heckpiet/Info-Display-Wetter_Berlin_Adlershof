@@ -10,6 +10,7 @@ const requiredFiles = [
   "version.js",
   "progress.js",
   "display.js",
+  "i18n.js",
   "sw.js",
   "manifest.webmanifest",
   "config.js",

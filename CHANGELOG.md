@@ -4,6 +4,14 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [3.5.0] - 2026-08-04
+
+### Added
+
+- Add complete German and English runtime localization with matching locale formatting
+- Add color emoji, monochrome, and minimal offline weather icon packs
+- Add validated language and icon-pack settings with export/import support
+
 ## [3.4.0] - 2026-08-04
 
 ### Changed

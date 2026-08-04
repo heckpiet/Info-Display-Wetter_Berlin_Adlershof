@@ -6,6 +6,8 @@ const ALLOWED = [
   "refreshIntervalMinutes",
   "cacheMaxAgeHours",
   "themeMode",
+  "language",
+  "iconPack",
   "fontScale",
   "density",
   "informationMode",
@@ -42,6 +44,13 @@ export function sanitizeSettings(value = {}) {
     !["auto", "phone", "tablet", "desktop", "tv"].includes(result.deviceProfile)
   )
     delete result.deviceProfile;
+  if (result.language !== undefined && !["de", "en"].includes(result.language))
+    delete result.language;
+  if (
+    result.iconPack !== undefined &&
+    !["color", "mono", "minimal"].includes(result.iconPack)
+  )
+    delete result.iconPack;
   if (
     result.displayScale !== undefined &&
     (!Number.isFinite(Number(result.displayScale)) ||
