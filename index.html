@@ -166,6 +166,20 @@
     </dialog>
 
     <noscript>This display requires JavaScript.</noscript>
+    <script>
+      if ("serviceWorker" in navigator) {
+        let refreshing = false;
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+          if (!refreshing) {
+            refreshing = true;
+            location.reload();
+          }
+        });
+        navigator.serviceWorker
+          .register("./sw.js", { updateViaCache: "none" })
+          .catch(() => {});
+      }
+    </script>
     <script type="module" src="app.js"></script>
   </body>
 </html>

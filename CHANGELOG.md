@@ -4,6 +4,12 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [3.0.4] - 2026-08-04
+
+### Fixed
+
+- Force service-worker update checks to bypass HTTP caches and reload once when a new worker takes control
+
 ## [3.0.3] - 2026-08-04
 
 ### Added
