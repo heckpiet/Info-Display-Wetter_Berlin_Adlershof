@@ -40,6 +40,20 @@ The display calls the configured proxy with these query parameters:
 
 Only set `providerProxyUrl` to infrastructure you control. The proxy should restrict allowed origins and validate all parameters.
 
+## Deploying the bundled Cloudflare Worker
+
+The `proxy/` directory contains the production proxy entry point and adapter tests. Install Wrangler, authenticate with your Cloudflare account, review `wrangler.toml`, and deploy from that directory. Configure secrets without committing them:
+
+```sh
+npx wrangler secret put OPENWEATHER_API_KEY
+npx wrangler secret put DWD_INGESTION_URL
+npx wrangler deploy
+```
+
+`METNO_USER_AGENT` must identify the application and provide a valid contact URL or address. Set `ALLOWED_ORIGIN` to the exact site origin. After deployment, set `providerProxyUrl` to the Worker URL and choose `metNo`, `openWeather`, or `dwdOpenData`.
+
+The DWD profile deliberately expects a separate `DWD_INGESTION_URL`: native ICON GRIB2 acquisition, decoding, grid selection, and model-run lifecycle management are unsuitable for an edge request handler. The ingestion service must return the canonical contract below.
+
 ## Canonical proxy response
 
 Every proxy-backed provider must return the same provider-independent JSON shape. Numeric values use Celsius, millimetres, hectopascals, kilometres per hour, degrees, and WMO weather codes.

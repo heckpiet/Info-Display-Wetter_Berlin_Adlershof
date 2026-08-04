@@ -78,6 +78,8 @@ For commercial use, check the current Open-Meteo licensing and pricing terms. At
 
 Alternative provider profiles are prepared but disabled by default. Direct DWD Open Data requires GRIB2 processing, MET Norway requires an identified server-side client and has browser CORS constraints, and OpenWeather requires an API key. Keys must never be placed in this static application. See [Weather provider integration](docs/WEATHER_PROVIDERS.md) for the proxy contract and activation instructions.
 
+Version 3 includes a deployable Cloudflare Worker proxy with MET Norway and OpenWeather adapters plus a controlled DWD ingestion-service hook. It remains inactive until the operator supplies external hosting and any required secrets.
+
 ## CI/CD and deployment
 
 `quality.yml` runs linting, formatting checks, tests, and a live API smoke test on pushes and pull requests. `deploy-pages.yml` publishes the exact static files to GitHub Pages after quality checks pass on `main`.

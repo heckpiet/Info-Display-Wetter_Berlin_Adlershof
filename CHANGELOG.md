@@ -4,6 +4,15 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-08-04
+
+### Added
+
+- Deployable Cloudflare Worker provider proxy with origin restriction and edge caching
+- MET Norway and OpenWeather canonical response adapters
+- Configurable DWD GRIB2 ingestion-service integration point
+- Proxy contract tests and secure deployment documentation
+
 ## [2.5.0] - 2026-08-04
 
 ### Added

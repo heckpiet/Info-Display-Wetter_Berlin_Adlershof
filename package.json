@@ -1,13 +1,13 @@
 {
   "name": "info-display-weather-berlin-adlershof",
-  "version": "2.5.0",
+  "version": "3.0.0",
   "private": true,
   "type": "module",
   "engines": {
     "node": ">=24"
   },
   "scripts": {
-    "test": "node --test test/weather.test.js test/providers.test.js test/settings.test.js",
+    "test": "node --test test/weather.test.js test/providers.test.js test/settings.test.js proxy/test/proxy.test.js",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
