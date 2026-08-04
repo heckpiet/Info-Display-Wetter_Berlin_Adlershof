@@ -1,0 +1,10 @@
+# Canonical line endings normalization (AI Coding Rules v1.3.1)
+* text=auto eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.woff binary
+*.woff2 binary

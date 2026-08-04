@@ -4,7 +4,12 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
-## [3.23.0] - 2026-08-04
+## [3.24.0] - 2026-08-04
+
+### Added
+
+- Integrate official AI Coding Rules Version 1.3.1 specification across workspace guidelines
+- Add `.gitattributes` for canonical line endings normalization (LF for text files, CRLF for `*.bat` and `*.cmd`) as required by AI Coding Rules v1.3.1 Section 4 (`rules/30-project-structure.md`)
 
 ### Added
 
