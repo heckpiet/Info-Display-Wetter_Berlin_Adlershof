@@ -4,7 +4,11 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
-## [3.21.0] - 2026-08-04
+## [3.22.0] - 2026-08-04
+
+### Changed
+
+- Replace README screenshot assets with high-resolution, pixel-perfect 16:9 UI previews removing empty vertical bars
 
 ### Changed
 
