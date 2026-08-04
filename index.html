@@ -9,8 +9,8 @@
       content="A resilient, backend-free DWD weather display for kiosk browsers."
     />
     <title>Weather display</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css?v=3.7.1" />
+    <link rel="manifest" href="manifest.webmanifest?v=3.7.1" />
   </head>
   <body>
     <button
@@ -421,10 +421,10 @@
           }
         });
         navigator.serviceWorker
-          .register("./sw.js", { updateViaCache: "none" })
+          .register("./sw.js?v=3.7.1", { updateViaCache: "none" })
           .catch(() => {});
       }
     </script>
-    <script type="module" src="app.js"></script>
+    <script type="module" src="app.js?v=3.7.1"></script>
   </body>
 </html>

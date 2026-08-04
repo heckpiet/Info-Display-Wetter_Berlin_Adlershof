@@ -19,18 +19,29 @@ const requiredFiles = [
 
 await Promise.all(requiredFiles.map((file) => access(file)));
 
-const [html, config, packageJson] = await Promise.all([
-  readFile("index.html", "utf8"),
-  readFile("config.js", "utf8"),
-  readFile("package.json", "utf8").then(JSON.parse),
-]);
+const [html, config, packageJson, app, providers, progress, serviceWorker] =
+  await Promise.all([
+    readFile("index.html", "utf8"),
+    readFile("config.js", "utf8"),
+    readFile("package.json", "utf8").then(JSON.parse),
+    readFile("app.js", "utf8"),
+    readFile("providers.js", "utf8"),
+    readFile("progress.js", "utf8"),
+    readFile("sw.js", "utf8"),
+  ]);
 
 const failures = [];
 if (!/<html lang="en">/.test(html))
   failures.push("The English interface must declare lang=en");
-if (!/src="app\.js"/.test(html)) failures.push("index.html must load app.js");
-if (!/href="styles\.css"/.test(html))
+const releaseQuery = `?v=${packageJson.version}`;
+if (!html.includes(`src="app.js${releaseQuery}"`))
+  failures.push("index.html must load the release-versioned app.js");
+if (!html.includes(`href="styles.css${releaseQuery}"`))
   failures.push("index.html must load styles.css");
+if (!html.includes(`register("./sw.js${releaseQuery}"`))
+  failures.push(
+    "index.html must register the release-versioned service worker",
+  );
 if (/google\.script|<\?=/.test(html))
   failures.push("Legacy Apps Script syntax is not allowed");
 if (!/locale: "de-DE"/.test(config))
@@ -39,6 +50,13 @@ if (!/weatherProvider: "openMeteoDwd"/.test(config))
   failures.push("Open-Meteo DWD ICON must remain the default provider");
 if (!config.includes(`version: "${packageJson.version}"`))
   failures.push("App and package versions must match");
+for (const [name, source] of Object.entries({ app, providers, progress })) {
+  const localImports = [...source.matchAll(/from "(\.\/[^"?]+)([^"]*)"/g)];
+  if (localImports.some((match) => match[2] !== releaseQuery))
+    failures.push(`${name}.js contains an unversioned local module import`);
+}
+if (!serviceWorker.includes(`const VERSION = "${packageJson.version}"`))
+  failures.push("Service-worker and package versions must match");
 
 if (failures.length) throw new Error(failures.join("\n"));
 console.log(`Static site validation passed for v${packageJson.version}.`);
