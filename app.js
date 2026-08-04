@@ -1,22 +1,23 @@
-import { DEFAULT_CONFIG } from "./config.js?v=3.7.1";
-import { cacheKey, configFromUrl, weatherInfo } from "./weather.js?v=3.7.1";
-import { fetchWeather, getProvider } from "./providers.js?v=3.7.1";
-import { initialiseSettings, loadSettings } from "./settings.js?v=3.7.1";
+import { DEFAULT_CONFIG } from "./config.js?v=3.7.2";
+import { cacheKey, configFromUrl, weatherInfo } from "./weather.js?v=3.7.2";
+import { fetchWeather, getProvider } from "./providers.js?v=3.7.2";
+import { initialiseSettings, loadSettings } from "./settings.js?v=3.7.2";
 import {
   compareVersions,
   getLatestRelease,
   RELEASES_URL,
-} from "./version.js?v=3.7.1";
+  VERSION_CACHE_KEY,
+} from "./version.js?v=3.7.2";
 import {
   getYearProgress,
   getYearProgressPresentation,
-} from "./progress.js?v=3.7.1";
+} from "./progress.js?v=3.7.2";
 import {
   detectDisplay,
   formatDisplaySummary,
   resolveDisplay,
-} from "./display.js?v=3.7.1";
-import { applyStaticTranslations, translate } from "./i18n.js?v=3.7.1";
+} from "./display.js?v=3.7.2";
+import { applyStaticTranslations, translate } from "./i18n.js?v=3.7.2";
 
 const config = configFromUrl({ ...DEFAULT_CONFIG, ...loadSettings() });
 config.locale = config.language === "de" ? "de-DE" : "en-GB";
@@ -42,7 +43,9 @@ async function renderVersionStatus() {
   const element = $("latest-version");
   element.href = RELEASES_URL;
   try {
-    const latest = await getLatestRelease();
+    const latest = await getLatestRelease({
+      cacheKey: `${VERSION_CACHE_KEY}:${config.version}`,
+    });
     const updateAvailable = compareVersions(latest, config.version) > 0;
     element.textContent = updateAvailable
       ? t("updateAvailable", { version: latest })

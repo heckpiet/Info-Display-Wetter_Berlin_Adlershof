@@ -1,4 +1,4 @@
-const VERSION = "3.7.1";
+const VERSION = "3.7.2";
 const CACHE = `weather-display-shell-v${VERSION}`;
 const asset = (path) => `${path}?v=${VERSION}`;
 const ASSETS = [

@@ -15,6 +15,12 @@ const requiredFiles = [
   "manifest.webmanifest",
   "config.js",
   "LICENSE",
+  "docs/images/kiosk-desktop.png",
+  "docs/images/kiosk-daily-forecast.png",
+  "docs/images/settings-dialog.png",
+  "docs/images/settings-appearance.png",
+  "docs/images/mode-essential.png",
+  "docs/images/mode-glance.png",
 ];
 
 await Promise.all(requiredFiles.map((file) => access(file)));

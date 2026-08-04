@@ -1,8 +1,10 @@
 # Weather Info Display
 
-A backend-free weather dashboard designed for an unattended browser in kiosk mode. It uses the high-resolution DWD ICON forecast through Open-Meteo, ships as static files, and requires no API key.
+A privacy-friendly, bilingual weather dashboard for unattended kiosk, wall-tablet, and smart-display browsers. The standard configuration uses the high-resolution DWD ICON forecast through Open-Meteo, runs entirely as static files, and requires no API key.
 
-Berlin-Adlershof is the included example location. You can change it without rebuilding the application.
+[Live demo](https://heckpiet.github.io/Info-Display-Wetter_Berlin_Adlershof/) · [Latest release](https://github.com/heckpiet/Info-Display-Wetter_Berlin_Adlershof/releases/latest) · [Documentation](docs/SETTINGS.md) · [Provider setup](docs/WEATHER_PROVIDERS.md)
+
+Berlin-Adlershof is the included example location. Location, language, visual density, icon style, kiosk spacing, and secondary-information behavior can be changed without rebuilding the application.
 
 ## Screenshots
 
@@ -10,7 +12,7 @@ Berlin-Adlershof is the included example location. You can change it without reb
 
 ![Desktop kiosk view with current weather and the hourly forecast](docs/images/kiosk-desktop.png)
 
-The default desktop layout presents the current conditions, four upcoming hours, a live clock, data age, and year progress at a glance.
+The default desktop layout prioritizes current conditions, four upcoming hours, and a live clock. Routine provider, version, freshness, and year-progress information automatically leaves the layout after inactivity; important offline, error, and update states remain visible.
 
 ### Daily forecast
 
@@ -18,11 +20,13 @@ The default desktop layout presents the current conditions, four upcoming hours,
 
 The forecast card switches automatically or manually between the next four hours and the next four days.
 
-### Display settings
+### Display and appearance settings
 
-![Display settings dialog](docs/images/settings-dialog.png)
+| Display, scaling, and kiosk edges                                                              | Language, icons, and secondary information                                                               |
+| ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| ![Display settings with responsive profiles and edge spacing](docs/images/settings-dialog.png) | ![Appearance settings with language, icon, and visibility controls](docs/images/settings-appearance.png) |
 
-Location, refresh and cache intervals, theme, font scale, density, and layout can be changed directly on the display. Settings are stored only in the local browser and can be exported or imported as JSON.
+The four keyboard-accessible tabs cover location/data, display/layout, appearance/behavior, and backup/reset. Settings are stored only in the local browser and can be exported or imported as JSON.
 
 > The screenshots show live forecast data captured for the Berlin-Adlershof example. Values and the adaptive theme change with time and weather conditions.
 
@@ -36,17 +40,18 @@ Choose **Essential** for a quieter wall display or **Glance** for maximum readab
 
 ## Features
 
-- Current conditions and alternating hourly/daily forecast
+- Current conditions and alternating four-hour/four-day forecast
 - Daily low/high, wind gusts, UV index, full date, and explicit data age
 - Automatic light/dark theme based on sunrise and sunset
 - Four adaptive day-phase themes, manual forecast switching, and kiosk display profiles
-- Responsive kiosk layout for tablets and desktop displays
+- Responsive kiosk layout for phones, tablets, desktop displays, and TVs
 - Detailed, essential, and distance-optimized glance information modes
 - Cached last-known-good data when the network or API is unavailable
 - Automatic refresh, timeout, and retry handling
 - URL-based location configuration
 - Provider abstraction with proxy-ready DWD, MET Norway, and OpenWeather profiles
-- GitHub Pages deployment and pull-request quality checks
+- Atomic, versioned offline assets that prevent mixed-release layouts
+- GitHub Pages deployment after pull-request and main-branch quality checks
 - Running and latest GitHub release versions shown directly on the display
 - Configurable year progress as percentage, elapsed days, both, or hidden
 - Viewport- and capability-aware device profiles with manual scale and width overrides
@@ -86,7 +91,7 @@ https://example.github.io/repository/?lat=53.5511&lon=9.9937&name=Hamburg&timezo
 
 Supported parameters are `lat`, `lon`, `name`, `timezone`, and `locale`. Invalid coordinates are ignored. Use an [IANA timezone name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
-`locale` controls date, time, and number formatting, not the interface language. The repository and interface remain English; `de-DE` is the appropriate default formatting locale for the Berlin-Adlershof example. Unsupported locale and timezone overrides are ignored safely.
+`locale` controls date, time, and number formatting. The independently selectable interface language supports German and English; `de-DE` is the appropriate default formatting locale for the Berlin-Adlershof example. Unsupported locale and timezone overrides are ignored safely.
 
 ## Kiosk mode
 
@@ -122,7 +127,7 @@ Before enabling it, review the complete [Package E prerequisites and go-live che
 
 ## CI/CD and deployment
 
-`quality.yml` runs linting, formatting checks, tests, and a live API smoke test on pushes and pull requests. `deploy-pages.yml` publishes the exact static files to GitHub Pages after quality checks pass on `main`.
+`quality.yml` runs linting, formatting checks, automated tests, static-site validation, release-asset version alignment, and a live API smoke test on pushes and pull requests. `deploy-pages.yml` publishes the exact static files to GitHub Pages only after quality checks pass on `main`. Versioned module, stylesheet, manifest, and service-worker URLs keep online and offline clients on one coherent release.
 
 To enable deployment:
 
@@ -150,7 +155,7 @@ npm run smoke
 
 ## Privacy and resilience
 
-The browser contacts only `api.open-meteo.com`. The latest successful response is stored in browser `localStorage` for up to 12 hours. It contains public forecast data and the configured location, not personal data. If no usable cache exists, the page remains visible with an error state and retries automatically.
+The default browser contacts `api.open-meteo.com` for weather and GitHub's public releases API for the optional update indicator. The latest successful forecast is stored in browser `localStorage` for up to 12 hours. It contains public forecast data and the configured location, not personal data. There are no cookies, analytics, or accounts. If no usable cache exists, the page remains visible with an error state and retries automatically.
 
 ## Legacy Apps Script migration
 

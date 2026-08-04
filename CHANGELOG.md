@@ -4,6 +4,16 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [3.7.2] - 2026-08-04
+
+### Changed
+
+- Refresh every README screenshot from the current production interface at a consistent 1280×720 viewport
+- Add separate Display and Appearance settings screenshots covering edge spacing and secondary-information controls
+- Rewrite the project overview, feature summary, privacy notes, configuration guidance, and CI/CD description for the current application
+- Update repository description and discovery topics for kiosk, wall-display, PWA, dashboard, and bilingual use cases
+- Scope the cached GitHub release result to the installed application version so a new release checks immediately instead of showing an older cached version
+
 ## [3.7.1] - 2026-08-04
 
 ### Fixed
