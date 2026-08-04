@@ -112,6 +112,7 @@
     <dialog id="settings-dialog">
       <form id="settings-form" method="dialog">
         <h2>Display settings</h2>
+        <output class="display-summary" id="display-summary"></output>
         <label>Location name <input name="locationName" required /></label>
         <label
           >Latitude <input name="latitude" type="number" step="any" required
@@ -179,6 +180,34 @@
             <option>kiosk</option>
           </select></label
         >
+        <label
+          >Device profile
+          <select name="deviceProfile">
+            <option value="auto">Auto-detect</option>
+            <option value="phone">Phone</option>
+            <option value="tablet">Tablet</option>
+            <option value="desktop">Desktop</option>
+            <option value="tv">TV / kiosk</option>
+          </select></label
+        >
+        <label
+          >Display scale
+          <input
+            name="displayScale"
+            type="number"
+            min="0.75"
+            max="1.5"
+            step="0.05"
+        /></label>
+        <label
+          >Content width (%)
+          <input
+            name="contentWidthPercent"
+            type="number"
+            min="70"
+            max="100"
+            step="1"
+        /></label>
         <div class="settings-actions">
           <button value="cancel">Cancel</button
           ><button type="button" id="settings-reset">Reset</button

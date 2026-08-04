@@ -4,6 +4,14 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [3.3.0] - 2026-08-04
+
+### Added
+
+- Add viewport-aware phone, tablet, desktop, and TV/kiosk display profiles
+- Show detected viewport, pixel ratio, pointer, hover, offline-cache, and fullscreen capabilities
+- Add manual device-profile, 75–150% display-scale, and 70–100% content-width controls
+
 ## [3.2.0] - 2026-08-04
 
 ### Added

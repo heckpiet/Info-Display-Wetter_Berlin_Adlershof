@@ -12,6 +12,9 @@ const ALLOWED = [
   "forecastRotation",
   "yearProgressMode",
   "layoutMode",
+  "deviceProfile",
+  "displayScale",
+  "contentWidthPercent",
   "controlsAutoHideSeconds",
 ];
 
@@ -34,6 +37,25 @@ export function sanitizeSettings(value = {}) {
     !["percentage", "days", "both", "hidden"].includes(result.yearProgressMode)
   )
     delete result.yearProgressMode;
+  if (
+    result.deviceProfile !== undefined &&
+    !["auto", "phone", "tablet", "desktop", "tv"].includes(result.deviceProfile)
+  )
+    delete result.deviceProfile;
+  if (
+    result.displayScale !== undefined &&
+    (!Number.isFinite(Number(result.displayScale)) ||
+      Number(result.displayScale) < 0.75 ||
+      Number(result.displayScale) > 1.5)
+  )
+    delete result.displayScale;
+  if (
+    result.contentWidthPercent !== undefined &&
+    (!Number.isFinite(Number(result.contentWidthPercent)) ||
+      Number(result.contentWidthPercent) < 70 ||
+      Number(result.contentWidthPercent) > 100)
+  )
+    delete result.contentWidthPercent;
   return result;
 }
 
@@ -64,6 +86,8 @@ export function initialiseSettings(config) {
       "refreshIntervalMinutes",
       "cacheMaxAgeHours",
       "fontScale",
+      "displayScale",
+      "contentWidthPercent",
     ])
       data[key] = Number(data[key]);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(sanitizeSettings(data)));
