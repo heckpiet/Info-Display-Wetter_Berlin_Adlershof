@@ -4,6 +4,20 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-08-04
+
+### Added
+
+- Provider abstraction with Open-Meteo DWD ICON retained as the operational default
+- Proxy-ready profiles for direct DWD Open Data, MET Norway Locationforecast, and OpenWeather One Call
+- Canonical provider response validation and provider-specific cache separation
+- Security and implementation documentation for alternative data sources
+
+### Changed
+
+- Display the active provider attribution dynamically
+- Exercise the provider abstraction in the production API smoke test
+
 ## [2.0.1] - 2026-08-04
 
 ### Changed

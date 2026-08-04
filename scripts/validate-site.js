@@ -5,6 +5,7 @@ const requiredFiles = [
   "styles.css",
   "app.js",
   "weather.js",
+  "providers.js",
   "config.js",
   "LICENSE",
 ];
@@ -27,6 +28,8 @@ if (/google\.script|<\?=/.test(html))
   failures.push("Legacy Apps Script syntax is not allowed");
 if (!/locale: "de-DE"/.test(config))
   failures.push("Adlershof must default to de-DE formatting");
+if (!/weatherProvider: "openMeteoDwd"/.test(config))
+  failures.push("Open-Meteo DWD ICON must remain the default provider");
 if (!config.includes(`version: "${packageJson.version}"`))
   failures.push("App and package versions must match");
 

@@ -12,6 +12,7 @@ Berlin-Adlershof is the included example location. You can change it without reb
 - Cached last-known-good data when the network or API is unavailable
 - Automatic refresh, timeout, and retry handling
 - URL-based location configuration
+- Provider abstraction with proxy-ready DWD, MET Norway, and OpenWeather profiles
 - GitHub Pages deployment and pull-request quality checks
 - No cookies, analytics, account, backend, or secrets
 
@@ -72,6 +73,8 @@ The project intentionally keeps Open-Meteo's dedicated DWD ICON endpoint.
 - **Bright Sky:** an excellent simple DWD JSON API for station observations and MOSMIX forecasts, but it does not improve this display's forecast use case enough to justify changing providers.
 
 For commercial use, check the current Open-Meteo licensing and pricing terms. Attribution to DWD and Open-Meteo remains visible in the interface.
+
+Alternative provider profiles are prepared but disabled by default. Direct DWD Open Data requires GRIB2 processing, MET Norway requires an identified server-side client and has browser CORS constraints, and OpenWeather requires an API key. Keys must never be placed in this static application. See [Weather provider integration](docs/WEATHER_PROVIDERS.md) for the proxy contract and activation instructions.
 
 ## CI/CD and deployment
 
