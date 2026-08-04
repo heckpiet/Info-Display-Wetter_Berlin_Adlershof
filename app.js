@@ -1,28 +1,28 @@
-import { DEFAULT_CONFIG } from "./config.js?v=3.10.0";
+import { DEFAULT_CONFIG } from "./config.js?v=3.11.0";
 import {
   cacheKey,
   configFromUrl,
   isNightTime,
   weatherInfo,
-} from "./weather.js?v=3.10.0";
-import { fetchWeather, getProvider } from "./providers.js?v=3.10.0";
-import { initialiseSettings, loadSettings } from "./settings.js?v=3.10.0";
+} from "./weather.js?v=3.11.0";
+import { fetchWeather, getProvider } from "./providers.js?v=3.11.0";
+import { initialiseSettings, loadSettings } from "./settings.js?v=3.11.0";
 import {
   compareVersions,
   getLatestRelease,
   RELEASES_URL,
   VERSION_CACHE_KEY,
-} from "./version.js?v=3.10.0";
+} from "./version.js?v=3.11.0";
 import {
   getYearProgress,
   getYearProgressPresentation,
-} from "./progress.js?v=3.10.0";
+} from "./progress.js?v=3.11.0";
 import {
   detectDisplay,
   formatDisplaySummary,
   resolveDisplay,
-} from "./display.js?v=3.10.0";
-import { applyStaticTranslations, translate } from "./i18n.js?v=3.10.0";
+} from "./display.js?v=3.11.0";
+import { applyStaticTranslations, translate } from "./i18n.js?v=3.11.0";
 
 const config = configFromUrl({ ...DEFAULT_CONFIG, ...loadSettings() });
 config.locale = config.language === "de" ? "de-DE" : "en-GB";
@@ -108,6 +108,55 @@ function setTheme(current) {
   }
   document.body.dataset.theme = theme;
   document.body.dataset.colorTheme = config.colorTheme || "default";
+
+  if (config.colorTheme === "custom") {
+    document.body.style.setProperty("--bg", config.customBgColor || "#0f172a");
+    document.body.style.setProperty(
+      "--bg-gradient",
+      config.customBgColor || "#0f172a",
+    );
+    document.body.style.setProperty(
+      "--tile",
+      config.customTileColor || "#1e293b",
+    );
+    document.body.style.setProperty(
+      "--tile-border",
+      "rgba(255, 255, 255, 0.15)",
+    );
+    document.body.style.setProperty(
+      "--text",
+      config.customTextColor || "#f8fafc",
+    );
+    document.body.style.setProperty(
+      "--accent",
+      config.customAccentColor || "#38bdf8",
+    );
+    document.body.style.setProperty(
+      "--accent-glow",
+      config.customAccentColor
+        ? `${config.customAccentColor}40`
+        : "rgba(56, 189, 248, 0.3)",
+    );
+    document.body.style.setProperty(
+      "--chip",
+      config.customChipColor || "#334155",
+    );
+    document.body.style.setProperty(
+      "--chip-border",
+      "rgba(255, 255, 255, 0.1)",
+    );
+  } else {
+    document.body.style.removeProperty("--bg");
+    document.body.style.removeProperty("--bg-gradient");
+    document.body.style.removeProperty("--tile");
+    document.body.style.removeProperty("--tile-border");
+    document.body.style.removeProperty("--text");
+    document.body.style.removeProperty("--accent");
+    document.body.style.removeProperty("--accent-glow");
+    document.body.style.removeProperty("--chip");
+    document.body.style.removeProperty("--chip-border");
+  }
+
   document.querySelector('meta[name="theme-color"]').content =
     theme === "night" ? "#090d16" : "#f0f4f9";
 }

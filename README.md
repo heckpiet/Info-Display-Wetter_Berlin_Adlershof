@@ -42,8 +42,9 @@ Choose **Essential** for a quieter wall display or **Glance** for maximum readab
 
 - Current conditions and alternating four-hour/four-day forecast
 - Daily low/high, wind gusts, UV index, full date, and explicit data age
-- Automatic light/dark theme based on sunrise and sunset
-- Four adaptive day-phase themes, manual forecast switching, and kiosk display profiles
+- 8 selectable color themes (Sky Glass, Cyberpunk Neon, Nordic Slate, Forest Aurora, Sunset Coral, Minimal Dark, Minimal Light, High Contrast)
+- Built-in Custom Theme Builder with HTML5 color pickers for background, tile, text, accent, and chip colors
+- 5 adaptive day-phase themes (Morning, Noon, Afternoon, Evening, Night), manual forecast switching, and kiosk display profiles
 - Responsive kiosk layout for phones, tablets, desktop displays, and TVs
 - Detailed, essential, and distance-optimized glance information modes
 - Cached last-known-good data when the network or API is unavailable

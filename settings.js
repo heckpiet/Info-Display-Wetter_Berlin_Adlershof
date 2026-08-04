@@ -7,6 +7,11 @@ const ALLOWED = [
   "cacheMaxAgeHours",
   "themeMode",
   "colorTheme",
+  "customBgColor",
+  "customTileColor",
+  "customTextColor",
+  "customAccentColor",
+  "customChipColor",
   "language",
   "iconPack",
   "fontScale",
@@ -29,17 +34,37 @@ const ALLOWED = [
   "controlsAutoHideSeconds",
 ];
 
+const HEX_COLOR = /^#[0-9a-fA-F]{6}$/;
+
 export function sanitizeSettings(value = {}) {
   const result = {};
   for (const key of ALLOWED)
     if (value[key] !== undefined) result[key] = value[key];
   if (
     result.colorTheme !== undefined &&
-    !["default", "cyberpunk", "nordic", "forest", "sunset"].includes(
-      result.colorTheme,
-    )
+    ![
+      "default",
+      "cyberpunk",
+      "nordic",
+      "forest",
+      "sunset",
+      "minimalDark",
+      "minimalLight",
+      "highContrast",
+      "custom",
+    ].includes(result.colorTheme)
   )
     delete result.colorTheme;
+  for (const key of [
+    "customBgColor",
+    "customTileColor",
+    "customTextColor",
+    "customAccentColor",
+    "customChipColor",
+  ]) {
+    if (result[key] !== undefined && !HEX_COLOR.test(String(result[key])))
+      delete result[key];
+  }
   if (
     result.themeMode !== undefined &&
     !["auto", "morning", "noon", "afternoon", "evening", "night"].includes(
@@ -157,6 +182,14 @@ export function initialiseSettings(config) {
       form.elements[key].readOnly = !individual;
   };
   insetMode.addEventListener("change", updateInsetControls);
+  const colorTheme = form.elements.colorTheme;
+  const customThemeFieldset = form.querySelector(".custom-theme-settings");
+  const updateCustomThemeControls = () => {
+    if (customThemeFieldset) {
+      customThemeFieldset.hidden = colorTheme?.value !== "custom";
+    }
+  };
+  colorTheme?.addEventListener("change", updateCustomThemeControls);
   const updateSecondaryInfoControls = () => {
     form.elements.secondaryInfoDelaySeconds.readOnly = ![
       "dim",
@@ -206,6 +239,7 @@ export function initialiseSettings(config) {
     populate(config);
     updateInsetControls();
     updateSecondaryInfoControls();
+    updateCustomThemeControls();
     activateTab(tabs[0]);
     dialog.showModal();
     tabs[0].focus();

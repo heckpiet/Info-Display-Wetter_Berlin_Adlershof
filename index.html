@@ -9,8 +9,8 @@
       content="A resilient, backend-free DWD weather display for kiosk browsers."
     />
     <title>Weather display</title>
-    <link rel="stylesheet" href="styles.css?v=3.10.0" />
-    <link rel="manifest" href="manifest.webmanifest?v=3.10.0" />
+    <link rel="stylesheet" href="styles.css?v=3.11.0" />
+    <link rel="manifest" href="manifest.webmanifest?v=3.11.0" />
   </head>
   <body>
     <button
@@ -341,8 +341,35 @@
               <option value="nordic">Nordic Slate</option>
               <option value="forest">Forest Aurora</option>
               <option value="sunset">Sunset Coral</option>
+              <option value="minimalDark">Minimal Dark</option>
+              <option value="minimalLight">Minimal Light</option>
+              <option value="highContrast">High Contrast</option>
+              <option value="custom">Custom Theme Builder</option>
             </select></label
           >
+          <fieldset class="inset-settings custom-theme-settings" hidden>
+            <legend>Custom Theme Colors</legend>
+            <label
+              >Background
+              <input name="customBgColor" type="color" value="#0f172a"
+            /></label>
+            <label
+              >Tile card
+              <input name="customTileColor" type="color" value="#1e293b"
+            /></label>
+            <label
+              >Text color
+              <input name="customTextColor" type="color" value="#f8fafc"
+            /></label>
+            <label
+              >Accent color
+              <input name="customAccentColor" type="color" value="#38bdf8"
+            /></label>
+            <label
+              >Badge chip
+              <input name="customChipColor" type="color" value="#334155"
+            /></label>
+          </fieldset>
           <label
             >Theme phase
             <select name="themeMode">
@@ -433,10 +460,10 @@
           }
         });
         navigator.serviceWorker
-          .register("./sw.js?v=3.10.0", { updateViaCache: "none" })
+          .register("./sw.js?v=3.11.0", { updateViaCache: "none" })
           .catch(() => {});
       }
     </script>
-    <script type="module" src="app.js?v=3.10.0"></script>
+    <script type="module" src="app.js?v=3.11.0"></script>
   </body>
 </html>

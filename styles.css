@@ -563,6 +563,68 @@ body[data-color-theme="sunset"][data-theme="night"] {
   --accent-glow: rgba(251, 146, 60, 0.35);
   --chip: rgba(56, 21, 71, 0.75);
 }
+/* ==========================================================================
+   MINIMAL DARK THEME - 5 Day Phases
+   ========================================================================== */
+body[data-color-theme="minimalDark"][data-theme="morning"],
+body[data-color-theme="minimalDark"][data-theme="noon"],
+body[data-color-theme="minimalDark"][data-theme="afternoon"],
+body[data-color-theme="minimalDark"][data-theme="evening"],
+body[data-color-theme="minimalDark"][data-theme="night"] {
+  --bg: #121824;
+  --bg-gradient: #121824;
+  --tile: #1e293b;
+  --tile-border: rgba(255, 255, 255, 0.08);
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+  --accent-glow: rgba(56, 189, 248, 0.2);
+  --chip: #334155;
+  --chip-border: rgba(255, 255, 255, 0.05);
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   MINIMAL LIGHT THEME - 5 Day Phases
+   ========================================================================== */
+body[data-color-theme="minimalLight"][data-theme="morning"],
+body[data-color-theme="minimalLight"][data-theme="noon"],
+body[data-color-theme="minimalLight"][data-theme="afternoon"],
+body[data-color-theme="minimalLight"][data-theme="evening"],
+body[data-color-theme="minimalLight"][data-theme="night"] {
+  --bg: #f8fafc;
+  --bg-gradient: #f8fafc;
+  --tile: #ffffff;
+  --tile-border: #e2e8f0;
+  --text: #0f172a;
+  --muted: #64748b;
+  --accent: #0284c7;
+  --accent-glow: rgba(2, 132, 199, 0.15);
+  --chip: #f1f5f9;
+  --chip-border: #cbd5e1;
+  color-scheme: light;
+}
+
+/* ==========================================================================
+   HIGH CONTRAST THEME - 5 Day Phases
+   ========================================================================== */
+body[data-color-theme="highContrast"][data-theme="morning"],
+body[data-color-theme="highContrast"][data-theme="noon"],
+body[data-color-theme="highContrast"][data-theme="afternoon"],
+body[data-color-theme="highContrast"][data-theme="evening"],
+body[data-color-theme="highContrast"][data-theme="night"] {
+  --bg: #000000;
+  --bg-gradient: #000000;
+  --tile: #0d0d0d;
+  --tile-border: #ffffff;
+  --text: #ffffff;
+  --muted: #fef08a;
+  --accent: #facc15;
+  --accent-glow: rgba(250, 204, 21, 0.4);
+  --chip: #18181b;
+  --chip-border: #facc15;
+  color-scheme: dark;
+}
 * {
   box-sizing: border-box;
 }

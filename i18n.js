@@ -148,6 +148,17 @@ export function applyStaticTranslations(language) {
   label(form, "language", de ? "Sprache" : "Language");
   label(form, "iconPack", de ? "Icon-Paket" : "Icon pack");
   label(form, "colorTheme", de ? "Farb-Theme" : "Color theme");
+  label(form, "customBgColor", de ? "Hintergrund" : "Background");
+  label(form, "customTileColor", de ? "Kacheln / Karten" : "Tile card");
+  label(form, "customTextColor", de ? "Textfarbe" : "Text color");
+  label(form, "customAccentColor", de ? "Akzentfarbe" : "Accent color");
+  label(form, "customChipColor", de ? "Badges / Chips" : "Badge chip");
+  const customLegend = form.querySelector(".custom-theme-settings legend");
+  if (customLegend)
+    customLegend.textContent = de
+      ? "Eigene Farbwahl (Custom)"
+      : "Custom Theme Colors";
+
   label(form, "themeMode", de ? "Tagesphase" : "Theme phase");
   options(
     form,
@@ -159,6 +170,10 @@ export function applyStaticTranslations(language) {
           "Nordic Slate",
           "Forest Aurora",
           "Sunset Coral",
+          "Minimal Dunkel",
+          "Minimal Hell",
+          "Hoher Kontrast",
+          "Benutzerdefiniert (Custom Builder)",
         ]
       : [
           "Sky Glass (Default)",
@@ -166,6 +181,10 @@ export function applyStaticTranslations(language) {
           "Nordic Slate",
           "Forest Aurora",
           "Sunset Coral",
+          "Minimal Dark",
+          "Minimal Light",
+          "High Contrast",
+          "Custom Theme Builder",
         ],
   );
   options(

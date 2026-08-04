@@ -4,7 +4,13 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
-## [3.10.0] - 2026-08-04
+## [3.11.0] - 2026-08-04
+
+### Added
+
+- Add interactive Custom Theme Builder with HTML5 color pickers for background, tile cards, text, accent, and badge chip colors
+- Add 3 simple minimal & high-contrast themes: Minimal Dark, Minimal Light, and High Contrast
+- Add complete documentation updates in README.md and docs/SETTINGS.md for the new custom theme builder and expanded color theme suite
 
 ### Added
 

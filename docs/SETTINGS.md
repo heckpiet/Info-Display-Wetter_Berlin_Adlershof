@@ -6,8 +6,24 @@ The dialog groups controls into four keyboard-accessible tabs:
 
 - **Location & data:** location, coordinates, refresh interval, and cache duration
 - **Display:** detected capabilities, device profile, layout, information density, and scaling
-- **Appearance & behavior:** theme, forecast rotation, and year-progress presentation
+- **Appearance & behavior:** color theme selection, custom theme builder, 5 day-phase overrides, forecast rotation, icon pack, and year-progress presentation
 - **Backup & reset:** JSON export/import and restoring defaults
+
+## Color themes, custom builder, and 5 day phases
+
+Choose from 8 built-in color themes or build a custom palette:
+
+- **Sky Glass (Default):** Atmospheric blue and cyan glassmorphism layout
+- **Cyberpunk Neon:** Vibrant cyan, pink, and synthwave purple neon aesthetic
+- **Nordic Slate:** Polar ice teal and cool slate grey palette
+- **Forest Aurora:** Emerald green and golden sun canopy theme
+- **Sunset Coral:** Rich peach, coral orange, and twilight violet theme
+- **Minimal Dark:** Restrained monochrome dark grey design
+- **Minimal Light:** Clean paper-white minimal light design
+- **High Contrast:** High-contrast black and yellow accessibility theme
+- **Custom Theme Builder:** Select **Custom Theme Builder** to reveal color pickers for background, tile card, text color, accent color, and badge chip colors. Custom themes are saved in browser storage and exported/imported via JSON backup.
+
+Every theme seamlessly integrates with all **5 day phases** (**Morning**, **Noon**, **Afternoon**, **Evening**, **Night**). Choose **auto** under **Theme phase** to automatically cycle phases based on local sunrise and sunset times, or select a specific phase to pin it permanently.
 
 | Display and edge controls                       | Appearance and behavior controls                       |
 | ----------------------------------------------- | ------------------------------------------------------ |
