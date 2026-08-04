@@ -80,6 +80,8 @@ Alternative provider profiles are prepared but disabled by default. Direct DWD O
 
 Version 3 includes a deployable Cloudflare Worker proxy with MET Norway and OpenWeather adapters plus a controlled DWD ingestion-service hook. It remains inactive until the operator supplies external hosting and any required secrets.
 
+Before enabling it, review the complete [Package E prerequisites and go-live checklist](docs/WEATHER_PROVIDERS.md#prerequisites). The default display requires none of this proxy infrastructure.
+
 ## CI/CD and deployment
 
 `quality.yml` runs linting, formatting checks, tests, and a live API smoke test on pushes and pull requests. `deploy-pages.yml` publishes the exact static files to GitHub Pages after quality checks pass on `main`.
