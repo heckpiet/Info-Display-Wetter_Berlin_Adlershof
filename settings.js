@@ -74,9 +74,38 @@ export function initialiseSettings(config) {
     ALLOWED.forEach((key) => {
       if (form.elements[key]) form.elements[key].value = values[key] ?? "";
     });
+  const tabs = [...form.querySelectorAll('[role="tab"]')];
+  const panels = [...form.querySelectorAll('[role="tabpanel"]')];
+  const activateTab = (tab, focus = false) => {
+    tabs.forEach((item) => {
+      const selected = item === tab;
+      item.setAttribute("aria-selected", String(selected));
+      item.tabIndex = selected ? 0 : -1;
+    });
+    panels.forEach((panel) => {
+      panel.hidden = panel.id !== tab.getAttribute("aria-controls");
+    });
+    if (focus) tab.focus();
+  };
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => activateTab(tab));
+    tab.addEventListener("keydown", (event) => {
+      let targetIndex;
+      if (event.key === "ArrowRight") targetIndex = (index + 1) % tabs.length;
+      else if (event.key === "ArrowLeft")
+        targetIndex = (index - 1 + tabs.length) % tabs.length;
+      else if (event.key === "Home") targetIndex = 0;
+      else if (event.key === "End") targetIndex = tabs.length - 1;
+      else return;
+      event.preventDefault();
+      activateTab(tabs[targetIndex], true);
+    });
+  });
   document.getElementById("settings-trigger").addEventListener("click", () => {
     populate(config);
+    activateTab(tabs[0]);
     dialog.showModal();
+    tabs[0].focus();
   });
   document.getElementById("settings-save").addEventListener("click", () => {
     const data = Object.fromEntries(new FormData(form));

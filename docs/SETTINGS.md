@@ -2,6 +2,15 @@
 
 Open the gear button to adjust the kiosk locally. Settings are stored only in browser `localStorage` and override `config.js`; URL location parameters remain the final override. Reset removes the local override. Export/import transfers the allow-listed non-secret settings as JSON.
 
+The dialog groups controls into four keyboard-accessible tabs:
+
+- **Location & data:** location, coordinates, refresh interval, and cache duration
+- **Display:** detected capabilities, device profile, layout, information density, and scaling
+- **Appearance & behavior:** theme, forecast rotation, and year-progress presentation
+- **Backup & reset:** JSON export/import and restoring defaults
+
+Use `Left Arrow` and `Right Arrow` to move between tabs, or `Home` and `End` to jump to the first or last tab. The active tab and keyboard focus remain visibly distinct, following the [WAI-ARIA tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/).
+
 Never store API keys in settings. Provider credentials belong in the controlled proxy described in [WEATHER_PROVIDERS.md](WEATHER_PROVIDERS.md).
 
 ## Information modes
