@@ -4,7 +4,14 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
-## [3.14.0] - 2026-08-04
+## [3.15.0] - 2026-08-04
+
+### Added
+
+- Relocate layoutStructure selector to Appearance & behavior settings tab
+- Add 2 new layout structures: Magazine Editorial & Weather Story and Ambient Room Clock & Weather Strip (8 layout options total)
+- Add custom background image engine supporting atmospheric presets, web image URLs, and local file uploads
+- Add card opacity & glass transparency slider (10% to 100%)
 
 ### Fixed
 

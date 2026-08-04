@@ -1,32 +1,59 @@
-import { DEFAULT_CONFIG } from "./config.js?v=3.14.0";
+import { DEFAULT_CONFIG } from "./config.js?v=3.15.0";
 import {
   cacheKey,
   configFromUrl,
   isNightTime,
   weatherInfo,
-} from "./weather.js?v=3.14.0";
-import { fetchWeather, getProvider } from "./providers.js?v=3.14.0";
-import { initialiseSettings, loadSettings } from "./settings.js?v=3.14.0";
+} from "./weather.js?v=3.15.0";
+import { fetchWeather, getProvider } from "./providers.js?v=3.15.0";
+import { initialiseSettings, loadSettings } from "./settings.js?v=3.15.0";
 import {
   compareVersions,
   getLatestRelease,
   RELEASES_URL,
   VERSION_CACHE_KEY,
-} from "./version.js?v=3.14.0";
+} from "./version.js?v=3.15.0";
 import {
   getYearProgress,
   getYearProgressPresentation,
-} from "./progress.js?v=3.14.0";
+} from "./progress.js?v=3.15.0";
 import {
   detectDisplay,
   formatDisplaySummary,
   resolveDisplay,
-} from "./display.js?v=3.14.0";
-import { applyStaticTranslations, translate } from "./i18n.js?v=3.14.0";
+} from "./display.js?v=3.15.0";
+import { applyStaticTranslations, translate } from "./i18n.js?v=3.15.0";
 
 const config = configFromUrl({ ...DEFAULT_CONFIG, ...loadSettings() });
 config.locale = config.language === "de" ? "de-DE" : "en-GB";
 document.body.dataset.layoutStructure = config.layoutStructure || "default";
+
+function applyBackgroundImage() {
+  const type = config.bgImageType || "none";
+  let url = "";
+  if (type === "preset") url = config.bgPresetUrl;
+  else if (type === "url") url = config.bgImageUrl;
+  else if (type === "file") url = config.bgImageDataUrl;
+
+  if (url) {
+    document.body.style.backgroundImage = `url("${url}")`;
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundAttachment = "fixed";
+    document.body.classList.add("has-bg-image");
+  } else {
+    document.body.style.backgroundImage = "";
+    document.body.classList.remove("has-bg-image");
+  }
+}
+
+function applyTileOpacity() {
+  const opacity = Number(config.tileOpacity) || 0.75;
+  document.documentElement.style.setProperty("--tile-opacity", String(opacity));
+}
+
+applyBackgroundImage();
+applyTileOpacity();
 const t = (key, values) => translate(config.language, key, values);
 const $ = (id) => document.getElementById(id);
 const formatNumber = (value, digits = 0) =>

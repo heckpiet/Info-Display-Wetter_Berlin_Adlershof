@@ -148,6 +148,8 @@ export function applyStaticTranslations(language) {
           "Split Columns (Vertikal)",
           "Kompakte Banner-Leiste",
           "Zentriertes Fokus-Deck",
+          "Magazin & Weather Story",
+          "Ambient Raum-Uhr & Wetterleiste",
         ]
       : [
           "Standard Kiosk Grid (Default)",
@@ -156,7 +158,38 @@ export function applyStaticTranslations(language) {
           "Split Columns (Vertical)",
           "Compact Banner Bar",
           "Focused Hero Deck",
+          "Magazine Editorial & Weather Story",
+          "Ambient Room Clock & Weather Strip",
         ],
+  );
+  label(
+    form,
+    "bgImageType",
+    de ? "Hintergrundbild-Quelle" : "Background image source",
+  );
+  options(
+    form,
+    "bgImageType",
+    de
+      ? [
+          "Keins (Theme-Farbe)",
+          "Stimmungsvolles Preset",
+          "Web-Bild (URL)",
+          "Lokale Bilddatei",
+        ]
+      : [
+          "None (Theme color)",
+          "Atmospheric Preset",
+          "Web Image URL",
+          "Local File Upload",
+        ],
+  );
+  label(form, "bgPresetUrl", de ? "Hintergrund-Preset" : "Background preset");
+  label(form, "bgImageUrl", de ? "Bild-URL" : "Image URL");
+  label(
+    form,
+    "tileOpacity",
+    de ? "Kachel-Transparenz" : "Card opacity & transparency",
   );
   form.querySelector(".inset-settings legend").textContent = de
     ? "Randabstand"

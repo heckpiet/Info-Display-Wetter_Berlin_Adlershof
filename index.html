@@ -9,8 +9,8 @@
       content="A resilient, backend-free DWD weather display for kiosk browsers."
     />
     <title>Weather display</title>
-    <link rel="stylesheet" href="styles.css?v=3.14.0" />
-    <link rel="manifest" href="manifest.webmanifest?v=3.14.0" />
+    <link rel="stylesheet" href="styles.css?v=3.15.0" />
+    <link rel="manifest" href="manifest.webmanifest?v=3.15.0" />
   </head>
   <body>
     <button
@@ -257,19 +257,7 @@
               max="100"
               step="1"
           /></label>
-          <label
-            >Layout structure
-            <select name="layoutStructure">
-              <option value="default">Standard Kiosk Grid (Default)</option>
-              <option value="heroBottom">
-                Hero Header & Bottom Cards (Bild 1)
-              </option>
-              <option value="dashboardGrid">Smart Display Grid (Bild 2)</option>
-              <option value="splitVertical">Split Columns (Vertikal)</option>
-              <option value="compactBanner">Compact Banner Bar</option>
-              <option value="focusCards">Focused Hero Deck</option>
-            </select></label
-          >
+
           <fieldset class="inset-settings">
             <legend>Edge spacing</legend>
             <label
@@ -347,6 +335,25 @@
             </select></label
           >
           <label
+            >Layout structure
+            <select name="layoutStructure">
+              <option value="default">Standard Kiosk Grid (Default)</option>
+              <option value="heroBottom">
+                Hero Header & Bottom Cards (Bild 1)
+              </option>
+              <option value="dashboardGrid">Smart Display Grid (Bild 2)</option>
+              <option value="splitVertical">Split Columns (Vertikal)</option>
+              <option value="compactBanner">Compact Banner Bar</option>
+              <option value="focusCards">Focused Hero Deck</option>
+              <option value="magazineHero">
+                Magazine Editorial & Weather Story
+              </option>
+              <option value="minimalistClock">
+                Ambient Room Clock & Weather Strip
+              </option>
+            </select></label
+          >
+          <label
             >Color theme
             <select name="colorTheme">
               <option value="default">Sky Glass (Default)</option>
@@ -383,6 +390,62 @@
               <input name="customChipColor" type="color" value="#334155"
             /></label>
           </fieldset>
+          <label
+            >Background image source
+            <select name="bgImageType">
+              <option value="none">None (Theme color)</option>
+              <option value="preset">Atmospheric Preset</option>
+              <option value="url">Web Image URL</option>
+              <option value="file">Local File Upload</option>
+            </select></label
+          >
+          <label class="bg-preset-group" hidden
+            >Background preset
+            <select name="bgPresetUrl">
+              <option
+                value="https://images.unsplash.com/photo-1534088568595-a066f410bcda?auto=format&fit=crop&w=1920&q=80"
+              >
+                Sky Sunrise
+              </option>
+              <option
+                value="https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=1920&q=80"
+              >
+                Aurora Night
+              </option>
+              <option
+                value="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80"
+              >
+                Warm Sunset
+              </option>
+              <option
+                value="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1920&q=80"
+              >
+                Misty Forest
+              </option>
+            </select></label
+          >
+          <label class="bg-url-group" hidden
+            >Image URL
+            <input
+              name="bgImageUrl"
+              type="url"
+              placeholder="https://example.com/background.jpg"
+          /></label>
+          <label class="bg-file-group" hidden
+            >Upload local image
+            <input type="file" id="bg-file-input" accept="image/*" />
+            <input name="bgImageDataUrl" type="hidden"
+          /></label>
+          <label
+            >Card opacity & transparency
+            <input
+              name="tileOpacity"
+              type="range"
+              min="0.1"
+              max="1"
+              step="0.05"
+              value="0.75"
+          /></label>
           <label
             >Theme phase
             <select name="themeMode">
@@ -473,10 +536,10 @@
           }
         });
         navigator.serviceWorker
-          .register("./sw.js?v=3.14.0", { updateViaCache: "none" })
+          .register("./sw.js?v=3.15.0", { updateViaCache: "none" })
           .catch(() => {});
       }
     </script>
-    <script type="module" src="app.js?v=3.14.0"></script>
+    <script type="module" src="app.js?v=3.15.0"></script>
   </body>
 </html>

@@ -13,6 +13,11 @@ const ALLOWED = [
   "customAccentColor",
   "customChipColor",
   "layoutStructure",
+  "bgImageType",
+  "bgImageUrl",
+  "bgImageDataUrl",
+  "bgPresetUrl",
+  "tileOpacity",
   "language",
   "iconPack",
   "fontScale",
@@ -75,9 +80,23 @@ export function sanitizeSettings(value = {}) {
       "splitVertical",
       "compactBanner",
       "focusCards",
+      "magazineHero",
+      "minimalistClock",
     ].includes(result.layoutStructure)
   )
     delete result.layoutStructure;
+  if (
+    result.bgImageType !== undefined &&
+    !["none", "preset", "url", "file"].includes(result.bgImageType)
+  )
+    delete result.bgImageType;
+  if (
+    result.tileOpacity !== undefined &&
+    (isNaN(Number(result.tileOpacity)) ||
+      Number(result.tileOpacity) < 0.1 ||
+      Number(result.tileOpacity) > 1)
+  )
+    delete result.tileOpacity;
   if (
     result.layoutMode !== undefined &&
     !["auto", "kiosk"].includes(result.layoutMode)
@@ -208,6 +227,29 @@ export function initialiseSettings(config) {
     }
   };
   colorTheme?.addEventListener("change", updateCustomThemeControls);
+  const bgImageType = form.elements.bgImageType;
+  const bgFileInput = form.querySelector("#bg-file-input");
+  const bgImageDataUrl = form.elements.bgImageDataUrl;
+  const updateBgImageControls = () => {
+    const type = bgImageType?.value ?? "none";
+    const presetGroup = form.querySelector(".bg-preset-group");
+    if (presetGroup) presetGroup.hidden = type !== "preset";
+    const urlGroup = form.querySelector(".bg-url-group");
+    if (urlGroup) urlGroup.hidden = type !== "url";
+    const fileGroup = form.querySelector(".bg-file-group");
+    if (fileGroup) fileGroup.hidden = type !== "file";
+  };
+  bgImageType?.addEventListener("change", updateBgImageControls);
+  bgFileInput?.addEventListener("change", (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        if (bgImageDataUrl) bgImageDataUrl.value = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
   const updateSecondaryInfoControls = () => {
     form.elements.secondaryInfoDelaySeconds.readOnly = ![
       "dim",
@@ -258,6 +300,7 @@ export function initialiseSettings(config) {
     updateInsetControls();
     updateSecondaryInfoControls();
     updateCustomThemeControls();
+    updateBgImageControls();
     activateTab(tabs[0]);
     dialog.showModal();
     tabs[0].focus();
