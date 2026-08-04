@@ -4,7 +4,11 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
-## [3.20.0] - 2026-08-04
+## [3.21.0] - 2026-08-04
+
+### Changed
+
+- Update docs/images/kiosk-desktop.png screenshot to showcase the latest v3.20.0 Top Centered Clock & Grid layout
 
 ### Added
 
