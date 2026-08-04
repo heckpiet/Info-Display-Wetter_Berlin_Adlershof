@@ -1350,3 +1350,43 @@ noscript {
     transition: none !important;
   }
 }
+
+/* Layout Structure 9: Top Centered Clock & Grid */
+body[data-layout-structure="centeredClockGrid"] .wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body[data-layout-structure="centeredClockGrid"] .header {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  width: 100%;
+}
+body[data-layout-structure="centeredClockGrid"] .header .title-group {
+  text-align: center;
+}
+body[data-layout-structure="centeredClockGrid"] .datetime {
+  text-align: center;
+  background: var(--chip);
+  border: 1px solid var(--chip-border);
+  padding: 14px 28px;
+  border-radius: 20px;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  margin-block: 16px 24px;
+}
+body[data-layout-structure="centeredClockGrid"] #clock {
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--accent);
+}
+body[data-layout-structure="centeredClockGrid"] .grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) minmax(420px, 1.35fr);
+  gap: 24px;
+  align-items: start;
+}

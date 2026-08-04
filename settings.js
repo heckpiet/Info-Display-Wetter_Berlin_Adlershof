@@ -83,6 +83,7 @@ export function sanitizeSettings(value = {}) {
       "focusCards",
       "magazineHero",
       "minimalistClock",
+      "centeredClockGrid",
     ].includes(result.layoutStructure)
   )
     delete result.layoutStructure;

@@ -150,6 +150,7 @@ export function applyStaticTranslations(language) {
           "Zentriertes Fokus-Deck",
           "Magazin & Weather Story",
           "Ambient Raum-Uhr & Wetterleiste",
+          "Zentrierte Uhr & Kiosk-Grid (Preset)",
         ]
       : [
           "Standard Kiosk Grid (Default)",
@@ -160,6 +161,7 @@ export function applyStaticTranslations(language) {
           "Focused Hero Deck",
           "Magazine Editorial & Weather Story",
           "Ambient Room Clock & Weather Strip",
+          "Top Centered Clock & Grid (Preset)",
         ],
   );
   label(

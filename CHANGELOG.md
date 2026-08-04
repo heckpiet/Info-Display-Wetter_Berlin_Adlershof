@@ -4,7 +4,11 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
-## [3.19.0] - 2026-08-04
+## [3.20.0] - 2026-08-04
+
+### Added
+
+- Add 9th layout structure mode: Top Centered Clock & Grid (centeredClockGrid) featuring top-centered title, subtitle, and prominent glass clock above the weather grid
 
 ### Fixed
 
