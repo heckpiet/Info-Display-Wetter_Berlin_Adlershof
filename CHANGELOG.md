@@ -4,6 +4,12 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [3.0.2] - 2026-08-04
+
+### Documentation
+
+- Add screenshots of the hourly kiosk view, daily forecast, and display settings to the project overview
+
 ## [3.0.1] - 2026-08-04
 
 ### Documentation
