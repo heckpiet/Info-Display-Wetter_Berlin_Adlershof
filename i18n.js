@@ -136,10 +136,10 @@ export function applyStaticTranslations(language) {
     "contentWidthPercent",
     de ? "Inhaltsbreite (%)" : "Content width (%)",
   );
-  label(form, "layoutMode", de ? "Layout-Struktur" : "Layout structure");
+  label(form, "layoutStructure", de ? "Layout-Struktur" : "Layout structure");
   options(
     form,
-    "layoutMode",
+    "layoutStructure",
     de
       ? [
           "Standard Kiosk Grid (Default)",

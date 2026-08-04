@@ -12,6 +12,7 @@ const ALLOWED = [
   "customTextColor",
   "customAccentColor",
   "customChipColor",
+  "layoutStructure",
   "language",
   "iconPack",
   "fontScale",
@@ -66,7 +67,7 @@ export function sanitizeSettings(value = {}) {
       delete result[key];
   }
   if (
-    result.layoutMode !== undefined &&
+    result.layoutStructure !== undefined &&
     ![
       "default",
       "heroBottom",
@@ -74,7 +75,12 @@ export function sanitizeSettings(value = {}) {
       "splitVertical",
       "compactBanner",
       "focusCards",
-    ].includes(result.layoutMode)
+    ].includes(result.layoutStructure)
+  )
+    delete result.layoutStructure;
+  if (
+    result.layoutMode !== undefined &&
+    !["auto", "kiosk"].includes(result.layoutMode)
   )
     delete result.layoutMode;
   if (

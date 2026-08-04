@@ -892,49 +892,49 @@ dialog::backdrop {
    ========================================================================== */
 
 /* 1. HERO BOTTOM LAYOUT (Inspired by Image 0) */
-body[data-layout-mode="heroBottom"] .grid {
+body[data-layout-structure="heroBottom"] .grid {
   grid-template-columns: 1fr;
   gap: 24px;
 }
-body[data-layout-mode="heroBottom"] .tile.now {
+body[data-layout-structure="heroBottom"] .tile.now {
   text-align: center;
   padding: 32px 24px;
 }
-body[data-layout-mode="heroBottom"] .current-summary {
+body[data-layout-structure="heroBottom"] .current-summary {
   flex-direction: column;
   justify-content: center;
   gap: 8px;
 }
-body[data-layout-mode="heroBottom"] #now-temp {
+body[data-layout-structure="heroBottom"] #now-temp {
   font-size: clamp(3.8rem, 9vw, 7.5rem);
   font-weight: 800;
   letter-spacing: -2px;
 }
-body[data-layout-mode="heroBottom"] .weather-icon {
+body[data-layout-structure="heroBottom"] .weather-icon {
   width: clamp(90px, 12vw, 150px);
   height: clamp(90px, 12vw, 150px);
   margin: 0 auto;
 }
-body[data-layout-mode="heroBottom"] .kv {
+body[data-layout-structure="heroBottom"] .kv {
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
   margin-top: 24px;
 }
-body[data-layout-mode="heroBottom"] .slots {
+body[data-layout-structure="heroBottom"] .slots {
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
 }
 
 /* 2. DASHBOARD GRID LAYOUT (Inspired by Image 1) */
-body[data-layout-mode="dashboardGrid"] .grid {
+body[data-layout-structure="dashboardGrid"] .grid {
   grid-template-columns: 1.15fr 0.85fr;
   gap: 20px;
 }
-body[data-layout-mode="dashboardGrid"] .tile.now {
+body[data-layout-structure="dashboardGrid"] .tile.now {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-body[data-layout-mode="dashboardGrid"] .kv {
+body[data-layout-structure="dashboardGrid"] .kv {
   grid-template-columns: repeat(2, 1fr);
   background: rgba(0, 0, 0, 0.12);
   padding: 16px;
@@ -943,44 +943,44 @@ body[data-layout-mode="dashboardGrid"] .kv {
 }
 
 /* 3. SPLIT VERTICAL LAYOUT */
-body[data-layout-mode="splitVertical"] .grid {
+body[data-layout-structure="splitVertical"] .grid {
   grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
-body[data-layout-mode="splitVertical"] .kv {
+body[data-layout-structure="splitVertical"] .kv {
   grid-template-columns: 1fr;
 }
 
 /* 4. COMPACT BANNER LAYOUT */
-body[data-layout-mode="compactBanner"] .wrap {
+body[data-layout-structure="compactBanner"] .wrap {
   width: 100%;
   max-width: 100%;
   padding: 10px 16px;
 }
-body[data-layout-mode="compactBanner"] .grid {
+body[data-layout-structure="compactBanner"] .grid {
   grid-template-columns: minmax(320px, 0.8fr) 1.2fr;
   gap: 14px;
 }
-body[data-layout-mode="compactBanner"] .tile {
+body[data-layout-structure="compactBanner"] .tile {
   padding: 14px;
 }
-body[data-layout-mode="compactBanner"] #now-temp {
+body[data-layout-structure="compactBanner"] #now-temp {
   font-size: clamp(2.2rem, 4vw, 3.5rem);
 }
-body[data-layout-mode="compactBanner"] .slots {
+body[data-layout-structure="compactBanner"] .slots {
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 8px;
 }
 
 /* 5. FOCUS CARDS LAYOUT */
-body[data-layout-mode="focusCards"] .wrap {
+body[data-layout-structure="focusCards"] .wrap {
   max-width: 860px;
 }
-body[data-layout-mode="focusCards"] .grid {
+body[data-layout-structure="focusCards"] .grid {
   grid-template-columns: 1fr;
   gap: 24px;
 }
-body[data-layout-mode="focusCards"] .tile {
+body[data-layout-structure="focusCards"] .tile {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
 }
 

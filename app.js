@@ -26,7 +26,7 @@ import { applyStaticTranslations, translate } from "./i18n.js?v=3.13.0";
 
 const config = configFromUrl({ ...DEFAULT_CONFIG, ...loadSettings() });
 config.locale = config.language === "de" ? "de-DE" : "en-GB";
-document.body.dataset.layoutMode = config.layoutMode || "default";
+document.body.dataset.layoutStructure = config.layoutStructure || "default";
 const t = (key, values) => translate(config.language, key, values);
 const $ = (id) => document.getElementById(id);
 const formatNumber = (value, digits = 0) =>
