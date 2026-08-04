@@ -33,11 +33,17 @@ export function getYearProgress(date = new Date(), timezone = "UTC") {
   return { dayOfYear, totalDays, percentage };
 }
 
-export function formatYearProgress(progress, mode = "both") {
-  const percent = `${progress.percentage.toFixed(2)}% of year`;
-  const days = `Day ${progress.dayOfYear} of ${progress.totalDays}`;
+export function formatYearProgress(progress, mode = "both", language = "en") {
+  const percent = translate(language, "percentYear", {
+    percent: progress.percentage.toFixed(2),
+  });
+  const days = translate(language, "dayYear", {
+    day: progress.dayOfYear,
+    total: progress.totalDays,
+  });
   if (mode === "percentage") return percent;
   if (mode === "days") return days;
   if (mode === "hidden") return "";
   return `${percent} · ${days}`;
 }
+import { translate } from "./i18n.js";

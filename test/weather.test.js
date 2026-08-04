@@ -73,5 +73,10 @@ test("normalizes an API response", () => {
 
 test("maps WMO weather codes and creates location-specific cache keys", () => {
   assert.equal(weatherInfo(95).description, "Thunderstorm");
+  assert.deepEqual(weatherInfo(61, "de", "mono"), {
+    icon: "☂",
+    description: "Regen",
+  });
+  assert.equal(weatherInfo(0, "en", "minimal").icon, "○");
   assert.match(cacheKey(DEFAULT_CONFIG), /52\.4357:13\.5406/);
 });

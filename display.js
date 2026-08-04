@@ -43,12 +43,19 @@ export function resolveDisplay(config, detected) {
   };
 }
 
-export function formatDisplaySummary(display) {
-  const pointer = display.coarsePointer ? "coarse pointer" : "fine pointer";
-  const hover = display.hover ? "hover" : "no hover";
+export function formatDisplaySummary(display, language = "en") {
+  const de = language === "de";
+  const pointer = display.coarsePointer
+    ? de
+      ? "grober Zeiger"
+      : "coarse pointer"
+    : de
+      ? "präziser Zeiger"
+      : "fine pointer";
+  const hover = display.hover ? "hover" : de ? "kein Hover" : "no hover";
   const features = [
-    display.serviceWorker ? "offline cache" : null,
-    display.fullscreen ? "fullscreen" : null,
+    display.serviceWorker ? (de ? "Offline-Cache" : "offline cache") : null,
+    display.fullscreen ? (de ? "Vollbild" : "fullscreen") : null,
   ].filter(Boolean);
-  return `${display.width}×${display.height} CSS px · ${display.devicePixelRatio}× DPR · ${pointer} · ${hover} · detected ${display.detectedProfile}${features.length ? ` · ${features.join(", ")}` : ""}`;
+  return `${display.width}×${display.height} CSS px · ${display.devicePixelRatio}× DPR · ${pointer} · ${hover} · ${de ? "erkannt" : "detected"} ${display.detectedProfile}${features.length ? ` · ${features.join(", ")}` : ""}`;
 }

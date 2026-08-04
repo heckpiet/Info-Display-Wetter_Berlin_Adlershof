@@ -13,6 +13,20 @@ Use `Left Arrow` and `Right Arrow` to move between tabs, or `Home` and `End` to 
 
 Never store API keys in settings. Provider credentials belong in the controlled proxy described in [WEATHER_PROVIDERS.md](WEATHER_PROVIDERS.md).
 
+## Language and weather icons
+
+Choose **Deutsch** or **English** under **Appearance & behavior**. The language changes the complete runtime interface, weather descriptions, status messages, accessibility labels, dates, times, and number formatting. Repository documentation and source code remain English.
+
+Three dependency-free icon packs are included and work offline:
+
+| Pack            | Example                                   | Character      |
+| --------------- | ----------------------------------------- | -------------- |
+| **Color emoji** | Familiar, colorful weather symbols        | ☀️ ⛅ 🌧️ ❄️ ⛈️ |
+| **Monochrome**  | Quiet single-color symbols                | ☀︎ ◒ ☂ ❄ ϟ      |
+| **Minimal**     | Geometric symbols for clean kiosk layouts | ○ ◑ ▥ ✳ ↯      |
+
+Icon packs change presentation only; WMO weather-code mapping and text descriptions remain identical.
+
 ## Information modes
 
 | Mode          | Best for                      | Visible information                                                                                                   |

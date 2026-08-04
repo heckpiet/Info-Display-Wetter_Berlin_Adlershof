@@ -9,8 +9,11 @@ import {
   formatDisplaySummary,
   resolveDisplay,
 } from "./display.js";
+import { applyStaticTranslations, translate } from "./i18n.js";
 
 const config = configFromUrl({ ...DEFAULT_CONFIG, ...loadSettings() });
+config.locale = config.language === "de" ? "de-DE" : "en-GB";
+const t = (key, values) => translate(config.language, key, values);
 const $ = (id) => document.getElementById(id);
 const formatNumber = (value, digits = 0) =>
   value == null
@@ -35,11 +38,11 @@ async function renderVersionStatus() {
     const latest = await getLatestRelease();
     const updateAvailable = compareVersions(latest, config.version) > 0;
     element.textContent = updateAvailable
-      ? `GitHub latest: v${latest} · update available`
-      : `GitHub latest: v${latest}`;
+      ? t("updateAvailable", { version: latest })
+      : t("githubLatest", { version: latest });
     element.classList.toggle("update-available", updateAvailable);
   } catch {
-    element.textContent = "GitHub: unavailable";
+    element.textContent = t("githubUnavailable");
   }
 }
 
@@ -76,7 +79,11 @@ function setTheme(current) {
 
 function renderCurrent(data) {
   const current = data.current;
-  const info = weatherInfo(current.weatherCode);
+  const info = weatherInfo(
+    current.weatherCode,
+    config.language,
+    config.iconPack,
+  );
   $("now-temp").textContent = `${formatNumber(current.temp)}°C`;
   $("now-icon").textContent = info.icon;
   $("now-description").textContent = info.description;
@@ -106,12 +113,16 @@ function renderForecast() {
           (row) => row.time !== String(latestData.current.time).slice(0, 10),
         )
         .slice(0, 4);
-  $("view-label").textContent = hourlyView ? "Next hours" : "Next days";
+  $("view-label").textContent = hourlyView ? t("nextHours") : t("nextDays");
   const container = $("forecast-slots");
   container.replaceChildren(
     ...rows.map((row) => {
       const fragment = $("slot-template").content.cloneNode(true);
-      const info = weatherInfo(row.weatherCode);
+      const info = weatherInfo(
+        row.weatherCode,
+        config.language,
+        config.iconPack,
+      );
       fragment.querySelector("h3").textContent = hourlyView
         ? formatDate(row.time, { hour: "2-digit", minute: "2-digit" })
         : formatDate(row.time, {
@@ -164,8 +175,14 @@ function render(data, cached = false) {
     Math.round((Date.now() - Date.parse(data.fetchedAt)) / 60000),
   );
   $("status").textContent = cached
-    ? `Offline · cached data from ${ageMinutes} min ago · retrying automatically`
-    : `Updated ${formatDate(data.fetchedAt, { dateStyle: "short", timeStyle: "medium" })} · ${ageMinutes} min old`;
+    ? t("offline", { age: ageMinutes })
+    : t("updated", {
+        date: formatDate(data.fetchedAt, {
+          dateStyle: "short",
+          timeStyle: "medium",
+        }),
+        age: ageMinutes,
+      });
   document.body.classList.toggle("offline", cached);
 }
 
@@ -190,21 +207,21 @@ async function loadWeather() {
   } catch (error) {
     const cached = readCache();
     if (cached) render(cached, true);
-    else
-      $("status").textContent =
-        `Weather unavailable · ${error.message} · retrying automatically`;
+    else $("status").textContent = t("unavailable", { error: error.message });
     document.body.classList.add("offline");
     const retrySeconds = Math.min(
       config.retryIntervalSeconds * 2 ** retryAttempt,
       900,
     );
     retryAttempt += 1;
-    $("status").textContent += ` · next retry in ${retrySeconds}s`;
+    $("status").textContent +=
+      ` · ${t("nextRetry", { seconds: retrySeconds })}`;
     retryTimer = setTimeout(loadWeather, retrySeconds * 1000);
   }
 }
 
 function initialise() {
+  applyStaticTranslations(config.language);
   initialiseSettings(config);
   const applyDisplay = () => {
     const detected = detectDisplay();
@@ -218,17 +235,21 @@ function initialise() {
       `${resolved.widthPercent}%`,
     );
     document.body.dataset.deviceProfile = resolved.profile;
-    $("display-summary").textContent = formatDisplaySummary(detected);
+    $("display-summary").textContent = formatDisplaySummary(
+      detected,
+      config.language,
+    );
   };
   applyDisplay();
   addEventListener("resize", applyDisplay, { passive: true });
   document.body.dataset.density = config.density;
+  document.body.dataset.iconPack = config.iconPack;
   document.body.dataset.informationMode = config.informationMode;
   document.body.dataset.layout = config.layoutMode;
-  document.title = `Weather – ${config.locationName}`;
-  $("title").textContent = `Weather – ${config.locationName}`;
+  document.title = `${t("weather")} – ${config.locationName}`;
+  $("title").textContent = `${t("weather")} – ${config.locationName}`;
   $("timezone").textContent = config.timezone;
-  $("version").textContent = `Running v${config.version}`;
+  $("version").textContent = t("running", { version: config.version });
   renderVersionStatus();
   $("provider-name").textContent = getProvider(
     config.weatherProvider,
@@ -238,6 +259,7 @@ function initialise() {
   $("year-label").textContent = formatYearProgress(
     yearProgress,
     config.yearProgressMode,
+    config.language,
   );
   document
     .querySelector(".progress")
