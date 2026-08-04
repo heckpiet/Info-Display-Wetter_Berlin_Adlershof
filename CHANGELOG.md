@@ -4,6 +4,13 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [3.4.0] - 2026-08-04
+
+### Changed
+
+- Reorganize settings into Location & Data, Display, Appearance & Behavior, and Backup & Reset tabs
+- Add WAI-ARIA tab semantics, roving focus, arrow/Home/End keyboard navigation, and responsive mobile panels
+
 ## [3.3.0] - 2026-08-04
 
 ### Added
