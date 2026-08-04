@@ -4,7 +4,12 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
-## [3.15.0] - 2026-08-04
+## [3.16.0] - 2026-08-04
+
+### Changed
+
+- Remove legacy 1400px container width restriction from .wrap rule in styles.css
+- Implement 100% full-width and full-height responsive layout expansion for widescreen, 1440p, 4K, and wall kiosk displays
 
 ### Added
 
