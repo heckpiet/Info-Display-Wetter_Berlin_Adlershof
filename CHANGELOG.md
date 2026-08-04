@@ -4,7 +4,13 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
-## [3.11.0] - 2026-08-04
+## [3.12.0] - 2026-08-04
+
+### Added
+
+- Add updated v3.12.0 UI screenshots in docs/images/ reflecting the Glassmorphic layout and Custom Theme Builder
+- Add automated official GitHub Release publishing workflow via gh release create
+- Update workspace standards for strict visual documentation and mandatory release management
 
 ### Added
 
