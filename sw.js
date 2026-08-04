@@ -1,4 +1,4 @@
-const VERSION = "3.13.0";
+const VERSION = "3.14.0";
 const CACHE = `weather-display-shell-v${VERSION}`;
 const asset = (path) => `${path}?v=${VERSION}`;
 const ICON_PACKS = ["fill", "flat", "line", "animated"];

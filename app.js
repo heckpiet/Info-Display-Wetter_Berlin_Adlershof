@@ -1,28 +1,28 @@
-import { DEFAULT_CONFIG } from "./config.js?v=3.13.0";
+import { DEFAULT_CONFIG } from "./config.js?v=3.14.0";
 import {
   cacheKey,
   configFromUrl,
   isNightTime,
   weatherInfo,
-} from "./weather.js?v=3.13.0";
-import { fetchWeather, getProvider } from "./providers.js?v=3.13.0";
-import { initialiseSettings, loadSettings } from "./settings.js?v=3.13.0";
+} from "./weather.js?v=3.14.0";
+import { fetchWeather, getProvider } from "./providers.js?v=3.14.0";
+import { initialiseSettings, loadSettings } from "./settings.js?v=3.14.0";
 import {
   compareVersions,
   getLatestRelease,
   RELEASES_URL,
   VERSION_CACHE_KEY,
-} from "./version.js?v=3.13.0";
+} from "./version.js?v=3.14.0";
 import {
   getYearProgress,
   getYearProgressPresentation,
-} from "./progress.js?v=3.13.0";
+} from "./progress.js?v=3.14.0";
 import {
   detectDisplay,
   formatDisplaySummary,
   resolveDisplay,
-} from "./display.js?v=3.13.0";
-import { applyStaticTranslations, translate } from "./i18n.js?v=3.13.0";
+} from "./display.js?v=3.14.0";
+import { applyStaticTranslations, translate } from "./i18n.js?v=3.14.0";
 
 const config = configFromUrl({ ...DEFAULT_CONFIG, ...loadSettings() });
 config.locale = config.language === "de" ? "de-DE" : "en-GB";
@@ -35,11 +35,20 @@ const formatNumber = (value, digits = 0) =>
     : new Intl.NumberFormat(config.locale, {
         maximumFractionDigits: digits,
       }).format(value);
-const formatDate = (value, options) =>
-  new Intl.DateTimeFormat(config.locale, {
-    ...options,
-    timeZone: config.timezone,
-  }).format(new Date(value));
+const formatDate = (value, options) => {
+  try {
+    return new Intl.DateTimeFormat(config.locale || "de-DE", {
+      ...options,
+      timeZone: config.timezone || "Europe/Berlin",
+    }).format(new Date(value));
+  } catch {
+    try {
+      return new Intl.DateTimeFormat("de-DE", options).format(new Date(value));
+    } catch {
+      return String(value);
+    }
+  }
+};
 let latestData;
 let hourlyView = true;
 let retryTimer;

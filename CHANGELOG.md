@@ -4,7 +4,12 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
-## [3.13.0] - 2026-08-04
+## [3.14.0] - 2026-08-04
+
+### Fixed
+
+- Add crash-safe fallback handling to formatDate for invalid locale or timezone edge cases
+- Force Service Worker PWA cache eviction to immediately serve non-cached release modules on GitHub Pages
 
 ### Added
 
