@@ -1,23 +1,28 @@
-import { DEFAULT_CONFIG } from "./config.js?v=3.7.2";
-import { cacheKey, configFromUrl, weatherInfo } from "./weather.js?v=3.7.2";
-import { fetchWeather, getProvider } from "./providers.js?v=3.7.2";
-import { initialiseSettings, loadSettings } from "./settings.js?v=3.7.2";
+import { DEFAULT_CONFIG } from "./config.js?v=3.8.0";
+import {
+  cacheKey,
+  configFromUrl,
+  isNightTime,
+  weatherInfo,
+} from "./weather.js?v=3.8.0";
+import { fetchWeather, getProvider } from "./providers.js?v=3.8.0";
+import { initialiseSettings, loadSettings } from "./settings.js?v=3.8.0";
 import {
   compareVersions,
   getLatestRelease,
   RELEASES_URL,
   VERSION_CACHE_KEY,
-} from "./version.js?v=3.7.2";
+} from "./version.js?v=3.8.0";
 import {
   getYearProgress,
   getYearProgressPresentation,
-} from "./progress.js?v=3.7.2";
+} from "./progress.js?v=3.8.0";
 import {
   detectDisplay,
   formatDisplaySummary,
   resolveDisplay,
-} from "./display.js?v=3.7.2";
-import { applyStaticTranslations, translate } from "./i18n.js?v=3.7.2";
+} from "./display.js?v=3.8.0";
+import { applyStaticTranslations, translate } from "./i18n.js?v=3.8.0";
 
 const config = configFromUrl({ ...DEFAULT_CONFIG, ...loadSettings() });
 config.locale = config.language === "de" ? "de-DE" : "en-GB";
@@ -38,6 +43,14 @@ let latestData;
 let hourlyView = true;
 let retryTimer;
 let retryAttempt = 0;
+const reducedMotion =
+  globalThis.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+
+function setWeatherIcon(element, info, className = "") {
+  element.src = info.icon;
+  element.alt = "";
+  if (className) element.className = className;
+}
 
 async function renderVersionStatus() {
   const element = $("latest-version");
@@ -94,9 +107,11 @@ function renderCurrent(data) {
     current.weatherCode,
     config.language,
     config.iconPack,
+    isNightTime(current.time, current.sunrise, current.sunset),
+    reducedMotion,
   );
   $("now-temp").textContent = `${formatNumber(current.temp)}°C`;
-  $("now-icon").textContent = info.icon;
+  setWeatherIcon($("now-icon"), info);
   $("now-description").textContent = info.description;
   $("now-feels").textContent = `${formatNumber(current.feelsLike)}°C`;
   $("now-range").textContent =
@@ -133,6 +148,17 @@ function renderForecast() {
         row.weatherCode,
         config.language,
         config.iconPack,
+        hourlyView &&
+          isNightTime(
+            row.time,
+            latestData.daily.find(
+              (day) => day.time === String(row.time).slice(0, 10),
+            )?.sunrise,
+            latestData.daily.find(
+              (day) => day.time === String(row.time).slice(0, 10),
+            )?.sunset,
+          ),
+        reducedMotion,
       );
       fragment.querySelector("h3").textContent = hourlyView
         ? formatDate(row.time, { hour: "2-digit", minute: "2-digit" })
@@ -149,9 +175,12 @@ function renderForecast() {
           ? ""
           : ` · ${formatNumber(row.precipitationProbability)}%`;
       const details = fragment.querySelector(".slot-details");
+      const icon = document.createElement("img");
+      setWeatherIcon(icon, info, "forecast-icon");
       details.replaceChildren(
+        icon,
         Object.assign(document.createElement("span"), {
-          textContent: `${info.icon} ${info.description}`,
+          textContent: info.description,
         }),
         Object.assign(document.createElement("span"), {
           className: "slot-precip metric-detail",

@@ -50,9 +50,9 @@ test("information mode is included in portable settings", () => {
     }),
     {},
   );
-  assert.deepEqual(sanitizeSettings({ language: "de", iconPack: "mono" }), {
+  assert.deepEqual(sanitizeSettings({ language: "de", iconPack: "line" }), {
     language: "de",
-    iconPack: "mono",
+    iconPack: "line",
   });
   assert.deepEqual(
     sanitizeSettings({ language: "fr", iconPack: "external" }),

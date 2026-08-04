@@ -58,7 +58,8 @@ Choose **Essential** for a quieter wall display or **Glance** for maximum readab
 - Uniform or per-side pixel spacing for kiosk bezels, overscan, and asymmetric mounting frames
 - Configurable secondary-information dimming or auto-hide with persistent critical status notices
 - Thematically grouped, keyboard-accessible settings tabs
-- Complete German/English runtime localization and three offline icon packs
+- Complete German/English runtime localization and four local Meteocons icon styles
+- Day/night-aware weather symbols with automatic static fallback for reduced-motion users
 - No cookies, analytics, account, backend, or secrets
 
 ## Quick start
@@ -157,10 +158,14 @@ npm run smoke
 
 The default browser contacts `api.open-meteo.com` for weather and GitHub's public releases API for the optional update indicator. The latest successful forecast is stored in browser `localStorage` for up to 12 hours. It contains public forecast data and the configured location, not personal data. There are no cookies, analytics, or accounts. If no usable cache exists, the page remains visible with an error state and retries automatically.
 
+## Weather icons
+
+The display bundles a curated, release-pinned subset of [Meteocons](https://github.com/basmilius/meteocons) as local SVG files. Fill, Flat, Outline, and Animated styles cover every mapped WMO condition without a CDN. Clear and partly cloudy conditions use distinct day/night artwork. When the browser requests reduced motion, the Animated selection automatically renders the static Fill artwork. See [Third-party notices](THIRD_PARTY_NOTICES.md) for the MIT license and attribution.
+
 ## Legacy Apps Script migration
 
 Version 2 removes `Code.gs` and `appsscript.json`. Configuration, weather response mapping, caching, and retries now run in the browser. Existing Apps Script deployments can remain online while the static URL is tested, then be retired.
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE). Bundled third-party assets retain their licenses as documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

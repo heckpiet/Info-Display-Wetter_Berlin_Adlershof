@@ -21,15 +21,16 @@ Never store API keys in settings. Provider credentials belong in the controlled 
 
 Choose **Deutsch** or **English** under **Appearance & behavior**. The language changes the complete runtime interface, weather descriptions, status messages, accessibility labels, dates, times, and number formatting. Repository documentation and source code remain English.
 
-Three dependency-free icon packs are included and work offline:
+Four Meteocons SVG styles are bundled locally and work offline:
 
-| Pack            | Example                                   | Character      |
-| --------------- | ----------------------------------------- | -------------- |
-| **Color emoji** | Familiar, colorful weather symbols        | ☀️ ⛅ 🌧️ ❄️ ⛈️ |
-| **Monochrome**  | Quiet single-color symbols                | ☀︎ ◒ ☂ ❄ ϟ      |
-| **Minimal**     | Geometric symbols for clean kiosk layouts | ○ ◑ ▥ ✳ ↯      |
+| Pack         | Presentation                                   | Recommended use                   |
+| ------------ | ---------------------------------------------- | --------------------------------- |
+| **Fill**     | Rich color, gradients, and strongest hierarchy | Default kiosk and wall display    |
+| **Flat**     | Quiet color without gradients                  | Restrained or lower-power display |
+| **Outline**  | Clean line artwork                             | Minimal interface with clear form |
+| **Animated** | Slowly moving color artwork                    | Optional ambient display          |
 
-Icon packs change presentation only; WMO weather-code mapping and text descriptions remain identical.
+All packs cover the same WMO weather-code mapping and use distinct day/night artwork where appropriate. Animated icons automatically fall back to static Fill icons when the browser reports `prefers-reduced-motion: reduce`. Only the required icon subset is included, and every asset is cached by the service worker for offline pack switching. Licensing and attribution are recorded in [Third-party notices](../THIRD_PARTY_NOTICES.md).
 
 ## Information modes
 

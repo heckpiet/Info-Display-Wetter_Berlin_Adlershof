@@ -70,7 +70,7 @@ export function sanitizeSettings(value = {}) {
     delete result.language;
   if (
     result.iconPack !== undefined &&
-    !["color", "mono", "minimal"].includes(result.iconPack)
+    !["fill", "flat", "line", "animated"].includes(result.iconPack)
   )
     delete result.iconPack;
   if (

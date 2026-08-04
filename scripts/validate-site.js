@@ -15,6 +15,11 @@ const requiredFiles = [
   "manifest.webmanifest",
   "config.js",
   "LICENSE",
+  "THIRD_PARTY_NOTICES.md",
+  "assets/meteocons/fill/clear-day.svg",
+  "assets/meteocons/flat/clear-day.svg",
+  "assets/meteocons/line/clear-day.svg",
+  "assets/meteocons/animated/clear-day.svg",
   "docs/images/kiosk-desktop.png",
   "docs/images/kiosk-daily-forecast.png",
   "docs/images/settings-dialog.png",
@@ -54,6 +59,8 @@ if (!/locale: "de-DE"/.test(config))
   failures.push("Adlershof must default to de-DE formatting");
 if (!/weatherProvider: "openMeteoDwd"/.test(config))
   failures.push("Open-Meteo DWD ICON must remain the default provider");
+if (!/iconPack: "fill"/.test(config))
+  failures.push("Meteocons Fill must remain the default icon pack");
 if (!config.includes(`version: "${packageJson.version}"`))
   failures.push("App and package versions must match");
 for (const [name, source] of Object.entries({ app, providers, progress })) {

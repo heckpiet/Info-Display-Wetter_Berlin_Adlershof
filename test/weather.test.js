@@ -5,6 +5,7 @@ import {
   buildWeatherUrl,
   cacheKey,
   configFromUrl,
+  isNightTime,
   normalizeWeather,
   weatherInfo,
 } from "../weather.js";
@@ -73,10 +74,28 @@ test("normalizes an API response", () => {
 
 test("maps WMO weather codes and creates location-specific cache keys", () => {
   assert.equal(weatherInfo(95).description, "Thunderstorm");
-  assert.deepEqual(weatherInfo(61, "de", "mono"), {
-    icon: "☂",
+  assert.deepEqual(weatherInfo(61, "de", "line"), {
+    icon: "assets/meteocons/line/rain.svg",
     description: "Regen",
   });
-  assert.equal(weatherInfo(0, "en", "minimal").icon, "○");
+  assert.equal(
+    weatherInfo(0, "en", "flat", true).icon,
+    "assets/meteocons/flat/clear-night.svg",
+  );
+  assert.equal(
+    weatherInfo(0, "en", "animated", false, true).icon,
+    "assets/meteocons/fill/clear-day.svg",
+  );
   assert.match(cacheKey(DEFAULT_CONFIG), /52\.4357:13\.5406/);
+});
+
+test("detects day and night from local provider timestamps", () => {
+  assert.equal(
+    isNightTime("2026-08-04T04:45", "2026-08-04T05:30", "2026-08-04T20:52"),
+    true,
+  );
+  assert.equal(
+    isNightTime("2026-08-04T12:00", "2026-08-04T05:30", "2026-08-04T20:52"),
+    false,
+  );
 });
