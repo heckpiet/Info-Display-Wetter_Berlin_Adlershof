@@ -4,6 +4,11 @@ import { fetchWeather, getProvider } from "./providers.js";
 import { initialiseSettings, loadSettings } from "./settings.js";
 import { compareVersions, getLatestRelease, RELEASES_URL } from "./version.js";
 import { formatYearProgress, getYearProgress } from "./progress.js";
+import {
+  detectDisplay,
+  formatDisplaySummary,
+  resolveDisplay,
+} from "./display.js";
 
 const config = configFromUrl({ ...DEFAULT_CONFIG, ...loadSettings() });
 const $ = (id) => document.getElementById(id);
@@ -201,10 +206,22 @@ async function loadWeather() {
 
 function initialise() {
   initialiseSettings(config);
-  document.documentElement.style.setProperty(
-    "--font-scale",
-    String(config.fontScale),
-  );
+  const applyDisplay = () => {
+    const detected = detectDisplay();
+    const resolved = resolveDisplay(config, detected);
+    document.documentElement.style.setProperty(
+      "--font-scale",
+      String(resolved.scale),
+    );
+    document.documentElement.style.setProperty(
+      "--content-width",
+      `${resolved.widthPercent}%`,
+    );
+    document.body.dataset.deviceProfile = resolved.profile;
+    $("display-summary").textContent = formatDisplaySummary(detected);
+  };
+  applyDisplay();
+  addEventListener("resize", applyDisplay, { passive: true });
   document.body.dataset.density = config.density;
   document.body.dataset.informationMode = config.informationMode;
   document.body.dataset.layout = config.layoutMode;

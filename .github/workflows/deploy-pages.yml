@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p _site
-          cp index.html styles.css app.js weather.js providers.js settings.js version.js progress.js config.js sw.js manifest.webmanifest LICENSE _site/
+          cp index.html styles.css app.js weather.js providers.js settings.js version.js progress.js display.js config.js sw.js manifest.webmanifest LICENSE _site/
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v5
       - name: Deploy

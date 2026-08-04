@@ -20,6 +20,18 @@ Set **Forecast rotation** to **Manual only** when changing content would make th
 
 The footer can show **Percentage and days**, **Percentage only**, **Days only**, or be **Hidden**. The combined default looks like `58.90% of year · Day 216 of 365`. Leap years are detected automatically and use 366 as the total.
 
+## Display detection and manual overrides
+
+With **Device profile** set to **Auto-detect**, the application classifies the current CSS viewport as phone, tablet, desktop, or large TV/kiosk and recalculates the layout whenever the browser window or screen orientation changes. It also detects coarse-pointer, hover, device-pixel-ratio, service-worker, and fullscreen capabilities. It does not use the user-agent string or collect a hardware fingerprint.
+
+The settings dialog shows the detected viewport and capabilities. Override the automatic result with **Phone**, **Tablet**, **Desktop**, or **TV / kiosk** when the physical viewing situation differs from the viewport heuristic.
+
+- **Display scale** applies a global 75–150% visual scale on top of the existing font scale.
+- **Content width** limits the dashboard to 70–100% of the viewport.
+- **Layout**, **Density**, **Information mode**, and **Font scale** remain independent controls.
+
+Automatic detection uses standards-based [CSS media features](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries) and progressive [feature detection](https://web.dev/learn/pwa/foundations), avoiding unreliable browser-name assumptions.
+
 The profiles follow practical accessibility principles: strong text contrast, scalable text, touch controls at least 44 CSS pixels in size, a reduced-motion fallback, and fewer competing elements in distance-viewing modes.
 
 Reference guidance:

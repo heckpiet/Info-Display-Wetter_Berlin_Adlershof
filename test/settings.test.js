@@ -34,4 +34,20 @@ test("information mode is included in portable settings", () => {
     {},
   );
   assert.deepEqual(sanitizeSettings({ yearProgressMode: "invalid" }), {});
+  assert.deepEqual(
+    sanitizeSettings({
+      deviceProfile: "tv",
+      displayScale: 1.2,
+      contentWidthPercent: 90,
+    }),
+    { deviceProfile: "tv", displayScale: 1.2, contentWidthPercent: 90 },
+  );
+  assert.deepEqual(
+    sanitizeSettings({
+      deviceProfile: "watch",
+      displayScale: 4,
+      contentWidthPercent: 20,
+    }),
+    {},
+  );
 });

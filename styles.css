@@ -117,8 +117,13 @@ dialog::backdrop {
   gap: 1rem;
 }
 #settings-form h2,
+.display-summary,
 .settings-actions {
   grid-column: 1/-1;
+}
+.display-summary {
+  color: var(--muted);
+  font-size: 0.85rem;
 }
 #settings-form label {
   display: grid;
@@ -147,9 +152,24 @@ dialog::backdrop {
   }
 }
 .wrap {
-  width: min(1400px, 100%);
+  width: min(1400px, var(--content-width, 100%));
   margin-inline: auto;
   padding: 20px;
+}
+body[data-device-profile="phone"] .grid,
+body[data-device-profile="tablet"] .grid {
+  grid-template-columns: 1fr;
+}
+body[data-device-profile="tv"] .wrap {
+  max-width: none;
+}
+@media (pointer: coarse) {
+  #flip-button,
+  .settings-trigger,
+  .settings-actions button,
+  .import-button {
+    min-height: 48px;
+  }
 }
 .header,
 .footer,
