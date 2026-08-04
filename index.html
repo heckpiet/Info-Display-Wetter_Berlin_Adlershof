@@ -9,8 +9,8 @@
       content="A resilient, backend-free DWD weather display for kiosk browsers."
     />
     <title>Weather display</title>
-    <link rel="stylesheet" href="styles.css?v=3.22.0" />
-    <link rel="manifest" href="manifest.webmanifest?v=3.22.0" />
+    <link rel="stylesheet" href="styles.css?v=3.23.0" />
+    <link rel="manifest" href="manifest.webmanifest?v=3.23.0" />
   </head>
   <body>
     <button
@@ -339,10 +339,12 @@
             <select name="layoutStructure">
               <option value="default">Standard Kiosk Grid (Default)</option>
               <option value="heroBottom">
-                Hero Header & Bottom Cards (Bild 1)
+                Hero Header & Bottom Cards (Image 1)
               </option>
-              <option value="dashboardGrid">Smart Display Grid (Bild 2)</option>
-              <option value="splitVertical">Split Columns (Vertikal)</option>
+              <option value="dashboardGrid">
+                Smart Display Grid (Image 2)
+              </option>
+              <option value="splitVertical">Split Columns (Vertical)</option>
               <option value="compactBanner">Compact Banner Bar</option>
               <option value="focusCards">Focused Hero Deck</option>
               <option value="magazineHero">
@@ -352,7 +354,7 @@
                 Ambient Room Clock & Weather Strip
               </option>
               <option value="centeredClockGrid">
-                Top Centered Clock & Grid (Preset aus Screenshot)
+                Top Centered Clock & Grid (Screenshot Preset)
               </option>
             </select></label
           >
@@ -546,10 +548,10 @@
           }
         });
         navigator.serviceWorker
-          .register("./sw.js?v=3.22.0", { updateViaCache: "none" })
+          .register("./sw.js?v=3.23.0", { updateViaCache: "none" })
           .catch(() => {});
       }
     </script>
-    <script type="module" src="app.js?v=3.22.0"></script>
+    <script type="module" src="app.js?v=3.23.0"></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-import { buildWeatherUrl, normalizeWeather } from "./weather.js?v=3.22.0";
+import { buildWeatherUrl, normalizeWeather } from "./weather.js?v=3.23.0";
 
 export const WEATHER_PROVIDERS = Object.freeze({
   openMeteoDwd: Object.freeze({

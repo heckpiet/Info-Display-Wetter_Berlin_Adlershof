@@ -42,7 +42,7 @@ Choose **Essential** for a quieter wall display or **Glance** for maximum readab
 
 - Current conditions and alternating four-hour/four-day forecast
 - Daily low/high, wind gusts, UV index, sunrise/sunset times with custom SVG icons (🌅 / 🌇), full date, and explicit data age
-- 9 selectable layout structure modes (Standard Kiosk Grid, Hero Header & Bottom Cards [Bild 1], Smart Display Grid [Bild 2], Split Columns, Compact Banner Bar, Focused Hero Deck, Magazine Editorial, Ambient Room Clock, Top Centered Clock & Grid [Preset])
+- 9 selectable layout structure modes (Standard Kiosk Grid, Hero Header & Bottom Cards [Image 1], Smart Display Grid [Image 2], Split Columns, Compact Banner Bar, Focused Hero Deck, Magazine Editorial, Ambient Room Clock, Top Centered Clock & Grid [Preset])
 - Custom background image support (Atmospheric presets, custom Web URLs, and local image file upload) with customizable card opacity slider (10% - 100%)
 - 8 selectable color themes (Sky Glass, Cyberpunk Neon, Nordic Slate, Forest Aurora, Sunset Coral, Minimal Dark, Minimal Light, High Contrast)
 - Built-in Custom Theme Builder with HTML5 color pickers for background, tile, text, accent, and chip colors

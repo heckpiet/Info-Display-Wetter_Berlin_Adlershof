@@ -4,7 +4,18 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
-## [3.22.0] - 2026-08-04
+## [3.23.0] - 2026-08-04
+
+### Added
+
+- Add CycloneDX-compliant Software Bill of Materials (`sbom.json` & `docs/SBOM.md`) for full SBOM/BOM management (Section 10)
+- Add environment and configuration templates (`.env.example` & `config.example.json`) for runtime parameter documentation (Section 6)
+- Add unit tests in `test/settings.test.js` covering `showSunTimes`, `centeredClockGrid`, `bgImageType`, and `tileOpacity` settings (Section 10)
+
+### Changed
+
+- Complete pure English documentation audit across `README.md` and `docs/SETTINGS.md` (Section 5)
+- Sanitize HTML select options in `index.html` for clean dynamic i18n localization (Section 4)
 
 ### Changed
 

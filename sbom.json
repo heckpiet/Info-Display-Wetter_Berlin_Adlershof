@@ -1,0 +1,102 @@
+{
+  "$schema": "https://cyclonedx.org/schema/bom-1.5.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:674a046a-adlershof-weather-display-sbom-v3.23.0",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-08-04T21:16:00Z",
+    "tools": [
+      {
+        "vendor": "Antigravity",
+        "name": "AGY Code Analysis",
+        "version": "2.0"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "name": "info-display-weather-berlin-adlershof",
+      "version": "3.23.0",
+      "description": "A resilient, backend-free DWD weather display for kiosk browsers.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "eslint",
+      "version": "10.8.0",
+      "scope": "development",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@eslint/js",
+      "version": "10.0.1",
+      "scope": "development",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "prettier",
+      "version": "3.8.1",
+      "scope": "development",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "data",
+      "name": "Open-Meteo DWD ICON API",
+      "publisher": "Deutscher Wetterdienst (DWD) / Open-Meteo",
+      "description": "High-resolution DWD ICON weather forecast data API",
+      "externalReferences": [
+        {
+          "type": "documentation",
+          "url": "https://open-meteo.com/en/docs/dwd-api"
+        }
+      ]
+    },
+    {
+      "type": "framework",
+      "name": "Meteocons Icon Set",
+      "publisher": "Bas Milius",
+      "description": "Weather icon suite (Fill, Flat, Line, Animated SVG icons)",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://bas.dev/work/meteocons"
+        }
+      ]
+    }
+  ]
+}

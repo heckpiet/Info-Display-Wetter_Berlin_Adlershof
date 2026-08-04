@@ -95,3 +95,30 @@ test("information mode is included in portable settings", () => {
     {},
   );
 });
+
+test("v3.23.0 layout, background, and sun times settings sanitization", () => {
+  assert.deepEqual(
+    sanitizeSettings({
+      showSunTimes: true,
+      layoutStructure: "centeredClockGrid",
+      bgImageType: "preset",
+      tileOpacity: 0.8,
+    }),
+    {
+      showSunTimes: true,
+      layoutStructure: "centeredClockGrid",
+      bgImageType: "preset",
+      tileOpacity: 0.8,
+    },
+  );
+  assert.deepEqual(
+    sanitizeSettings({
+      showSunTimes: "false",
+      layoutStructure: "unknownLayout",
+      bgImageType: "invalidType",
+    }),
+    {
+      showSunTimes: false,
+    },
+  );
+});
