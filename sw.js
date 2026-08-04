@@ -1,6 +1,31 @@
-const VERSION = "3.7.2";
+const VERSION = "3.8.0";
 const CACHE = `weather-display-shell-v${VERSION}`;
 const asset = (path) => `${path}?v=${VERSION}`;
+const ICON_PACKS = ["fill", "flat", "line", "animated"];
+const ICON_NAMES = [
+  "clear-day",
+  "clear-night",
+  "mostly-clear-day",
+  "mostly-clear-night",
+  "partly-cloudy-day",
+  "partly-cloudy-night",
+  "overcast",
+  "fog",
+  "drizzle",
+  "sleet",
+  "rain",
+  "snow",
+  "partly-cloudy-day-rain",
+  "partly-cloudy-night-rain",
+  "partly-cloudy-day-snow",
+  "partly-cloudy-night-snow",
+  "thunderstorms",
+  "thunderstorms-hail",
+  "not-available",
+];
+const ICON_ASSETS = ICON_PACKS.flatMap((pack) =>
+  ICON_NAMES.map((name) => asset(`./assets/meteocons/${pack}/${name}.svg`)),
+);
 const ASSETS = [
   "./",
   asset("./index.html"),
@@ -15,6 +40,7 @@ const ASSETS = [
   asset("./i18n.js"),
   asset("./version.js"),
   asset("./manifest.webmanifest"),
+  ...ICON_ASSETS,
 ];
 self.addEventListener("install", (event) =>
   event.waitUntil(

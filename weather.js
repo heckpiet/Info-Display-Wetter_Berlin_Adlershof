@@ -204,61 +204,33 @@ const WEATHER_TEXT = {
   },
 };
 
-const ICON_PACKS = {
-  color: {
-    clear: "☀️",
-    mainlyClear: "🌤️",
-    partlyCloudy: "⛅",
-    overcast: "☁️",
-    fog: "🌫️",
-    drizzle: "🌦️",
-    freezingDrizzle: "🌧️",
-    rain: "🌧️",
-    freezingRain: "🌧️",
-    snow: "❄️",
-    rainShowers: "🌦️",
-    snowShowers: "🌨️",
-    thunderstorm: "⛈️",
-    hail: "⛈️",
-    unknown: "❔",
-  },
-  mono: {
-    clear: "☀︎",
-    mainlyClear: "☼",
-    partlyCloudy: "◒",
-    overcast: "☁",
-    fog: "≋",
-    drizzle: "☂",
-    freezingDrizzle: "☂",
-    rain: "☂",
-    freezingRain: "☂",
-    snow: "❄",
-    rainShowers: "☔",
-    snowShowers: "❄",
-    thunderstorm: "ϟ",
-    hail: "ϟ",
-    unknown: "?",
-  },
-  minimal: {
-    clear: "○",
-    mainlyClear: "◔",
-    partlyCloudy: "◑",
-    overcast: "●",
-    fog: "≡",
-    drizzle: "⋮",
-    freezingDrizzle: "⋮",
-    rain: "▥",
-    freezingRain: "▥",
-    snow: "✳",
-    rainShowers: "▦",
-    snowShowers: "✳",
-    thunderstorm: "↯",
-    hail: "↯",
-    unknown: "·",
-  },
-};
+const ICON_NAMES = Object.freeze({
+  clear: ["clear-day", "clear-night"],
+  mainlyClear: ["mostly-clear-day", "mostly-clear-night"],
+  partlyCloudy: ["partly-cloudy-day", "partly-cloudy-night"],
+  overcast: ["overcast", "overcast"],
+  fog: ["fog", "fog"],
+  drizzle: ["drizzle", "drizzle"],
+  freezingDrizzle: ["sleet", "sleet"],
+  rain: ["rain", "rain"],
+  freezingRain: ["sleet", "sleet"],
+  snow: ["snow", "snow"],
+  rainShowers: ["partly-cloudy-day-rain", "partly-cloudy-night-rain"],
+  snowShowers: ["partly-cloudy-day-snow", "partly-cloudy-night-snow"],
+  thunderstorm: ["thunderstorms", "thunderstorms"],
+  hail: ["thunderstorms-hail", "thunderstorms-hail"],
+  unknown: ["not-available", "not-available"],
+});
 
-export function weatherInfo(code, language = "en", iconPack = "color") {
+const ICON_PACKS = new Set(["fill", "flat", "line", "animated"]);
+
+export function weatherInfo(
+  code,
+  language = "en",
+  iconPack = "fill",
+  isNight = false,
+  reducedMotion = false,
+) {
   const groups = [
     [[0], "clear"],
     [[1], "mainlyClear"],
@@ -277,10 +249,24 @@ export function weatherInfo(code, language = "en", iconPack = "color") {
   ];
   const match = groups.find(([codes]) => codes.includes(Number(code)));
   const key = match?.[1] ?? "unknown";
+  const selectedPack = ICON_PACKS.has(iconPack) ? iconPack : "fill";
+  const renderedPack =
+    selectedPack === "animated" && reducedMotion ? "fill" : selectedPack;
+  const iconName = ICON_NAMES[key][isNight ? 1 : 0];
   return {
-    icon: (ICON_PACKS[iconPack] ?? ICON_PACKS.color)[key],
+    icon: `assets/meteocons/${renderedPack}/${iconName}.svg`,
     description: (WEATHER_TEXT[language] ?? WEATHER_TEXT.en)[key],
   };
+}
+
+export function isNightTime(time, sunrise, sunset) {
+  const localTime = String(time ?? "").slice(11, 16);
+  const sunriseTime = String(sunrise ?? "").slice(11, 16);
+  const sunsetTime = String(sunset ?? "").slice(11, 16);
+  if (localTime && sunriseTime && sunsetTime)
+    return localTime < sunriseTime || localTime >= sunsetTime;
+  const hour = Number(localTime.slice(0, 2));
+  return Number.isFinite(hour) && (hour < 6 || hour >= 21);
 }
 
 export function cacheKey(config) {

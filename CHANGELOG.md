@@ -4,6 +4,22 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [3.8.0] - 2026-08-04
+
+### Added
+
+- Add local Meteocons Fill, Flat, Outline, and Animated SVG icon packs
+- Add day/night-specific icons for clear, mostly clear, partly cloudy, rain-shower, and snow-shower conditions
+- Add automatic static Fill fallback when the browser requests reduced motion
+- Add complete offline pre-caching and automated WMO coverage checks for every bundled pack
+- Add third-party asset attribution and MIT license notices
+
+### Changed
+
+- Replace the Unicode Color emoji, Monochrome, and Minimal packs with consistent SVG artwork
+- Make Meteocons Fill the default icon style
+- Refresh the documentation and screenshots for the new icon selector and default presentation
+
 ## [3.7.2] - 2026-08-04
 
 ### Changed

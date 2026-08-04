@@ -373,7 +373,9 @@ h2 {
   letter-spacing: -1px;
 }
 .weather-icon {
-  font-size: clamp(40px, 5vw, 64px);
+  width: clamp(78px, 8vw, 112px);
+  height: clamp(58px, 6vw, 84px);
+  object-fit: contain;
 }
 .kv {
   display: grid;
@@ -387,7 +389,16 @@ h2 {
   color: var(--muted);
 }
 .slot-details {
+  display: flex;
+  align-items: center;
+  gap: 5px;
   overflow-wrap: anywhere;
+}
+.forecast-icon {
+  width: 38px;
+  height: 30px;
+  flex: 0 0 auto;
+  object-fit: contain;
 }
 body[data-information-mode="essential"] .metric-detail,
 body[data-information-mode="essential"] .technical-meta,
@@ -406,7 +417,8 @@ body[data-information-mode="glance"] .big {
   font-size: clamp(76px, 10vw, 132px);
 }
 body[data-information-mode="glance"] .weather-icon {
-  font-size: clamp(56px, 7vw, 92px);
+  width: clamp(104px, 10vw, 148px);
+  height: clamp(78px, 7.5vw, 111px);
 }
 body[data-information-mode="glance"] .kv {
   font-size: 1.2rem;

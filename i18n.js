@@ -224,8 +224,18 @@ export function applyStaticTranslations(language) {
     form,
     "iconPack",
     de
-      ? ["☀️ Farbige Emoji", "☀︎ Monochrom", "○ Minimal"]
-      : ["☀️ Color emoji", "☀︎ Monochrome", "○ Minimal"],
+      ? [
+          "Meteocons Füllung",
+          "Meteocons Flach",
+          "Meteocons Kontur",
+          "Meteocons Animiert",
+        ]
+      : [
+          "Meteocons Fill",
+          "Meteocons Flat",
+          "Meteocons Outline",
+          "Meteocons Animated",
+        ],
   );
   form.querySelector(".settings-backup p").textContent = de
     ? "Einstellungen als JSON sichern, wieder importieren oder für diesen Browser zurücksetzen."
