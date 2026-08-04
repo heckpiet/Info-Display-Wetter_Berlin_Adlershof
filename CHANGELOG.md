@@ -4,6 +4,18 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [3.7.0] - 2026-08-04
+
+### Added
+
+- Add always-visible, inactivity-dimmed, inactivity-hidden, and important-only secondary-information modes
+- Add a configurable 3–300 second inactivity delay
+- Keep update, offline, cached-data, and error notices visible as important states
+
+### Changed
+
+- Treat provider, timezone, version, routine freshness, and year progress as secondary kiosk information
+
 ## [3.6.1] - 2026-08-04
 
 ### Fixed

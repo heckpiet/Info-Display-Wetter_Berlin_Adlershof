@@ -103,6 +103,43 @@ body.controls-hidden .control {
   opacity: 0;
   pointer-events: none;
 }
+.secondary-info {
+  transition: opacity 0.25s ease;
+}
+body[data-secondary-info-mode="dim"].secondary-info-inactive .secondary-info {
+  opacity: 0.28;
+}
+body[data-secondary-info-mode="autoHide"].secondary-info-inactive
+  .technical-meta,
+body[data-secondary-info-mode="important"] .technical-meta {
+  display: none;
+}
+body.update-important[data-secondary-info-mode="autoHide"].secondary-info-inactive
+  #latest-version,
+body.update-important[data-secondary-info-mode="important"] #latest-version {
+  display: inline;
+}
+body[data-secondary-info-mode="autoHide"].secondary-info-inactive:not(
+    .status-important
+  )
+  .footer,
+body[data-secondary-info-mode="important"]:not(.status-important) .footer {
+  display: none;
+}
+body[data-secondary-info-mode="autoHide"].secondary-info-inactive.status-important
+  .footer
+  > :not(.status),
+body[data-secondary-info-mode="important"].status-important
+  .footer
+  > :not(.status) {
+  display: none;
+}
+body.status-important[data-secondary-info-mode="dim"].secondary-info-inactive
+  .status,
+body.update-important[data-secondary-info-mode="dim"].secondary-info-inactive
+  .meta {
+  opacity: 1;
+}
 dialog {
   width: min(620px, 92vw);
   max-height: 92vh;
@@ -220,6 +257,11 @@ dialog::backdrop {
   }
   .inset-settings {
     grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .secondary-info {
+    transition: none;
   }
 }
 .import-button input {

@@ -154,6 +154,16 @@ export function applyStaticTranslations(language) {
     de ? "Vorhersagewechsel" : "Forecast rotation",
   );
   label(form, "yearProgressMode", de ? "Jahresfortschritt" : "Year progress");
+  label(
+    form,
+    "secondaryInfoMode",
+    de ? "Sekundäre Informationen" : "Secondary information",
+  );
+  label(
+    form,
+    "secondaryInfoDelaySeconds",
+    de ? "Ausblendverzögerung (Sek.)" : "Secondary info delay (seconds)",
+  );
   options(
     form,
     "deviceProfile",
@@ -191,6 +201,23 @@ export function applyStaticTranslations(language) {
     de
       ? ["Prozent und Tage", "Nur Prozent", "Nur Tage", "Ausgeblendet"]
       : ["Percentage and days", "Percentage only", "Days only", "Hidden"],
+  );
+  options(
+    form,
+    "secondaryInfoMode",
+    de
+      ? [
+          "Immer sichtbar",
+          "Bei Inaktivität dimmen",
+          "Bei Inaktivität ausblenden",
+          "Nur wichtige Hinweise",
+        ]
+      : [
+          "Always visible",
+          "Dim after inactivity",
+          "Hide after inactivity",
+          "Important only",
+        ],
   );
   options(form, "language", ["Deutsch", "English"]);
   options(

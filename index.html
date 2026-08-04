@@ -24,11 +24,11 @@
     <header class="wrap header">
       <div>
         <h1 id="title">Weather</h1>
-        <div class="meta">
+        <div class="meta secondary-info">
           <span class="technical-meta" id="provider-name"
             >DWD ICON via Open-Meteo</span
           ><span class="technical-meta" aria-hidden="true">•</span>
-          <span id="timezone"></span
+          <span class="technical-meta" id="timezone"></span
           ><span class="technical-meta" aria-hidden="true">•</span>
           <span class="technical-meta" id="version"></span
           ><span class="technical-meta" aria-hidden="true">•</span>
@@ -95,11 +95,13 @@
     </main>
 
     <footer class="wrap footer">
-      <div class="progress" aria-label="Year progress">
+      <div class="progress secondary-info" aria-label="Year progress">
         <i id="year-progress"></i>
       </div>
-      <div class="year-label" id="year-label">--% of year</div>
-      <div class="status" id="status" role="status">Starting…</div>
+      <div class="year-label secondary-info" id="year-label">--% of year</div>
+      <div class="status secondary-info" id="status" role="status">
+        Starting…
+      </div>
     </footer>
 
     <template id="slot-template">
@@ -356,6 +358,24 @@
               <option value="hidden">Hidden</option>
             </select></label
           >
+          <label
+            >Secondary information
+            <select name="secondaryInfoMode">
+              <option value="always">Always visible</option>
+              <option value="dim">Dim after inactivity</option>
+              <option value="autoHide">Hide after inactivity</option>
+              <option value="important">Important only</option>
+            </select></label
+          >
+          <label
+            >Secondary info delay (seconds)
+            <input
+              name="secondaryInfoDelaySeconds"
+              type="number"
+              min="3"
+              max="300"
+              step="1"
+          /></label>
         </section>
 
         <section

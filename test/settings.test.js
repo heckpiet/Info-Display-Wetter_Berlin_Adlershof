@@ -80,4 +80,18 @@ test("information mode is included in portable settings", () => {
     sanitizeSettings({ frameInsetMode: "diagonal", frameInset: 501 }),
     {},
   );
+  assert.deepEqual(
+    sanitizeSettings({
+      secondaryInfoMode: "autoHide",
+      secondaryInfoDelaySeconds: 20,
+    }),
+    { secondaryInfoMode: "autoHide", secondaryInfoDelaySeconds: 20 },
+  );
+  assert.deepEqual(
+    sanitizeSettings({
+      secondaryInfoMode: "sometimes",
+      secondaryInfoDelaySeconds: 2,
+    }),
+    {},
+  );
 });
