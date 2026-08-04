@@ -120,8 +120,20 @@ function renderForecast() {
         row.precipitationProbability == null
           ? ""
           : ` · ${formatNumber(row.precipitationProbability)}%`;
-      fragment.querySelector(".slot-details").textContent =
-        `${info.icon} ${info.description} · ${formatNumber(row.precipitation, 1)} mm${probability}`;
+      const details = fragment.querySelector(".slot-details");
+      details.replaceChildren(
+        Object.assign(document.createElement("span"), {
+          textContent: `${info.icon} ${info.description}`,
+        }),
+        Object.assign(document.createElement("span"), {
+          className: "slot-precip metric-detail",
+          textContent: ` · ${formatNumber(row.precipitation, 1)} mm`,
+        }),
+        Object.assign(document.createElement("span"), {
+          className: "slot-probability",
+          textContent: probability,
+        }),
+      );
       return fragment;
     }),
   );
@@ -193,6 +205,7 @@ function initialise() {
     String(config.fontScale),
   );
   document.body.dataset.density = config.density;
+  document.body.dataset.informationMode = config.informationMode;
   document.body.dataset.layout = config.layoutMode;
   document.title = `Weather – ${config.locationName}`;
   $("title").textContent = `Weather – ${config.locationName}`;
@@ -227,7 +240,8 @@ function initialise() {
   tick();
   setInterval(tick, 1000);
   $("flip-button").addEventListener("click", flipForecast);
-  setInterval(flipForecast, config.flipIntervalSeconds * 1000);
+  if (config.forecastRotation === "auto")
+    setInterval(flipForecast, config.flipIntervalSeconds * 1000);
   loadWeather();
 }
 

@@ -15,3 +15,17 @@ test("invalid stored settings fail safely", () => {
   const storage = { getItem: () => "not-json" };
   assert.deepEqual(loadSettings(storage), {});
 });
+
+test("information mode is included in portable settings", () => {
+  assert.deepEqual(
+    sanitizeSettings({
+      informationMode: "glance",
+      forecastRotation: "manual",
+    }),
+    { informationMode: "glance", forecastRotation: "manual" },
+  );
+  assert.deepEqual(
+    sanitizeSettings({ informationMode: "unknown", forecastRotation: "yes" }),
+    {},
+  );
+});

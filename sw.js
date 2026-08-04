@@ -1,4 +1,4 @@
-const CACHE = "weather-display-shell-v3.0.4";
+const CACHE = "weather-display-shell-v3.1.0";
 const ASSETS = [
   "./",
   "./index.html",

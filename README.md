@@ -26,6 +26,14 @@ Location, refresh and cache intervals, theme, font scale, density, and layout ca
 
 > The screenshots show live forecast data captured for the Berlin-Adlershof example. Values and the adaptive theme change with time and weather conditions.
 
+### Reduced information modes
+
+| Essential                                                                        | Glance                                                                          |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| ![Essential mode with core weather measurements](docs/images/mode-essential.png) | ![Glance mode with large distance-readable values](docs/images/mode-glance.png) |
+
+Choose **Essential** for a quieter wall display or **Glance** for maximum readability from a distance. The original full view remains available as **Detailed**.
+
 ## Features
 
 - Current conditions and alternating hourly/daily forecast
@@ -33,6 +41,7 @@ Location, refresh and cache intervals, theme, font scale, density, and layout ca
 - Automatic light/dark theme based on sunrise and sunset
 - Four adaptive day-phase themes, manual forecast switching, and kiosk display profiles
 - Responsive kiosk layout for tablets and desktop displays
+- Detailed, essential, and distance-optimized glance information modes
 - Cached last-known-good data when the network or API is unavailable
 - Automatic refresh, timeout, and retry handling
 - URL-based location configuration
