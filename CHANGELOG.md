@@ -4,7 +4,18 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
-## [3.8.0] - 2026-08-04
+## [3.9.0] - 2026-08-04
+
+### Added
+
+- Add modern Glassmorphism visual design system with `backdrop-filter: blur(16px)` and subtle card borders
+- Add dynamic atmospheric HSL background gradients for Morning, Noon, Evening, and Night day phases
+- Add tactile hover interactions and glowing accent shadows for kiosk controls and forecast cards
+
+### Changed
+
+- Adopt native privacy-friendly System-Font-Stack for zero-latency offline rendering without external font CDNs
+- Enhance card padding, border-radius, and visual contrast across desktop, tablet, and mobile views
 
 ### Added
 

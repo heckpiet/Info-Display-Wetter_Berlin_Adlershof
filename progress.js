@@ -58,4 +58,4 @@ export function getYearProgressPresentation(
     hidden: mode === "hidden",
   };
 }
-import { translate } from "./i18n.js?v=3.8.0";
+import { translate } from "./i18n.js?v=3.9.0";
