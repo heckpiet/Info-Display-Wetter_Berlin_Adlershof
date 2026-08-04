@@ -4,6 +4,13 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [3.0.3] - 2026-08-04
+
+### Added
+
+- Show the running application version and the latest GitHub release on the display
+- Cache GitHub release checks for six hours and highlight available updates
+
 ## [3.0.2] - 2026-08-04
 
 ### Documentation

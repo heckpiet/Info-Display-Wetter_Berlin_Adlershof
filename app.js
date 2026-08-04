@@ -2,6 +2,7 @@ import { DEFAULT_CONFIG } from "./config.js";
 import { cacheKey, configFromUrl, weatherInfo } from "./weather.js";
 import { fetchWeather, getProvider } from "./providers.js";
 import { initialiseSettings, loadSettings } from "./settings.js";
+import { compareVersions, getLatestRelease, RELEASES_URL } from "./version.js";
 
 const config = configFromUrl({ ...DEFAULT_CONFIG, ...loadSettings() });
 const $ = (id) => document.getElementById(id);
@@ -20,6 +21,21 @@ let latestData;
 let hourlyView = true;
 let retryTimer;
 let retryAttempt = 0;
+
+async function renderVersionStatus() {
+  const element = $("latest-version");
+  element.href = RELEASES_URL;
+  try {
+    const latest = await getLatestRelease();
+    const updateAvailable = compareVersions(latest, config.version) > 0;
+    element.textContent = updateAvailable
+      ? `GitHub latest: v${latest} · update available`
+      : `GitHub latest: v${latest}`;
+    element.classList.toggle("update-available", updateAvailable);
+  } catch {
+    element.textContent = "GitHub: unavailable";
+  }
+}
 
 function wind(value, direction) {
   if (value == null) return "-- km/h";
@@ -181,7 +197,8 @@ function initialise() {
   document.title = `Weather – ${config.locationName}`;
   $("title").textContent = `Weather – ${config.locationName}`;
   $("timezone").textContent = config.timezone;
-  $("version").textContent = `v${config.version}`;
+  $("version").textContent = `Running v${config.version}`;
+  renderVersionStatus();
   $("provider-name").textContent = getProvider(
     config.weatherProvider,
   ).attribution;

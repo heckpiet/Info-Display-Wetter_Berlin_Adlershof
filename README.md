@@ -38,6 +38,7 @@ Location, refresh and cache intervals, theme, font scale, density, and layout ca
 - URL-based location configuration
 - Provider abstraction with proxy-ready DWD, MET Norway, and OpenWeather profiles
 - GitHub Pages deployment and pull-request quality checks
+- Running and latest GitHub release versions shown directly on the display
 - No cookies, analytics, account, backend, or secrets
 
 ## Quick start
