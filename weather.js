@@ -178,5 +178,5 @@ export function weatherInfo(code) {
 }
 
 export function cacheKey(config) {
-  return `weather-display:v2:${config.latitude}:${config.longitude}:${config.timezone}`;
+  return `weather-display:v2:${config.weatherProvider}:${config.latitude}:${config.longitude}:${config.timezone}`;
 }

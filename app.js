@@ -1,11 +1,6 @@
 import { DEFAULT_CONFIG } from "./config.js";
-import {
-  buildWeatherUrl,
-  cacheKey,
-  configFromUrl,
-  normalizeWeather,
-  weatherInfo,
-} from "./weather.js";
+import { cacheKey, configFromUrl, weatherInfo } from "./weather.js";
+import { fetchWeather, getProvider } from "./providers.js";
 
 const config = configFromUrl(DEFAULT_CONFIG);
 const $ = (id) => document.getElementById(id);
@@ -132,13 +127,7 @@ function readCache() {
 async function loadWeather() {
   clearTimeout(retryTimer);
   try {
-    const response = await fetch(buildWeatherUrl(config), {
-      cache: "no-store",
-      signal: AbortSignal.timeout(15000),
-    });
-    if (!response.ok)
-      throw new Error(`Weather service returned HTTP ${response.status}`);
-    const data = normalizeWeather(await response.json(), config);
+    const data = await fetchWeather(config);
     localStorage.setItem(cacheKey(config), JSON.stringify(data));
     render(data);
     retryTimer = setTimeout(loadWeather, config.refreshIntervalMinutes * 60000);
@@ -158,6 +147,9 @@ function initialise() {
   $("title").textContent = `Weather – ${config.locationName}`;
   $("timezone").textContent = config.timezone;
   $("version").textContent = `v${config.version}`;
+  $("provider-name").textContent = getProvider(
+    config.weatherProvider,
+  ).attribution;
   $("year-progress").style.width =
     `${(((Date.now() - new Date(new Date().getFullYear(), 0, 1)) / (new Date(new Date().getFullYear() + 1, 0, 1) - new Date(new Date().getFullYear(), 0, 1))) * 100).toFixed(2)}%`;
   const tick = () => {

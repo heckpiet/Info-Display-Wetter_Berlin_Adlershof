@@ -1,12 +1,7 @@
 import { DEFAULT_CONFIG } from "../config.js";
-import { buildWeatherUrl, normalizeWeather } from "../weather.js";
+import { fetchWeather } from "../providers.js";
 
-const response = await fetch(buildWeatherUrl(DEFAULT_CONFIG), {
-  signal: AbortSignal.timeout(20000),
-});
-if (!response.ok)
-  throw new Error(`Open-Meteo smoke test failed with HTTP ${response.status}`);
-const data = normalizeWeather(await response.json(), DEFAULT_CONFIG);
+const data = await fetchWeather(DEFAULT_CONFIG);
 if (!data.current.time || data.hourly.length < 4 || data.daily.length < 4) {
   throw new Error("Open-Meteo smoke test returned incomplete forecast data");
 }
