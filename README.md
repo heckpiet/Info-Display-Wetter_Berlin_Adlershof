@@ -4,6 +4,28 @@ A backend-free weather dashboard designed for an unattended browser in kiosk mod
 
 Berlin-Adlershof is the included example location. You can change it without rebuilding the application.
 
+## Screenshots
+
+### Kiosk overview
+
+![Desktop kiosk view with current weather and the hourly forecast](docs/images/kiosk-desktop.png)
+
+The default desktop layout presents the current conditions, four upcoming hours, a live clock, data age, and year progress at a glance.
+
+### Daily forecast
+
+![Desktop kiosk view with the four-day forecast](docs/images/kiosk-daily-forecast.png)
+
+The forecast card switches automatically or manually between the next four hours and the next four days.
+
+### Display settings
+
+![Display settings dialog](docs/images/settings-dialog.png)
+
+Location, refresh and cache intervals, theme, font scale, density, and layout can be changed directly on the display. Settings are stored only in the local browser and can be exported or imported as JSON.
+
+> The screenshots show live forecast data captured for the Berlin-Adlershof example. Values and the adaptive theme change with time and weather conditions.
+
 ## Features
 
 - Current conditions and alternating hourly/daily forecast
