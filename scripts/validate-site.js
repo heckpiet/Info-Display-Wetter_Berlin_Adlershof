@@ -8,6 +8,7 @@ const requiredFiles = [
   "providers.js",
   "settings.js",
   "version.js",
+  "progress.js",
   "sw.js",
   "manifest.webmanifest",
   "config.js",

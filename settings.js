@@ -10,6 +10,7 @@ const ALLOWED = [
   "density",
   "informationMode",
   "forecastRotation",
+  "yearProgressMode",
   "layoutMode",
   "controlsAutoHideSeconds",
 ];
@@ -28,6 +29,11 @@ export function sanitizeSettings(value = {}) {
     !["auto", "manual"].includes(result.forecastRotation)
   )
     delete result.forecastRotation;
+  if (
+    result.yearProgressMode !== undefined &&
+    !["percentage", "days", "both", "hidden"].includes(result.yearProgressMode)
+  )
+    delete result.yearProgressMode;
   return result;
 }
 

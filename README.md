@@ -48,6 +48,7 @@ Choose **Essential** for a quieter wall display or **Glance** for maximum readab
 - Provider abstraction with proxy-ready DWD, MET Norway, and OpenWeather profiles
 - GitHub Pages deployment and pull-request quality checks
 - Running and latest GitHub release versions shown directly on the display
+- Configurable year progress as percentage, elapsed days, both, or hidden
 - No cookies, analytics, account, backend, or secrets
 
 ## Quick start
