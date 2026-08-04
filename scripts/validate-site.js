@@ -7,6 +7,8 @@ const requiredFiles = [
   "weather.js",
   "providers.js",
   "settings.js",
+  "sw.js",
+  "manifest.webmanifest",
   "config.js",
   "LICENSE",
 ];
