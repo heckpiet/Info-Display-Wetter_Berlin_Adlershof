@@ -17,6 +17,12 @@ const ALLOWED = [
   "deviceProfile",
   "displayScale",
   "contentWidthPercent",
+  "frameInsetMode",
+  "frameInset",
+  "frameInsetTop",
+  "frameInsetRight",
+  "frameInsetBottom",
+  "frameInsetLeft",
   "controlsAutoHideSeconds",
 ];
 
@@ -65,6 +71,26 @@ export function sanitizeSettings(value = {}) {
       Number(result.contentWidthPercent) > 100)
   )
     delete result.contentWidthPercent;
+  if (
+    result.frameInsetMode !== undefined &&
+    !["uniform", "individual"].includes(result.frameInsetMode)
+  )
+    delete result.frameInsetMode;
+  for (const key of [
+    "frameInset",
+    "frameInsetTop",
+    "frameInsetRight",
+    "frameInsetBottom",
+    "frameInsetLeft",
+  ]) {
+    if (
+      result[key] !== undefined &&
+      (!Number.isInteger(Number(result[key])) ||
+        Number(result[key]) < 0 ||
+        Number(result[key]) > 500)
+    )
+      delete result[key];
+  }
   return result;
 }
 
@@ -85,6 +111,19 @@ export function initialiseSettings(config) {
     });
   const tabs = [...form.querySelectorAll('[role="tab"]')];
   const panels = [...form.querySelectorAll('[role="tabpanel"]')];
+  const insetMode = form.elements.frameInsetMode;
+  const updateInsetControls = () => {
+    const individual = insetMode.value === "individual";
+    form.elements.frameInset.readOnly = individual;
+    for (const key of [
+      "frameInsetTop",
+      "frameInsetRight",
+      "frameInsetBottom",
+      "frameInsetLeft",
+    ])
+      form.elements[key].readOnly = !individual;
+  };
+  insetMode.addEventListener("change", updateInsetControls);
   const activateTab = (tab, focus = false) => {
     tabs.forEach((item) => {
       const selected = item === tab;
@@ -112,6 +151,7 @@ export function initialiseSettings(config) {
   });
   document.getElementById("settings-trigger").addEventListener("click", () => {
     populate(config);
+    updateInsetControls();
     activateTab(tabs[0]);
     dialog.showModal();
     tabs[0].focus();
@@ -126,6 +166,11 @@ export function initialiseSettings(config) {
       "fontScale",
       "displayScale",
       "contentWidthPercent",
+      "frameInset",
+      "frameInsetTop",
+      "frameInsetRight",
+      "frameInsetBottom",
+      "frameInsetLeft",
     ])
       data[key] = Number(data[key]);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(sanitizeSettings(data)));

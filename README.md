@@ -50,6 +50,7 @@ Choose **Essential** for a quieter wall display or **Glance** for maximum readab
 - Running and latest GitHub release versions shown directly on the display
 - Configurable year progress as percentage, elapsed days, both, or hidden
 - Viewport- and capability-aware device profiles with manual scale and width overrides
+- Uniform or per-side pixel spacing for kiosk bezels, overscan, and asymmetric mounting frames
 - Thematically grouped, keyboard-accessible settings tabs
 - Complete German/English runtime localization and three offline icon packs
 - No cookies, analytics, account, backend, or secrets

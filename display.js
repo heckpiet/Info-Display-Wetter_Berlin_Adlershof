@@ -36,10 +36,19 @@ export function resolveDisplay(config, detected) {
     config.deviceProfile === "auto"
       ? detected.detectedProfile
       : config.deviceProfile;
+  const uniform = config.frameInsetMode !== "individual";
+  const inset = (side) =>
+    Number(uniform ? config.frameInset : config[`frameInset${side}`]) || 0;
   return {
     profile,
     scale: config.fontScale * config.displayScale * PROFILE_SCALE[profile],
     widthPercent: config.contentWidthPercent,
+    insets: {
+      top: inset("Top"),
+      right: inset("Right"),
+      bottom: inset("Bottom"),
+      left: inset("Left"),
+    },
   };
 }
 

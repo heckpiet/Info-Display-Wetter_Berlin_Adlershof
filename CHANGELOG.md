@@ -4,6 +4,14 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [3.6.0] - 2026-08-04
+
+### Added
+
+- Add a configurable 0–500 px outer display inset for kiosk bezels and overscan
+- Add uniform and independent top, right, bottom, and left spacing modes
+- Keep the settings control inside the configured visible display frame
+
 ## [3.5.0] - 2026-08-04
 
 ### Added

@@ -234,6 +234,11 @@ function initialise() {
       "--content-width",
       `${resolved.widthPercent}%`,
     );
+    for (const [side, value] of Object.entries(resolved.insets))
+      document.documentElement.style.setProperty(
+        `--frame-inset-${side}`,
+        `${value}px`,
+      );
     document.body.dataset.deviceProfile = resolved.profile;
     $("display-summary").textContent = formatDisplaySummary(
       detected,

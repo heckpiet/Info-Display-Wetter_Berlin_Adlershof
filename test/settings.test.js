@@ -58,4 +58,26 @@ test("information mode is included in portable settings", () => {
     sanitizeSettings({ language: "fr", iconPack: "external" }),
     {},
   );
+  assert.deepEqual(
+    sanitizeSettings({
+      frameInsetMode: "individual",
+      frameInset: 24,
+      frameInsetTop: 10,
+      frameInsetRight: 20,
+      frameInsetBottom: 30,
+      frameInsetLeft: 40,
+    }),
+    {
+      frameInsetMode: "individual",
+      frameInset: 24,
+      frameInsetTop: 10,
+      frameInsetRight: 20,
+      frameInsetBottom: 30,
+      frameInsetLeft: 40,
+    },
+  );
+  assert.deepEqual(
+    sanitizeSettings({ frameInsetMode: "diagonal", frameInset: 501 }),
+    {},
+  );
 });
