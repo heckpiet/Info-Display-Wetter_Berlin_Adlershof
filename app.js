@@ -1,8 +1,9 @@
 import { DEFAULT_CONFIG } from "./config.js";
 import { cacheKey, configFromUrl, weatherInfo } from "./weather.js";
 import { fetchWeather, getProvider } from "./providers.js";
+import { initialiseSettings, loadSettings } from "./settings.js";
 
-const config = configFromUrl(DEFAULT_CONFIG);
+const config = configFromUrl({ ...DEFAULT_CONFIG, ...loadSettings() });
 const $ = (id) => document.getElementById(id);
 const formatNumber = (value, digits = 0) =>
   value == null
@@ -162,6 +163,7 @@ async function loadWeather() {
 }
 
 function initialise() {
+  initialiseSettings(config);
   document.documentElement.style.setProperty(
     "--font-scale",
     String(config.fontScale),

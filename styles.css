@@ -79,6 +79,59 @@ body[data-layout="kiosk"] .wrap {
   color: var(--text);
   cursor: pointer;
 }
+.settings-trigger {
+  position: fixed;
+  z-index: 10;
+  right: 1rem;
+  bottom: 1rem;
+  border: 0;
+  border-radius: 50%;
+  padding: 0.75rem;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.25s;
+}
+body.controls-hidden .control {
+  opacity: 0;
+  pointer-events: none;
+}
+dialog {
+  width: min(620px, 92vw);
+  border: 0;
+  border-radius: 18px;
+  background: var(--tile);
+  color: var(--text);
+}
+dialog::backdrop {
+  background: rgb(0 0 0 / 55%);
+}
+#settings-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+#settings-form h2,
+.settings-actions {
+  grid-column: 1/-1;
+}
+#settings-form label {
+  display: grid;
+  gap: 0.35rem;
+}
+#settings-form input,
+#settings-form select {
+  padding: 0.65rem;
+}
+.settings-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+.import-button input {
+  display: none;
+}
 .forecast.flipping .slots {
   animation: forecast-flip 0.35s ease;
 }

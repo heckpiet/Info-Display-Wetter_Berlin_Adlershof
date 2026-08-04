@@ -4,6 +4,14 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [2.4.0] - 2026-08-04
+
+### Added
+
+- Local settings overlay for location, refresh/cache intervals, themes, scale, density, and layout
+- Local save/reset plus JSON export/import
+- Configurable inactivity auto-hide for kiosk controls
+
 ## [2.3.0] - 2026-08-04
 
 ### Added

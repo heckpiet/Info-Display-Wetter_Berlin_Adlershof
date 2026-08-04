@@ -12,6 +12,14 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <button
+      class="settings-trigger control"
+      id="settings-trigger"
+      type="button"
+      aria-label="Open settings"
+    >
+      ⚙
+    </button>
     <header class="wrap header">
       <div>
         <h1 id="title">Weather</h1>
@@ -91,6 +99,65 @@
         <div class="slot-details"></div>
       </article>
     </template>
+    <dialog id="settings-dialog">
+      <form id="settings-form" method="dialog">
+        <h2>Display settings</h2>
+        <label>Location name <input name="locationName" required /></label>
+        <label
+          >Latitude <input name="latitude" type="number" step="any" required
+        /></label>
+        <label
+          >Longitude <input name="longitude" type="number" step="any" required
+        /></label>
+        <label
+          >Refresh minutes
+          <input name="refreshIntervalMinutes" type="number" min="1" max="1440"
+        /></label>
+        <label
+          >Cache hours
+          <input name="cacheMaxAgeHours" type="number" min="1" max="168"
+        /></label>
+        <label
+          >Theme
+          <select name="themeMode">
+            <option>auto</option>
+            <option>morning</option>
+            <option>noon</option>
+            <option>evening</option>
+            <option>night</option>
+          </select></label
+        >
+        <label
+          >Font scale
+          <input name="fontScale" type="number" min="0.75" max="2" step="0.05"
+        /></label>
+        <label
+          >Density
+          <select name="density">
+            <option>comfortable</option>
+            <option>compact</option>
+          </select></label
+        >
+        <label
+          >Layout
+          <select name="layoutMode">
+            <option>auto</option>
+            <option>kiosk</option>
+          </select></label
+        >
+        <div class="settings-actions">
+          <button value="cancel">Cancel</button
+          ><button type="button" id="settings-reset">Reset</button
+          ><button type="button" id="settings-export">Export</button
+          ><label class="import-button"
+            >Import<input
+              id="settings-import"
+              type="file"
+              accept="application/json" /></label
+          ><button id="settings-save" value="default">Save</button>
+        </div>
+      </form>
+    </dialog>
 
     <noscript>This display requires JavaScript.</noscript>
     <script type="module" src="app.js"></script>
