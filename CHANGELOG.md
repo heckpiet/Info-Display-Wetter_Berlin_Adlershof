@@ -4,7 +4,12 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
-## [3.18.0] - 2026-08-04
+## [3.19.0] - 2026-08-04
+
+### Fixed
+
+- Add overflow: hidden and box-sizing: border-box to .tile and .current-summary to eliminate gradient bleeding
+- Update default .grid layout to align-items: start to prevent tall card distortion and maintain balanced card proportions
 
 ### Added
 
