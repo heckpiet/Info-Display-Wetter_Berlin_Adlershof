@@ -112,6 +112,7 @@ export function initialiseSettings(config) {
   const tabs = [...form.querySelectorAll('[role="tab"]')];
   const panels = [...form.querySelectorAll('[role="tabpanel"]')];
   const insetMode = form.elements.frameInsetMode;
+  const yearProgressMode = form.elements.yearProgressMode;
   const updateInsetControls = () => {
     const individual = insetMode.value === "individual";
     form.elements.frameInset.readOnly = individual;
@@ -124,6 +125,19 @@ export function initialiseSettings(config) {
       form.elements[key].readOnly = !individual;
   };
   insetMode.addEventListener("change", updateInsetControls);
+  const previewYearProgress = (mode) =>
+    dispatchEvent(
+      new CustomEvent("weather-display:preview-year-progress", {
+        detail: { mode },
+      }),
+    );
+  yearProgressMode.addEventListener("change", () =>
+    previewYearProgress(yearProgressMode.value),
+  );
+  dialog.addEventListener("close", () => {
+    if (dialog.returnValue !== "default")
+      previewYearProgress(config.yearProgressMode);
+  });
   const activateTab = (tab, focus = false) => {
     tabs.forEach((item) => {
       const selected = item === tab;

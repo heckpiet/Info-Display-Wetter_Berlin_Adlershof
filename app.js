@@ -3,7 +3,7 @@ import { cacheKey, configFromUrl, weatherInfo } from "./weather.js";
 import { fetchWeather, getProvider } from "./providers.js";
 import { initialiseSettings, loadSettings } from "./settings.js";
 import { compareVersions, getLatestRelease, RELEASES_URL } from "./version.js";
-import { formatYearProgress, getYearProgress } from "./progress.js";
+import { getYearProgress, getYearProgressPresentation } from "./progress.js";
 import {
   detectDisplay,
   formatDisplaySummary,
@@ -259,19 +259,22 @@ function initialise() {
   $("provider-name").textContent = getProvider(
     config.weatherProvider,
   ).attribution;
-  const yearProgress = getYearProgress(new Date(), config.timezone);
-  $("year-progress").style.width = `${yearProgress.percentage}%`;
-  $("year-label").textContent = formatYearProgress(
-    yearProgress,
-    config.yearProgressMode,
-    config.language,
-  );
-  document
-    .querySelector(".progress")
-    .classList.toggle(
-      "year-progress-hidden",
-      config.yearProgressMode === "hidden",
+  const renderYearProgress = (mode = config.yearProgressMode) => {
+    const presentation = getYearProgressPresentation(
+      getYearProgress(new Date(), config.timezone),
+      mode,
+      config.language,
     );
+    $("year-progress").style.width = presentation.width;
+    $("year-label").textContent = presentation.label;
+    document
+      .querySelector(".progress")
+      .classList.toggle("year-progress-hidden", presentation.hidden);
+  };
+  renderYearProgress();
+  addEventListener("weather-display:preview-year-progress", (event) =>
+    renderYearProgress(event.detail.mode),
+  );
   const tick = () => {
     $("clock").textContent = formatDate(new Date(), {
       hour: "2-digit",
