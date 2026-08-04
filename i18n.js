@@ -215,6 +215,16 @@ export function applyStaticTranslations(language) {
       : "Custom Theme Colors";
 
   label(form, "themeMode", de ? "Tagesphase" : "Theme phase");
+  label(
+    form,
+    "showSunTimes",
+    de ? "Sonnenauf-/-untergang" : "Sunrise & sunset times",
+  );
+  options(
+    form,
+    "showSunTimes",
+    de ? ["Sichtbar", "Ausgeblendet"] : ["Visible", "Hidden"],
+  );
   options(
     form,
     "colorTheme",

@@ -24,6 +24,7 @@ const ALLOWED = [
   "density",
   "informationMode",
   "forecastRotation",
+  "showSunTimes",
   "yearProgressMode",
   "secondaryInfoMode",
   "secondaryInfoDelaySeconds",
@@ -114,6 +115,8 @@ export function sanitizeSettings(value = {}) {
     !["detailed", "essential", "glance"].includes(result.informationMode)
   )
     delete result.informationMode;
+  if (result.showSunTimes !== undefined)
+    result.showSunTimes = String(result.showSunTimes) !== "false";
   if (
     result.forecastRotation !== undefined &&
     !["auto", "manual"].includes(result.forecastRotation)

@@ -1,28 +1,28 @@
-import { DEFAULT_CONFIG } from "./config.js?v=3.16.0";
+import { DEFAULT_CONFIG } from "./config.js?v=3.17.0";
 import {
   cacheKey,
   configFromUrl,
   isNightTime,
   weatherInfo,
-} from "./weather.js?v=3.16.0";
-import { fetchWeather, getProvider } from "./providers.js?v=3.16.0";
-import { initialiseSettings, loadSettings } from "./settings.js?v=3.16.0";
+} from "./weather.js?v=3.17.0";
+import { fetchWeather, getProvider } from "./providers.js?v=3.17.0";
+import { initialiseSettings, loadSettings } from "./settings.js?v=3.17.0";
 import {
   compareVersions,
   getLatestRelease,
   RELEASES_URL,
   VERSION_CACHE_KEY,
-} from "./version.js?v=3.16.0";
+} from "./version.js?v=3.17.0";
 import {
   getYearProgress,
   getYearProgressPresentation,
-} from "./progress.js?v=3.16.0";
+} from "./progress.js?v=3.17.0";
 import {
   detectDisplay,
   formatDisplaySummary,
   resolveDisplay,
-} from "./display.js?v=3.16.0";
-import { applyStaticTranslations, translate } from "./i18n.js?v=3.16.0";
+} from "./display.js?v=3.17.0";
+import { applyStaticTranslations, translate } from "./i18n.js?v=3.17.0";
 
 const config = configFromUrl({ ...DEFAULT_CONFIG, ...loadSettings() });
 config.locale = config.language === "de" ? "de-DE" : "en-GB";
@@ -223,6 +223,10 @@ function renderCurrent(data) {
     current.sunrise && current.sunset
       ? `${formatDate(current.sunrise, { hour: "2-digit", minute: "2-digit" })} / ${formatDate(current.sunset, { hour: "2-digit", minute: "2-digit" })}`
       : "--:-- / --:--";
+  const sunRow = $("now-sun")?.closest(".kv-row");
+  if (sunRow) {
+    sunRow.style.display = config.showSunTimes === false ? "none" : "";
+  }
   setTheme(current);
 }
 

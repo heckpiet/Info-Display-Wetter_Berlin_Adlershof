@@ -4,7 +4,11 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
-## [3.16.0] - 2026-08-04
+## [3.17.0] - 2026-08-04
+
+### Added
+
+- Add showSunTimes settings dropdown control to toggle visibility of sunrise and sunset times (Visible vs Hidden)
 
 ### Changed
 
