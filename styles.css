@@ -9,7 +9,7 @@
   --warning: #b45309;
   --shadow: 0 12px 28px rgb(16 24 40 / 12%);
 }
-body.dark {
+body[data-theme="night"] {
   color-scheme: dark;
   --bg: #0b0f16;
   --tile: #111827;
@@ -19,6 +19,25 @@ body.dark {
   --chip: #1f2937;
   --warning: #fbbf24;
   --shadow: 0 20px 40px rgb(0 0 0 / 35%);
+}
+body[data-theme="morning"] {
+  --bg: #e9f6ff;
+  --accent: #168bd2;
+  --chip: #dceffc;
+}
+body[data-theme="noon"] {
+  --bg: #fff8dc;
+  --accent: #d97706;
+  --chip: #ffefb5;
+}
+body[data-theme="evening"] {
+  --bg: #25324a;
+  --tile: #334155;
+  --text: #fff7ed;
+  --muted: #cbd5e1;
+  --accent: #fb923c;
+  --chip: #475569;
+  color-scheme: dark;
 }
 * {
   box-sizing: border-box;
@@ -38,6 +57,36 @@ body {
   transition:
     background-color 0.3s,
     color 0.3s;
+}
+html {
+  font-size: calc(16px * var(--font-scale, 1));
+}
+body[data-density="compact"] .tile {
+  padding: 14px;
+}
+body[data-density="compact"] .slots {
+  gap: 10px;
+}
+body[data-layout="kiosk"] .wrap {
+  width: 100%;
+  max-width: none;
+}
+#flip-button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.4rem 0.7rem;
+  background: var(--chip);
+  color: var(--text);
+  cursor: pointer;
+}
+.forecast.flipping .slots {
+  animation: forecast-flip 0.35s ease;
+}
+@keyframes forecast-flip {
+  50% {
+    transform: rotateY(90deg);
+    opacity: 0.35;
+  }
 }
 .wrap {
   width: min(1400px, 100%);

@@ -9,6 +9,7 @@ Berlin-Adlershof is the included example location. You can change it without reb
 - Current conditions and alternating hourly/daily forecast
 - Daily low/high, wind gusts, UV index, full date, and explicit data age
 - Automatic light/dark theme based on sunrise and sunset
+- Four adaptive day-phase themes, manual forecast switching, and kiosk display profiles
 - Responsive kiosk layout for tablets and desktop displays
 - Cached last-known-good data when the network or API is unavailable
 - Automatic refresh, timeout, and retry handling
