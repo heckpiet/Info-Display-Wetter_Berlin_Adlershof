@@ -43,6 +43,12 @@ Set **Forecast rotation** to **Manual only** when changing content would make th
 
 The footer can show **Percentage and days**, **Percentage only**, **Days only**, or be **Hidden**. The combined default looks like `58.90% of year · Day 216 of 365`. Changes are previewed immediately behind the settings dialog; **Cancel** restores the saved presentation and **Save settings** persists it. Leap years are detected automatically and use 366 as the total. The bar always visualizes elapsed year progress proportionally, even when its text label uses days.
 
+## Secondary information
+
+Provider attribution, timezone, installed and GitHub versions, routine data freshness, and year progress are secondary information. Choose **Always visible**, **Dim after inactivity**, **Hide after inactivity**, or **Important only** under **Appearance & behavior**. The dim/hide delay accepts 3–300 seconds and resets on pointer, touch, or keyboard activity.
+
+The default is **Hide after inactivity** after 15 seconds. Available updates and offline, cached-data, or error messages remain visible regardless of the selected mode. Reduced-motion browser preferences disable the opacity transition.
+
 ## Display detection and manual overrides
 
 With **Device profile** set to **Auto-detect**, the application classifies the current CSS viewport as phone, tablet, desktop, or large TV/kiosk and recalculates the layout whenever the browser window or screen orientation changes. It also detects coarse-pointer, hover, device-pixel-ratio, service-worker, and fullscreen capabilities. It does not use the user-agent string or collect a hardware fingerprint.

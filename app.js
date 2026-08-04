@@ -41,6 +41,7 @@ async function renderVersionStatus() {
       ? t("updateAvailable", { version: latest })
       : t("githubLatest", { version: latest });
     element.classList.toggle("update-available", updateAvailable);
+    document.body.classList.toggle("update-important", updateAvailable);
   } catch {
     element.textContent = t("githubUnavailable");
   }
@@ -184,6 +185,7 @@ function render(data, cached = false) {
         age: ageMinutes,
       });
   document.body.classList.toggle("offline", cached);
+  document.body.classList.toggle("status-important", cached);
 }
 
 function readCache() {
@@ -209,6 +211,7 @@ async function loadWeather() {
     if (cached) render(cached, true);
     else $("status").textContent = t("unavailable", { error: error.message });
     document.body.classList.add("offline");
+    document.body.classList.add("status-important");
     const retrySeconds = Math.min(
       config.retryIntervalSeconds * 2 ** retryAttempt,
       900,
@@ -251,6 +254,25 @@ function initialise() {
   document.body.dataset.iconPack = config.iconPack;
   document.body.dataset.informationMode = config.informationMode;
   document.body.dataset.layout = config.layoutMode;
+  document.body.dataset.secondaryInfoMode = config.secondaryInfoMode;
+  let secondaryInfoTimer;
+  const showSecondaryInfo = () => {
+    if (config.secondaryInfoMode === "important") {
+      document.body.classList.add("secondary-info-inactive");
+      return;
+    }
+    document.body.classList.remove("secondary-info-inactive");
+    clearTimeout(secondaryInfoTimer);
+    if (["dim", "autoHide"].includes(config.secondaryInfoMode))
+      secondaryInfoTimer = setTimeout(
+        () => document.body.classList.add("secondary-info-inactive"),
+        config.secondaryInfoDelaySeconds * 1000,
+      );
+  };
+  ["mousemove", "pointerdown", "keydown"].forEach((name) =>
+    addEventListener(name, showSecondaryInfo, { passive: true }),
+  );
+  showSecondaryInfo();
   document.title = `${t("weather")} – ${config.locationName}`;
   $("title").textContent = `${t("weather")} – ${config.locationName}`;
   $("timezone").textContent = config.timezone;

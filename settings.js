@@ -13,6 +13,8 @@ const ALLOWED = [
   "informationMode",
   "forecastRotation",
   "yearProgressMode",
+  "secondaryInfoMode",
+  "secondaryInfoDelaySeconds",
   "layoutMode",
   "deviceProfile",
   "displayScale",
@@ -45,6 +47,20 @@ export function sanitizeSettings(value = {}) {
     !["percentage", "days", "both", "hidden"].includes(result.yearProgressMode)
   )
     delete result.yearProgressMode;
+  if (
+    result.secondaryInfoMode !== undefined &&
+    !["always", "dim", "autoHide", "important"].includes(
+      result.secondaryInfoMode,
+    )
+  )
+    delete result.secondaryInfoMode;
+  if (
+    result.secondaryInfoDelaySeconds !== undefined &&
+    (!Number.isInteger(Number(result.secondaryInfoDelaySeconds)) ||
+      Number(result.secondaryInfoDelaySeconds) < 3 ||
+      Number(result.secondaryInfoDelaySeconds) > 300)
+  )
+    delete result.secondaryInfoDelaySeconds;
   if (
     result.deviceProfile !== undefined &&
     !["auto", "phone", "tablet", "desktop", "tv"].includes(result.deviceProfile)
@@ -113,6 +129,7 @@ export function initialiseSettings(config) {
   const panels = [...form.querySelectorAll('[role="tabpanel"]')];
   const insetMode = form.elements.frameInsetMode;
   const yearProgressMode = form.elements.yearProgressMode;
+  const secondaryInfoMode = form.elements.secondaryInfoMode;
   const updateInsetControls = () => {
     const individual = insetMode.value === "individual";
     form.elements.frameInset.readOnly = individual;
@@ -125,6 +142,13 @@ export function initialiseSettings(config) {
       form.elements[key].readOnly = !individual;
   };
   insetMode.addEventListener("change", updateInsetControls);
+  const updateSecondaryInfoControls = () => {
+    form.elements.secondaryInfoDelaySeconds.readOnly = ![
+      "dim",
+      "autoHide",
+    ].includes(secondaryInfoMode.value);
+  };
+  secondaryInfoMode.addEventListener("change", updateSecondaryInfoControls);
   const previewYearProgress = (mode) =>
     dispatchEvent(
       new CustomEvent("weather-display:preview-year-progress", {
@@ -166,6 +190,7 @@ export function initialiseSettings(config) {
   document.getElementById("settings-trigger").addEventListener("click", () => {
     populate(config);
     updateInsetControls();
+    updateSecondaryInfoControls();
     activateTab(tabs[0]);
     dialog.showModal();
     tabs[0].focus();
@@ -177,6 +202,7 @@ export function initialiseSettings(config) {
       "longitude",
       "refreshIntervalMinutes",
       "cacheMaxAgeHours",
+      "secondaryInfoDelaySeconds",
       "fontScale",
       "displayScale",
       "contentWidthPercent",
