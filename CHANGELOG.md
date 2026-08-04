@@ -4,6 +4,13 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [3.0.1] - 2026-08-04
+
+### Documentation
+
+- Define the complete Package E infrastructure, account, runtime, secret, provider, legal, and operational prerequisites
+- Add secure installation steps, a production go-live checklist, limitations, and a proxy-local documentation entry point
+
 ## [3.0.0] - 2026-08-04
 
 ### Added
