@@ -28,4 +28,14 @@ test("loads and caches the latest GitHub release", async () => {
     "3.0.3",
   );
   assert.match(values.get(VERSION_CACHE_KEY), /3\.0\.3/);
+  assert.equal(
+    await getLatestRelease({
+      fetchImpl,
+      storage,
+      now: 2000,
+      cacheKey: `${VERSION_CACHE_KEY}:3.7.2`,
+    }),
+    "3.0.3",
+  );
+  assert.match(values.get(`${VERSION_CACHE_KEY}:3.7.2`), /3\.0\.3/);
 });

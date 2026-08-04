@@ -9,6 +9,10 @@ The dialog groups controls into four keyboard-accessible tabs:
 - **Appearance & behavior:** theme, forecast rotation, and year-progress presentation
 - **Backup & reset:** JSON export/import and restoring defaults
 
+| Display and edge controls                       | Appearance and behavior controls                       |
+| ----------------------------------------------- | ------------------------------------------------------ |
+| ![Display settings](images/settings-dialog.png) | ![Appearance settings](images/settings-appearance.png) |
+
 Use `Left Arrow` and `Right Arrow` to move between tabs, or `Home` and `End` to jump to the first or last tab. The active tab and keyboard focus remain visibly distinct, following the [WAI-ARIA tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/).
 
 Never store API keys in settings. Provider credentials belong in the controlled proxy described in [WEATHER_PROVIDERS.md](WEATHER_PROVIDERS.md).

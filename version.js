@@ -23,9 +23,9 @@ export function compareVersions(left, right) {
   return 0;
 }
 
-function readCachedRelease(storage, now) {
+function readCachedRelease(storage, now, cacheKey) {
   try {
-    const cached = JSON.parse(storage.getItem(VERSION_CACHE_KEY));
+    const cached = JSON.parse(storage.getItem(cacheKey));
     if (
       cached?.version &&
       Number.isFinite(cached.checkedAt) &&
@@ -42,8 +42,9 @@ export async function getLatestRelease({
   fetchImpl = fetch,
   storage = localStorage,
   now = Date.now(),
+  cacheKey = VERSION_CACHE_KEY,
 } = {}) {
-  const cached = readCachedRelease(storage, now);
+  const cached = readCachedRelease(storage, now, cacheKey);
   if (cached) return cached;
 
   const response = await fetchImpl(LATEST_RELEASE_API, {
@@ -56,10 +57,7 @@ export async function getLatestRelease({
   if (!/^\d+\.\d+\.\d+$/.test(version))
     throw new Error("GitHub returned an invalid release version");
   try {
-    storage.setItem(
-      VERSION_CACHE_KEY,
-      JSON.stringify({ version, checkedAt: now }),
-    );
+    storage.setItem(cacheKey, JSON.stringify({ version, checkedAt: now }));
   } catch {
     // The live result remains usable when storage is unavailable.
   }
