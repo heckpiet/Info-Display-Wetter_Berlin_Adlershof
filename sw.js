@@ -1,18 +1,20 @@
-const CACHE = "weather-display-shell-v3.7.0";
+const VERSION = "3.7.1";
+const CACHE = `weather-display-shell-v${VERSION}`;
+const asset = (path) => `${path}?v=${VERSION}`;
 const ASSETS = [
   "./",
-  "./index.html",
-  "./styles.css",
-  "./app.js",
-  "./config.js",
-  "./weather.js",
-  "./providers.js",
-  "./settings.js",
-  "./progress.js",
-  "./display.js",
-  "./i18n.js",
-  "./version.js",
-  "./manifest.webmanifest",
+  asset("./index.html"),
+  asset("./styles.css"),
+  asset("./app.js"),
+  asset("./config.js"),
+  asset("./weather.js"),
+  asset("./providers.js"),
+  asset("./settings.js"),
+  asset("./progress.js"),
+  asset("./display.js"),
+  asset("./i18n.js"),
+  asset("./version.js"),
+  asset("./manifest.webmanifest"),
 ];
 self.addEventListener("install", (event) =>
   event.waitUntil(
@@ -50,7 +52,7 @@ self.addEventListener("fetch", (event) => {
       .catch(() =>
         caches
           .match(event.request)
-          .then((cached) => cached ?? caches.match("./index.html")),
+          .then((cached) => cached ?? caches.match(asset("./index.html"))),
       ),
   );
 });

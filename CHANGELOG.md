@@ -4,6 +4,14 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [3.7.1] - 2026-08-04
+
+### Fixed
+
+- Prevent mixed-release settings layouts by versioning every local asset and JavaScript module URL
+- Version service-worker registration and offline pre-cache entries as one atomic release set
+- Validate asset, module, application, package, and service-worker version alignment in CI
+
 ## [3.7.0] - 2026-08-04
 
 ### Added

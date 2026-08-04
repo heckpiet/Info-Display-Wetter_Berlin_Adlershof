@@ -1,15 +1,22 @@
-import { DEFAULT_CONFIG } from "./config.js";
-import { cacheKey, configFromUrl, weatherInfo } from "./weather.js";
-import { fetchWeather, getProvider } from "./providers.js";
-import { initialiseSettings, loadSettings } from "./settings.js";
-import { compareVersions, getLatestRelease, RELEASES_URL } from "./version.js";
-import { getYearProgress, getYearProgressPresentation } from "./progress.js";
+import { DEFAULT_CONFIG } from "./config.js?v=3.7.1";
+import { cacheKey, configFromUrl, weatherInfo } from "./weather.js?v=3.7.1";
+import { fetchWeather, getProvider } from "./providers.js?v=3.7.1";
+import { initialiseSettings, loadSettings } from "./settings.js?v=3.7.1";
+import {
+  compareVersions,
+  getLatestRelease,
+  RELEASES_URL,
+} from "./version.js?v=3.7.1";
+import {
+  getYearProgress,
+  getYearProgressPresentation,
+} from "./progress.js?v=3.7.1";
 import {
   detectDisplay,
   formatDisplaySummary,
   resolveDisplay,
-} from "./display.js";
-import { applyStaticTranslations, translate } from "./i18n.js";
+} from "./display.js?v=3.7.1";
+import { applyStaticTranslations, translate } from "./i18n.js?v=3.7.1";
 
 const config = configFromUrl({ ...DEFAULT_CONFIG, ...loadSettings() });
 config.locale = config.language === "de" ? "de-DE" : "en-GB";
