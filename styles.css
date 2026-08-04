@@ -176,6 +176,13 @@ h2 {
   gap: 10px;
   color: var(--muted);
 }
+.meta a {
+  color: inherit;
+}
+.meta a.update-available {
+  color: var(--warning);
+  font-weight: 700;
+}
 .clock {
   font-size: clamp(24px, 4vw, 48px);
   font-variant-numeric: tabular-nums;

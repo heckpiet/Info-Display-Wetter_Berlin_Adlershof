@@ -1,4 +1,4 @@
-const CACHE = "weather-display-shell-v2.5.0";
+const CACHE = "weather-display-shell-v3.0.3";
 const ASSETS = [
   "./",
   "./index.html",
@@ -8,6 +8,7 @@ const ASSETS = [
   "./weather.js",
   "./providers.js",
   "./settings.js",
+  "./version.js",
   "./manifest.webmanifest",
 ];
 self.addEventListener("install", (event) =>
