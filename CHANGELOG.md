@@ -4,6 +4,14 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [3.1.0] - 2026-08-04
+
+### Added
+
+- Add detailed, essential, and distance-optimized glance information modes
+- Add automatic or manual-only forecast rotation
+- Increase kiosk touch targets and document the display hierarchy guidance
+
 ## [3.0.4] - 2026-08-04
 
 ### Fixed

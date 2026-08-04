@@ -8,6 +8,8 @@ const ALLOWED = [
   "themeMode",
   "fontScale",
   "density",
+  "informationMode",
+  "forecastRotation",
   "layoutMode",
   "controlsAutoHideSeconds",
 ];
@@ -16,6 +18,16 @@ export function sanitizeSettings(value = {}) {
   const result = {};
   for (const key of ALLOWED)
     if (value[key] !== undefined) result[key] = value[key];
+  if (
+    result.informationMode !== undefined &&
+    !["detailed", "essential", "glance"].includes(result.informationMode)
+  )
+    delete result.informationMode;
+  if (
+    result.forecastRotation !== undefined &&
+    !["auto", "manual"].includes(result.forecastRotation)
+  )
+    delete result.forecastRotation;
   return result;
 }
 

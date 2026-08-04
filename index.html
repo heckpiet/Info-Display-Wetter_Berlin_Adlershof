@@ -25,11 +25,15 @@
       <div>
         <h1 id="title">Weather</h1>
         <div class="meta">
-          <span id="provider-name">DWD ICON via Open-Meteo</span
-          ><span aria-hidden="true">•</span> <span id="timezone"></span
-          ><span aria-hidden="true">•</span> <span id="version"></span
-          ><span aria-hidden="true">•</span>
+          <span class="technical-meta" id="provider-name"
+            >DWD ICON via Open-Meteo</span
+          ><span class="technical-meta" aria-hidden="true">•</span>
+          <span id="timezone"></span
+          ><span class="technical-meta" aria-hidden="true">•</span>
+          <span class="technical-meta" id="version"></span
+          ><span class="technical-meta" aria-hidden="true">•</span>
           <a
+            class="technical-meta"
             id="latest-version"
             href="https://github.com/heckpiet/Info-Display-Wetter_Berlin_Adlershof/releases/latest"
             >GitHub latest: checking…</a
@@ -51,24 +55,24 @@
           <span id="now-description">Loading…</span>
         </div>
         <dl class="kv">
-          <dt>Feels like</dt>
-          <dd id="now-feels">--°C</dd>
+          <dt class="metric-essential">Feels like</dt>
+          <dd class="metric-essential" id="now-feels">--°C</dd>
           <dt>Today's low / high</dt>
           <dd id="now-range">-- / --°C</dd>
           <dt>Precipitation</dt>
           <dd id="now-precip">-- mm</dd>
-          <dt>Humidity</dt>
-          <dd id="now-humidity">-- %</dd>
-          <dt>Air pressure</dt>
-          <dd id="now-pressure">-- hPa</dd>
-          <dt>Wind</dt>
-          <dd id="now-wind">-- km/h</dd>
-          <dt>Wind gusts</dt>
-          <dd id="now-gust">-- km/h</dd>
-          <dt>UV index</dt>
-          <dd id="now-uv">--</dd>
-          <dt>Sunrise / sunset</dt>
-          <dd id="now-sun">--:-- / --:--</dd>
+          <dt class="metric-essential">Humidity</dt>
+          <dd class="metric-essential" id="now-humidity">-- %</dd>
+          <dt class="metric-detail">Air pressure</dt>
+          <dd class="metric-detail" id="now-pressure">-- hPa</dd>
+          <dt class="metric-essential">Wind</dt>
+          <dd class="metric-essential" id="now-wind">-- km/h</dd>
+          <dt class="metric-detail">Wind gusts</dt>
+          <dd class="metric-detail" id="now-gust">-- km/h</dd>
+          <dt class="metric-detail">UV index</dt>
+          <dd class="metric-detail" id="now-uv">--</dd>
+          <dt class="metric-essential">Sunrise / sunset</dt>
+          <dd class="metric-essential" id="now-sun">--:-- / --:--</dd>
         </dl>
       </section>
 
@@ -142,6 +146,21 @@
           <select name="density">
             <option>comfortable</option>
             <option>compact</option>
+          </select></label
+        >
+        <label
+          >Information mode
+          <select name="informationMode">
+            <option value="detailed">Detailed</option>
+            <option value="essential">Essential</option>
+            <option value="glance">Glance</option>
+          </select></label
+        >
+        <label
+          >Forecast rotation
+          <select name="forecastRotation">
+            <option value="auto">Automatic</option>
+            <option value="manual">Manual only</option>
           </select></label
         >
         <label
