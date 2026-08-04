@@ -13,6 +13,7 @@ test("Adlershof is the default example", () => {
   assert.equal(DEFAULT_CONFIG.locationName, "Berlin-Adlershof");
   assert.equal(DEFAULT_CONFIG.latitude, 52.4357);
   assert.equal(DEFAULT_CONFIG.longitude, 13.5406);
+  assert.equal(DEFAULT_CONFIG.locale, "de-DE");
 });
 
 test("valid URL settings override the defaults", () => {
@@ -30,6 +31,15 @@ test("invalid coordinates are ignored", () => {
   const config = configFromUrl(DEFAULT_CONFIG, "?lat=200&lon=wrong");
   assert.equal(config.latitude, DEFAULT_CONFIG.latitude);
   assert.equal(config.longitude, DEFAULT_CONFIG.longitude);
+});
+
+test("invalid locale and timezone overrides are ignored", () => {
+  const config = configFromUrl(
+    DEFAULT_CONFIG,
+    "?locale=not_a_locale&timezone=Not/A_Timezone",
+  );
+  assert.equal(config.locale, DEFAULT_CONFIG.locale);
+  assert.equal(config.timezone, DEFAULT_CONFIG.timezone);
 });
 
 test("API URL requests the selected DWD endpoint and expected fields", () => {

@@ -34,7 +34,7 @@ latitude: 52.4357,
 longitude: 13.5406,
 locationName: "Berlin-Adlershof",
 timezone: "Europe/Berlin",
-locale: "en-GB",
+locale: "de-DE",
 ```
 
 For one display, override the location in its kiosk URL:
@@ -44,6 +44,8 @@ https://example.github.io/repository/?lat=53.5511&lon=9.9937&name=Hamburg&timezo
 ```
 
 Supported parameters are `lat`, `lon`, `name`, `timezone`, and `locale`. Invalid coordinates are ignored. Use an [IANA timezone name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+
+`locale` controls date, time, and number formatting, not the interface language. The repository and interface remain English; `de-DE` is the appropriate default formatting locale for the Berlin-Adlershof example. Unsupported locale and timezone overrides are ignored safely.
 
 ## Kiosk mode
 
@@ -93,6 +95,7 @@ npm ci
 npm test
 npm run lint
 npm run format:check
+npm run validate:site
 npm run smoke
 ```
 

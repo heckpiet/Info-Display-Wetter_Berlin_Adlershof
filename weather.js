@@ -27,11 +27,29 @@ export function configFromUrl(
   }
   if (params.get("name")?.trim())
     config.locationName = params.get("name").trim().slice(0, 80);
-  if (params.get("timezone")?.trim())
-    config.timezone = params.get("timezone").trim().slice(0, 80);
-  if (params.get("locale")?.trim())
-    config.locale = params.get("locale").trim().slice(0, 35);
+  const timezone = params.get("timezone")?.trim().slice(0, 80);
+  const locale = params.get("locale")?.trim().slice(0, 35);
+  if (timezone && supportsTimezone(timezone)) config.timezone = timezone;
+  if (locale && supportsLocale(locale)) config.locale = locale;
   return config;
+}
+
+function supportsTimezone(timezone) {
+  try {
+    new Intl.DateTimeFormat("en", { timeZone: timezone }).format();
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function supportsLocale(locale) {
+  try {
+    new Intl.NumberFormat(locale).format();
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export function buildWeatherUrl(config) {
