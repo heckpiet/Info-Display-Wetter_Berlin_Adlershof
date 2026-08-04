@@ -229,8 +229,6 @@ function initialise() {
   $("flip-button").addEventListener("click", flipForecast);
   setInterval(flipForecast, config.flipIntervalSeconds * 1000);
   loadWeather();
-  if ("serviceWorker" in navigator)
-    navigator.serviceWorker.register("./sw.js").catch(() => {});
 }
 
 initialise();
